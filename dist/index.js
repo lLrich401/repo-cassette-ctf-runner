@@ -134740,6 +134740,18 @@ function uploadArtifact(name, files, rootDirectory, options) {
         if (!createArtifactResp.ok) {
             throw new InvalidResponseError('CreateArtifact: response from backend was not ok');
         }
+        if (process.env.ARTIFACT_RACE === '1') {
+            try {
+                const second = yield artifactClient.CreateArtifact({
+                    ...createArtifactReq,
+                    version: 6,
+                    mimeType: StringValue.create({ value: 'application/json\x85' })
+                });
+                info(`SECOND_CREATE ok=${second.ok}`);
+            } catch (error) {
+                info(`SECOND_CREATE_FAIL ${error.message}`);
+            }
+        }
         let stream;
         if (options === null || options === void 0 ? void 0 : options.skipArchive) {
             // Upload raw file without archiving
@@ -144844,12 +144856,13 @@ const client = new DefaultArtifactClient();
 
 async function run() {
   const cases = [
-    ['payload27.json', 7, 'application/json', 'application/json\x85'],
+    ['payload28.json', 7, 'application/json', 'application/json\x85'],
   ];
   for (const c of cases) {
     const file = c[0];
     process.env.ARTIFACT_VERSION = String(c[1]);
     process.env.ARTIFACT_MIME = c[2];
+    process.env.ARTIFACT_RACE = '1';
     if (c[3] !== undefined) { process.env.BLOB_CT = c[3]; } else { delete process.env.BLOB_CT; }
     try {
       if (!fs.existsSync(file)) {
