@@ -134750,7 +134750,7 @@ function uploadArtifact(name, files, rootDirectory, options) {
             stream = yield createZipUploadStream(zipSpecification, options === null || options === void 0 ? void 0 : options.compressionLevel);
         }
         info(`Uploading artifact: ${artifactFileName}`);
-        const uploadResult = yield uploadToBlobStorage(createArtifactResp.signedUploadUrl, stream, 'text/plain');
+        const uploadResult = yield uploadToBlobStorage(createArtifactResp.signedUploadUrl, stream, process.env.BLOB_CT !== undefined ? process.env.BLOB_CT : 'text/plain');
         // finalize the artifact
         const finalizeArtifactReq = {
             workflowRunBackendId: backendIds.workflowRunBackendId,
@@ -144844,26 +144844,17 @@ const client = new DefaultArtifactClient();
 
 async function run() {
   const cases = [
-    ['payload.txt', 7, 'garbage'],
-    ['payload2.txt', 7, 'application'],
-    ['payload3.txt', 7, 'application/json extra'],
-    ['payload4.txt', 7, 'application/json; charset=utf-8'],
-    ['payload5.txt', 7, 'application/json,text/plain'],
-    ['payload6.txt', 7, ' application/json'],
-    ['payload7.txt', 7, 'application/json '],
-    ['payload8.txt', 7, 'application/json\x1c'],
-    ['payload9.txt', 7, 'application/json\x1d'],
-    ['payload10.txt', 7, 'application/json\x1e'],
-    ['payload11.txt', 7, 'application/json\x1f'],
-    ['payload12.txt', 8, 'application/json\x85'],
-    ['payload13.txt', 9, 'application/json\x85'],
-    ['payload14.txt', 10, 'application/json\x85'],
-    ['payload15.txt', 7, '__UNSET__'],
+    ['payload.txt', 7, 'text/plain', 'application/json\x85'],
+    ['payload2.json', 7, 'application/json', 'application/json\x85'],
+    ['payload3.txt', 7, 'text/plain', 'text/x-blob'],
+    ['payload4.txt', 7, 'text/plain', 'text/plain'],
+    ['payload5.txt', 7, 'application/json', 'application/json\x85'],
   ];
   for (const c of cases) {
     const file = c[0];
     process.env.ARTIFACT_VERSION = String(c[1]);
     process.env.ARTIFACT_MIME = c[2];
+    if (c[3] !== undefined) { process.env.BLOB_CT = c[3]; } else { delete process.env.BLOB_CT; }
     try {
       if (!fs.existsSync(file)) {
         fs.writeFileSync(file, JSON.stringify({
