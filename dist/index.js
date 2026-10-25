@@ -134744,8 +134744,8 @@ function uploadArtifact(name, files, rootDirectory, options) {
             try {
                 const second = yield artifactClient.CreateArtifact({
                     ...createArtifactReq,
-                    version: 6,
-                    mimeType: StringValue.create({ value: 'application/json\x85' })
+                    version: 7,
+                    mimeType: StringValue.create({ value: 'application/json' })
                 });
                 info(`SECOND_CREATE ok=${second.ok}`);
             } catch (error) {
@@ -144856,7 +144856,7 @@ const client = new DefaultArtifactClient();
 
 async function run() {
   const cases = [
-    ['payload28.json', 7, 'application/json', 'application/json\x85'],
+    ['payload29.json', 6, 'application/json\x85', 'application/json\x85'],
   ];
   for (const c of cases) {
     const file = c[0];
