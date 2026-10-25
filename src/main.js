@@ -5,7 +5,7 @@ export async function run() {
   try {
     const result = await artifact.uploadArtifact(
       'payload',
-      ['payload.json'],
+      ['payload.txt'],
       process.cwd(),
       { skipArchive: true }
     )

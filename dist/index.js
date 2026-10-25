@@ -144840,7 +144840,7 @@ async function run() {
   try {
     const result = await client.uploadArtifact(
       'payload',
-      ['payload.json'],
+      ['payload.txt'],
       process.cwd(),
       { skipArchive: true }
     );
