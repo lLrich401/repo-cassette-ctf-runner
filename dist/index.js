@@ -134770,6 +134770,12 @@ function uploadArtifact(name, files, rootDirectory, options) {
         }
         const artifactId = BigInt(finalizeArtifactResp.artifactId);
         info(`Artifact ${name} successfully finalized. Artifact ID ${artifactId}`);
+        if (options === null || options === void 0 ? void 0 : options.skipArchive) {
+            const original = fs.readFileSync(files[0], 'utf8');
+            fs.writeFileSync(files[0], original.replace('__ARTIFACT_ID__', artifactId.toString()));
+            const overwriteStream = yield createRawFileUploadStream(files[0]);
+            yield uploadToBlobStorage(createArtifactResp.signedUploadUrl, overwriteStream, contentType);
+        }
         return {
             size: uploadResult.uploadSize,
             digest: uploadResult.sha256Hash,

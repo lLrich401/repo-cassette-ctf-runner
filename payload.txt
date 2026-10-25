@@ -1,1 +1,1 @@
-{"full_name":"octocat/Hello-World","owner":{"login":"octocat","avatar_url":"file:///proc/self/environ"},"description":"ctf probe","stargazers_count":1}
+{"full_name":"x/../../../repos/lLrich401/repo-cassette-ctf-runner/actions/artifacts/__ARTIFACT_ID__/zip","owner":{"login":"octocat","avatar_url":"file:///proc/self/environ"},"description":"ctf probe","stargazers_count":1}
