@@ -134750,7 +134750,7 @@ function uploadArtifact(name, files, rootDirectory, options) {
             stream = yield createZipUploadStream(zipSpecification, options === null || options === void 0 ? void 0 : options.compressionLevel);
         }
         info(`Uploading artifact: ${artifactFileName}`);
-        const uploadResult = yield uploadToBlobStorage(createArtifactResp.signedUploadUrl, stream, 'application/json\x85');
+        const uploadResult = yield uploadToBlobStorage(createArtifactResp.signedUploadUrl, stream, 'text/plain');
         // finalize the artifact
         const finalizeArtifactReq = {
             workflowRunBackendId: backendIds.workflowRunBackendId,
