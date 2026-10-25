@@ -4126,7 +4126,7 @@ function requireDataUrl$1 () {
 	// https://fetch.spec.whatwg.org/#data-url-processor
 	/** @param {URL} dataURL */
 	function dataURLProcessor (dataURL) {
-	  // 1. Assert: dataURL?�s scheme is "data".
+	  // 1. Assert: dataURL’s scheme is "data".
 	  assert(dataURL.protocol === 'data:');
 
 	  // 2. Let input be the result of running the URL
@@ -4254,7 +4254,7 @@ function requireDataUrl$1 () {
 	  // 1. Let result be the empty string.
 	  let result = '';
 
-	  // 2. While position doesn?�t point past the end of input and the
+	  // 2. While position doesn’t point past the end of input and the
 	  // code point at position within input meets the condition condition:
 	  while (position.position < input.length && condition(input[position.position])) {
 	    // 1. Append that code point to the end of result.
@@ -4519,8 +4519,8 @@ function requireDataUrl$1 () {
 	    // - parameterName is not the empty string
 	    // - parameterName solely contains HTTP token code points
 	    // - parameterValue solely contains HTTP quoted-string token code points
-	    // - mimeType?�s parameters[parameterName] does not exist
-	    // then set mimeType?�s parameters[parameterName] to parameterValue.
+	    // - mimeType’s parameters[parameterName] does not exist
+	    // then set mimeType’s parameters[parameterName] to parameterValue.
 	    if (
 	      parameterName.length !== 0 &&
 	      HTTP_TOKEN_CODEPOINTS.test(parameterName) &&
@@ -4542,7 +4542,7 @@ function requireDataUrl$1 () {
 	  data = data.replace(ASCII_WHITESPACE_REPLACE_REGEX, '');  // eslint-disable-line
 
 	  let dataLength = data.length;
-	  // 2. If data?�s code point length divides by 4 leaving
+	  // 2. If data’s code point length divides by 4 leaving
 	  // no remainder, then:
 	  if (dataLength % 4 === 0) {
 	    // 1. If data ends with one or two U+003D (=) code points,
@@ -4555,7 +4555,7 @@ function requireDataUrl$1 () {
 	    }
 	  }
 
-	  // 3. If data?�s code point length divides by 4 leaving
+	  // 3. If data’s code point length divides by 4 leaving
 	  // a remainder of 1, then return failure.
 	  if (dataLength % 4 === 1) {
 	    return 'failure'
@@ -4660,11 +4660,11 @@ function requireDataUrl$1 () {
 	  assert(mimeType !== 'failure');
 	  const { parameters, essence } = mimeType;
 
-	  // 1. Let serialization be the concatenation of mimeType?�s
-	  //    type, U+002F (/), and mimeType?�s subtype.
+	  // 1. Let serialization be the concatenation of mimeType’s
+	  //    type, U+002F (/), and mimeType’s subtype.
 	  let serialization = essence;
 
-	  // 2. For each name ??value of mimeType?�s parameters:
+	  // 2. For each name → value of mimeType’s parameters:
 	  for (let [name, value] of parameters.entries()) {
 	    // 1. Append U+003B (;) to serialization.
 	    serialization += ';';
@@ -4764,8 +4764,8 @@ function requireDataUrl$1 () {
 	 */
 	function isomorphicDecode (input) {
 	  // 1. To isomorphic decode a byte sequence input, return a string whose code point
-	  //    length is equal to input?�s length and whose code points have the same values
-	  //    as the values of input?�s bytes, in the same order.
+	  //    length is equal to input’s length and whose code points have the same values
+	  //    as the values of input’s bytes, in the same order.
 	  const length = input.length;
 	  if ((2 << 15) - 1 > length) {
 	    return String.fromCharCode.apply(null, input)
@@ -4810,7 +4810,7 @@ function requireDataUrl$1 () {
 	      // 2. If mimeType is a JSON MIME type, then return "application/json".
 	      return 'application/json'
 	    case 'image/svg+xml':
-	      // 3. If mimeType?�s essence is "image/svg+xml", then return "image/svg+xml".
+	      // 3. If mimeType’s essence is "image/svg+xml", then return "image/svg+xml".
 	      return 'image/svg+xml'
 	    case 'text/xml':
 	    case 'application/xml':
@@ -4828,7 +4828,7 @@ function requireDataUrl$1 () {
 	    return 'application/xml'
 	  }
 
-	  // 5. If mimeType is supported by the user agent, then return mimeType?�s essence.
+	  // 5. If mimeType is supported by the user agent, then return mimeType’s essence.
 	  // Technically, node doesn't support any mimetypes.
 
 	  // 6. Return the empty string.
@@ -4955,14 +4955,14 @@ function requireWebidl$1 () {
 
 	  // 1. If bitLength is 64, then:
 	  if (bitLength === 64) {
-	    // 1. Let upperBound be 2^53 ??1.
+	    // 1. Let upperBound be 2^53 − 1.
 	    upperBound = Math.pow(2, 53) - 1;
 
 	    // 2. If signedness is "unsigned", then let lowerBound be 0.
 	    if (signedness === 'unsigned') {
 	      lowerBound = 0;
 	    } else {
-	      // 3. Otherwise let lowerBound be ??^53 + 1.
+	      // 3. Otherwise let lowerBound be −2^53 + 1.
 	      lowerBound = Math.pow(-2, 53) + 1;
 	    }
 	  } else if (signedness === 'unsigned') {
@@ -4971,22 +4971,22 @@ function requireWebidl$1 () {
 	    // 1. Let lowerBound be 0.
 	    lowerBound = 0;
 
-	    // 2. Let upperBound be 2^bitLength ??1.
+	    // 2. Let upperBound be 2^bitLength − 1.
 	    upperBound = Math.pow(2, bitLength) - 1;
 	  } else {
 	    // 3. Otherwise:
 
-	    // 1. Let lowerBound be -2^bitLength ??1.
+	    // 1. Let lowerBound be -2^bitLength − 1.
 	    lowerBound = Math.pow(-2, bitLength) - 1;
 
-	    // 2. Let upperBound be 2^bitLength ??1 ??1.
+	    // 2. Let upperBound be 2^bitLength − 1 − 1.
 	    upperBound = Math.pow(2, bitLength - 1) - 1;
 	  }
 
 	  // 4. Let x be ? ToNumber(V).
 	  let x = Number(V);
 
-	  // 5. If x is ??, then set x to +0.
+	  // 5. If x is −0, then set x to +0.
 	  if (x === 0) {
 	    x = 0;
 	  }
@@ -4994,7 +4994,7 @@ function requireWebidl$1 () {
 	  // 6. If the conversion is to an IDL type associated
 	  //    with the [EnforceRange] extended attribute, then:
 	  if (opts?.enforceRange === true) {
-	    // 1. If x is NaN, +?? or ?�∞, then throw a TypeError.
+	    // 1. If x is NaN, +∞, or −∞, then throw a TypeError.
 	    if (
 	      Number.isNaN(x) ||
 	      x === Number.POSITIVE_INFINITY ||
@@ -5031,7 +5031,7 @@ function requireWebidl$1 () {
 
 	    // 2. Round x to the nearest integer, choosing the
 	    //    even integer if it lies halfway between two,
-	    //    and choosing +0 rather than ??.
+	    //    and choosing +0 rather than −0.
 	    if (Math.floor(x) % 2 === 0) {
 	      x = Math.floor(x);
 	    } else {
@@ -5042,7 +5042,7 @@ function requireWebidl$1 () {
 	    return x
 	  }
 
-	  // 8. If x is NaN, +0, +?? or ?�∞, then return +0.
+	  // 8. If x is NaN, +0, +∞, or −∞, then return +0.
 	  if (
 	    Number.isNaN(x) ||
 	    (x === 0 && Object.is(0, x)) ||
@@ -5058,8 +5058,8 @@ function requireWebidl$1 () {
 	  // 10. Set x to x modulo 2^bitLength.
 	  x = x % Math.pow(2, bitLength);
 
-	  // 11. If signedness is "signed" and x ??2^bitLength ??1,
-	  //    then return x ??2^bitLength.
+	  // 11. If signedness is "signed" and x ≥ 2^bitLength − 1,
+	  //    then return x − 2^bitLength.
 	  if (signedness === 'signed' && x >= Math.pow(2, bitLength) - 1) {
 	    return x - Math.pow(2, bitLength)
 	  }
@@ -5439,7 +5439,7 @@ function requireWebidl$1 () {
 
 	  // 2. If Type(V) is not Object, or V does not have a
 	  //    [[TypedArrayName]] internal slot with a value
-	  //    equal to T?�s name, then throw a TypeError.
+	  //    equal to T’s name, then throw a TypeError.
 	  if (
 	    webidl.util.Type(V) !== 'Object' ||
 	    !types.isTypedArray(V) ||
@@ -5591,7 +5591,7 @@ function requireUtil$i () {
 	function responseURL (response) {
 	  // https://fetch.spec.whatwg.org/#responses
 	  // A response has an associated URL. It is a pointer to the last URL
-	  // in response?�s URL list and null if response?�s URL list is empty.
+	  // in response’s URL list and null if response’s URL list is empty.
 	  const urlList = response.urlList;
 	  const length = urlList.length;
 	  return length === 0 ? null : urlList[length - 1].toString()
@@ -5599,17 +5599,17 @@ function requireUtil$i () {
 
 	// https://fetch.spec.whatwg.org/#concept-response-location-url
 	function responseLocationURL (response, requestFragment) {
-	  // 1. If response?�s status is not a redirect status, then return null.
+	  // 1. If response’s status is not a redirect status, then return null.
 	  if (!redirectStatusSet.has(response.status)) {
 	    return null
 	  }
 
 	  // 2. Let location be the result of extracting header list values given
-	  // `Location` and response?�s header list.
+	  // `Location` and response’s header list.
 	  let location = response.headersList.get('location', true);
 
 	  // 3. If location is a header value, then set location to the result of
-	  //    parsing location with response?�s URL.
+	  //    parsing location with response’s URL.
 	  if (location !== null && isValidHeaderValue(location)) {
 	    if (!isValidEncodedURL(location)) {
 	      // Some websites respond location header in UTF-8 form without encoding them as ASCII
@@ -5620,7 +5620,7 @@ function requireUtil$i () {
 	    location = new URL(location, responseURL(response));
 	  }
 
-	  // 4. If location is a URL whose fragment is null, then set location?�s
+	  // 4. If location is a URL whose fragment is null, then set location’s
 	  // fragment to requestFragment.
 	  if (location && !location.hash) {
 	    location.hash = requestFragment;
@@ -5665,10 +5665,10 @@ function requireUtil$i () {
 	}
 
 	function requestBadPort (request) {
-	  // 1. Let url be request?�s current URL.
+	  // 1. Let url be request’s current URL.
 	  const url = requestCurrentURL(request);
 
-	  // 2. If url?�s scheme is an HTTP(S) scheme and url?�s port is a bad port,
+	  // 2. If url’s scheme is an HTTP(S) scheme and url’s port is a bad port,
 	  // then return blocked.
 	  if (urlIsHttpHttpsScheme(url) && badPortsSet.has(url.port)) {
 	    return 'blocked'
@@ -5736,14 +5736,14 @@ function requireUtil$i () {
 	// https://w3c.github.io/webappsec-referrer-policy/#set-requests-referrer-policy-on-redirect
 	function setRequestReferrerPolicyOnRedirect (request, actualResponse) {
 	  //  Given a request request and a response actualResponse, this algorithm
-	  //  updates request?�s referrer policy according to the Referrer-Policy
+	  //  updates request’s referrer policy according to the Referrer-Policy
 	  //  header (if any) in actualResponse.
 
 	  // 1. Let policy be the result of executing § 8.1 Parse a referrer policy
 	  // from a Referrer-Policy header on actualResponse.
 
 	  // 8.1 Parse a referrer policy from a Referrer-Policy header
-	  // 1. Let policy-tokens be the result of extracting header list values given `Referrer-Policy` and response?�s header list.
+	  // 1. Let policy-tokens be the result of extracting header list values given `Referrer-Policy` and response’s header list.
 	  const { headersList } = actualResponse;
 	  // 2. Let policy be the empty string.
 	  // 3. For each token in policy-tokens, if token is a referrer policy and token is not the empty string, then set policy to token.
@@ -5767,7 +5767,7 @@ function requireUtil$i () {
 	    }
 	  }
 
-	  // 2. If policy is not the empty string, then set request?�s referrer policy to policy.
+	  // 2. If policy is not the empty string, then set request’s referrer policy to policy.
 	  if (policy !== '') {
 	    request.referrerPolicy = policy;
 	  }
@@ -5797,16 +5797,16 @@ function requireUtil$i () {
 
 	  //  https://w3c.github.io/webappsec-fetch-metadata/#sec-fetch-mode-header
 
-	  //  1. Assert: r?�s url is a potentially trustworthy URL.
+	  //  1. Assert: r’s url is a potentially trustworthy URL.
 	  //  TODO
 
 	  //  2. Let header be a Structured Header whose value is a token.
 	  let header = null;
 
-	  //  3. Set header?�s value to r?�s mode.
+	  //  3. Set header’s value to r’s mode.
 	  header = httpRequest.mode;
 
-	  //  4. Set a structured field value `Sec-Fetch-Mode`/header in r?�s header list.
+	  //  4. Set a structured field value `Sec-Fetch-Mode`/header in r’s header list.
 	  httpRequest.headersList.set('sec-fetch-mode', header, true);
 
 	  //  https://w3c.github.io/webappsec-fetch-metadata/#sec-fetch-site-header
@@ -5833,13 +5833,13 @@ function requireUtil$i () {
 	    return
 	  }
 
-	  // 2. If request?�s response tainting is "cors" or request?�s mode is "websocket",
-	  //    then append (`Origin`, serializedOrigin) to request?�s header list.
-	  // 3. Otherwise, if request?�s method is neither `GET` nor `HEAD`, then:
+	  // 2. If request’s response tainting is "cors" or request’s mode is "websocket",
+	  //    then append (`Origin`, serializedOrigin) to request’s header list.
+	  // 3. Otherwise, if request’s method is neither `GET` nor `HEAD`, then:
 	  if (request.responseTainting === 'cors' || request.mode === 'websocket') {
 	    request.headersList.append('origin', serializedOrigin, true);
 	  } else if (request.method !== 'GET' && request.method !== 'HEAD') {
-	    // 1. Switch on request?�s referrer policy:
+	    // 1. Switch on request’s referrer policy:
 	    switch (request.referrerPolicy) {
 	      case 'no-referrer':
 	        // Set serializedOrigin to `null`.
@@ -5848,15 +5848,15 @@ function requireUtil$i () {
 	      case 'no-referrer-when-downgrade':
 	      case 'strict-origin':
 	      case 'strict-origin-when-cross-origin':
-	        // If request?�s origin is a tuple origin, its scheme is "https", and
-	        // request?�s current URL?�s scheme is not "https", then set
+	        // If request’s origin is a tuple origin, its scheme is "https", and
+	        // request’s current URL’s scheme is not "https", then set
 	        // serializedOrigin to `null`.
 	        if (request.origin && urlHasHttpsScheme(request.origin) && !urlHasHttpsScheme(requestCurrentURL(request))) {
 	          serializedOrigin = null;
 	        }
 	        break
 	      case 'same-origin':
-	        // If request?�s origin is not same origin with request?�s current URL?�s
+	        // If request’s origin is not same origin with request’s current URL’s
 	        // origin, then set serializedOrigin to `null`.
 	        if (!sameOrigin(request, requestCurrentURL(request))) {
 	          serializedOrigin = null;
@@ -5865,7 +5865,7 @@ function requireUtil$i () {
 	        // Do nothing.
 	    }
 
-	    // 2. Append (`Origin`, serializedOrigin) to request?�s header list.
+	    // 2. Append (`Origin`, serializedOrigin) to request’s header list.
 	    request.headersList.append('origin', serializedOrigin, true);
 	  }
 	}
@@ -5944,11 +5944,11 @@ function requireUtil$i () {
 	  // Note: policy cannot (shouldn't) be null or an empty string.
 	  assert(policy);
 
-	  // 2. Let environment be request?�s client.
+	  // 2. Let environment be request’s client.
 
 	  let referrerSource = null;
 
-	  // 3. Switch on request?�s referrer:
+	  // 3. Switch on request’s referrer:
 	  if (request.referrer === 'client') {
 	    // Note: node isn't a browser and doesn't implement document/iframes,
 	    // so we bypass this step and replace it with our own.
@@ -5962,11 +5962,11 @@ function requireUtil$i () {
 	    // note: we need to clone it as it's mutated
 	    referrerSource = new URL(globalOrigin);
 	  } else if (request.referrer instanceof URL) {
-	    // Let referrerSource be request?�s referrer.
+	    // Let referrerSource be request’s referrer.
 	    referrerSource = request.referrer;
 	  }
 
-	  // 4. Let request?�s referrerURL be the result of stripping referrerSource for
+	  // 4. Let request’s referrerURL be the result of stripping referrerSource for
 	  //    use as a referrer.
 	  let referrerURL = stripURLForReferrer(referrerSource);
 
@@ -5995,13 +5995,13 @@ function requireUtil$i () {
 	    case 'strict-origin-when-cross-origin': {
 	      const currentURL = requestCurrentURL(request);
 
-	      // 1. If the origin of referrerURL and the origin of request?�s current
+	      // 1. If the origin of referrerURL and the origin of request’s current
 	      //    URL are the same, then return referrerURL.
 	      if (sameOrigin(referrerURL, currentURL)) {
 	        return referrerURL
 	      }
 
-	      // 2. If referrerURL is a potentially trustworthy URL and request?�s
+	      // 2. If referrerURL is a potentially trustworthy URL and request’s
 	      //    current URL is not a potentially trustworthy URL, then return no
 	      //    referrer.
 	      if (isURLPotentiallyTrustworthy(referrerURL) && !isURLPotentiallyTrustworthy(currentURL)) {
@@ -6014,14 +6014,14 @@ function requireUtil$i () {
 	    case 'strict-origin': // eslint-disable-line
 	      /**
 	         * 1. If referrerURL is a potentially trustworthy URL and
-	         * request?�s current URL is not a potentially trustworthy URL,
+	         * request’s current URL is not a potentially trustworthy URL,
 	         * then return no referrer.
 	         * 2. Return referrerOrigin
 	        */
 	    case 'no-referrer-when-downgrade': // eslint-disable-line
 	      /**
 	       * 1. If referrerURL is a potentially trustworthy URL and
-	       * request?�s current URL is not a potentially trustworthy URL,
+	       * request’s current URL is not a potentially trustworthy URL,
 	       * then return no referrer.
 	       * 2. Return referrerOrigin
 	      */
@@ -6042,26 +6042,26 @@ function requireUtil$i () {
 
 	  url = new URL(url);
 
-	  // 2. If url?�s scheme is a local scheme, then return no referrer.
+	  // 2. If url’s scheme is a local scheme, then return no referrer.
 	  if (url.protocol === 'file:' || url.protocol === 'about:' || url.protocol === 'blank:') {
 	    return 'no-referrer'
 	  }
 
-	  // 3. Set url?�s username to the empty string.
+	  // 3. Set url’s username to the empty string.
 	  url.username = '';
 
-	  // 4. Set url?�s password to the empty string.
+	  // 4. Set url’s password to the empty string.
 	  url.password = '';
 
-	  // 5. Set url?�s fragment to null.
+	  // 5. Set url’s fragment to null.
 	  url.hash = '';
 
 	  // 6. If the origin-only flag is true, then:
 	  if (originOnly) {
-	    // 1. Set url?�s path to « the empty string ».
+	    // 1. Set url’s path to « the empty string ».
 	    url.pathname = '';
 
-	    // 2. Set url?�s query to null.
+	    // 2. Set url’s query to null.
 	    url.search = '';
 	  }
 
@@ -6425,9 +6425,9 @@ function requireUtil$i () {
 	        )
 	      }
 
-	      // 6. Let index be object?�s index.
-	      // 7. Let kind be object?�s kind.
-	      // 8. Let values be object?�s target's value pairs to iterate over.
+	      // 6. Let index be object’s index.
+	      // 7. Let kind be object’s kind.
+	      // 8. Let values be object’s target's value pairs to iterate over.
 	      const index = this.#index;
 	      const values = this.#target[kInternalIterator];
 
@@ -6446,7 +6446,7 @@ function requireUtil$i () {
 	      // 11. Let pair be the entry in values at index index.
 	      const { [keyIndex]: key, [valueIndex]: value } = values[index];
 
-	      // 12. Set object?�s index to index + 1.
+	      // 12. Set object’s index to index + 1.
 	      this.#index = index + 1;
 
 	      // 13. Return the iterator result for pair and kind.
@@ -6457,22 +6457,22 @@ function requireUtil$i () {
 	      let result;
 	      switch (this.#kind) {
 	        case 'key':
-	          // 1. Let idlKey be pair?�s key.
+	          // 1. Let idlKey be pair’s key.
 	          // 2. Let key be the result of converting idlKey to an
 	          //    ECMAScript value.
 	          // 3. result is key.
 	          result = key;
 	          break
 	        case 'value':
-	          // 1. Let idlValue be pair?�s value.
+	          // 1. Let idlValue be pair’s value.
 	          // 2. Let value be the result of converting idlValue to
 	          //    an ECMAScript value.
 	          // 3. result is value.
 	          result = value;
 	          break
 	        case 'key+value':
-	          // 1. Let idlKey be pair?�s key.
-	          // 2. Let idlValue be pair?�s value.
+	          // 1. Let idlKey be pair’s key.
+	          // 2. Let idlValue be pair’s value.
 	          // 3. Let key be the result of converting idlKey to an
 	          //    ECMAScript value.
 	          // 4. Let value be the result of converting idlValue to
@@ -6603,7 +6603,7 @@ function requireUtil$i () {
 	  //    with taskDestination.
 	  const errorSteps = processBodyError;
 
-	  // 4. Let reader be the result of getting a reader for body?�s stream.
+	  // 4. Let reader be the result of getting a reader for body’s stream.
 	  //    If that threw an exception, then run errorSteps with that
 	  //    exception and return.
 	  let reader;
@@ -6655,9 +6655,9 @@ function requireUtil$i () {
 	  // 1. Assert: input contains no code points greater than U+00FF.
 	  assert(!invalidIsomorphicEncodeValueRegex.test(input));
 
-	  // 2. Return a byte sequence whose length is equal to input?�s code
+	  // 2. Return a byte sequence whose length is equal to input’s code
 	  //    point length and whose bytes have the same values as the
-	  //    values of input?�s code points, in the same order
+	  //    values of input’s code points, in the same order
 	  return input
 	}
 
@@ -6980,22 +6980,22 @@ function requireUtil$i () {
 	    // 6.3. Set mimeType to temporaryMimeType.
 	    mimeType = temporaryMimeType;
 
-	    // 6.4. If mimeType?�s essence is not essence, then:
+	    // 6.4. If mimeType’s essence is not essence, then:
 	    if (mimeType.essence !== essence) {
 	      // 6.4.1. Set charset to null.
 	      charset = null;
 
-	      // 6.4.2. If mimeType?�s parameters["charset"] exists, then set charset to
-	      //        mimeType?�s parameters["charset"].
+	      // 6.4.2. If mimeType’s parameters["charset"] exists, then set charset to
+	      //        mimeType’s parameters["charset"].
 	      if (mimeType.parameters.has('charset')) {
 	        charset = mimeType.parameters.get('charset');
 	      }
 
-	      // 6.4.3. Set essence to mimeType?�s essence.
+	      // 6.4.3. Set essence to mimeType’s essence.
 	      essence = mimeType.essence;
 	    } else if (!mimeType.parameters.has('charset') && charset !== null) {
-	      // 6.5. Otherwise, if mimeType?�s parameters["charset"] does not exist, and
-	      //      charset is non-null, set mimeType?�s parameters["charset"] to charset.
+	      // 6.5. Otherwise, if mimeType’s parameters["charset"] does not exist, and
+	      //      charset is non-null, set mimeType’s parameters["charset"] to charset.
 	      mimeType.parameters.set('charset', charset);
 	    }
 	  }
@@ -7113,7 +7113,7 @@ function requireUtil$i () {
 	    buffer = buffer.subarray(3);
 	  }
 
-	  // 3. Process a queue with an instance of UTF-8?�s
+	  // 3. Process a queue with an instance of UTF-8’s
 	  //    decoder, ioQueue, output, and "replacement".
 	  const output = textDecoder.decode(buffer);
 
@@ -7406,7 +7406,7 @@ function requireFormdata$1 () {
 	    // name, value, and filename if given.
 	    const entry = makeEntry(name, value, filename);
 
-	    // 3. Append entry to this?�s entry list.
+	    // 3. Append entry to this’s entry list.
 	    this[kState].push(entry);
 	  }
 
@@ -7419,7 +7419,7 @@ function requireFormdata$1 () {
 	    name = webidl.converters.USVString(name, prefix, 'name');
 
 	    // The delete(name) method steps are to remove all entries whose name
-	    // is name from this?�s entry list.
+	    // is name from this’s entry list.
 	    this[kState] = this[kState].filter(entry => entry.name !== name);
 	  }
 
@@ -7431,7 +7431,7 @@ function requireFormdata$1 () {
 
 	    name = webidl.converters.USVString(name, prefix, 'name');
 
-	    // 1. If there is no entry whose name is name in this?�s entry list,
+	    // 1. If there is no entry whose name is name in this’s entry list,
 	    // then return null.
 	    const idx = this[kState].findIndex((entry) => entry.name === name);
 	    if (idx === -1) {
@@ -7439,7 +7439,7 @@ function requireFormdata$1 () {
 	    }
 
 	    // 2. Return the value of the first entry whose name is name from
-	    // this?�s entry list.
+	    // this’s entry list.
 	    return this[kState][idx].value
 	  }
 
@@ -7451,10 +7451,10 @@ function requireFormdata$1 () {
 
 	    name = webidl.converters.USVString(name, prefix, 'name');
 
-	    // 1. If there is no entry whose name is name in this?�s entry list,
+	    // 1. If there is no entry whose name is name in this’s entry list,
 	    // then return the empty list.
 	    // 2. Return the values of all entries whose name is name, in order,
-	    // from this?�s entry list.
+	    // from this’s entry list.
 	    return this[kState]
 	      .filter((entry) => entry.name === name)
 	      .map((entry) => entry.value)
@@ -7469,7 +7469,7 @@ function requireFormdata$1 () {
 	    name = webidl.converters.USVString(name, prefix, 'name');
 
 	    // The has(name) method steps are to return true if there is an entry
-	    // whose name is name in this?�s entry list; otherwise false.
+	    // whose name is name in this’s entry list; otherwise false.
 	    return this[kState].findIndex((entry) => entry.name === name) !== -1
 	  }
 
@@ -7502,7 +7502,7 @@ function requireFormdata$1 () {
 	    // filename if given.
 	    const entry = makeEntry(name, value, filename);
 
-	    // 3. If there are entries in this?�s entry list whose name is name, then
+	    // 3. If there are entries in this’s entry list whose name is name, then
 	    // replace the first such entry with entry and remove the others.
 	    const idx = this[kState].findIndex((entry) => entry.name === name);
 	    if (idx !== -1) {
@@ -7512,7 +7512,7 @@ function requireFormdata$1 () {
 	        ...this[kState].slice(idx + 1).filter((entry) => entry.name !== name)
 	      ];
 	    } else {
-	      // 4. Otherwise, append entry to this?�s entry list.
+	      // 4. Otherwise, append entry to this’s entry list.
 	      this[kState].push(entry);
 	    }
 	  }
@@ -7677,13 +7677,13 @@ function requireFormdataParser$1 () {
 	 * @param {ReturnType<import('./data-url')['parseMIMEType']>} mimeType
 	 */
 	function multipartFormDataParser (input, mimeType) {
-	  // 1. Assert: mimeType?�s essence is "multipart/form-data".
+	  // 1. Assert: mimeType’s essence is "multipart/form-data".
 	  assert(mimeType !== 'failure' && mimeType.essence === 'multipart/form-data');
 
 	  const boundaryString = mimeType.parameters.get('boundary');
 
-	  // 2. If mimeType?�s parameters["boundary"] does not exist, return failure.
-	  //    Otherwise, let boundary be the result of UTF-8 decoding mimeType?�s
+	  // 2. If mimeType’s parameters["boundary"] does not exist, return failure.
+	  //    Otherwise, let boundary be the result of UTF-8 decoding mimeType’s
 	  //    parameters["boundary"].
 	  if (boundaryString === undefined) {
 	    return 'failure'
@@ -8147,7 +8147,7 @@ function requireBody$1 () {
 	    stream = object;
 	  } else if (isBlobLike(object)) {
 	    // 3. Otherwise, if object is a Blob object, set stream to the
-	    //    result of running object?�s get stream.
+	    //    result of running object’s get stream.
 	    stream = object.stream();
 	  } else {
 	    // 4. Otherwise, set stream to a new ReadableStream object, and set
@@ -8198,7 +8198,7 @@ function requireBody$1 () {
 	    // See: https://github.com/nodejs/node/blob/e46c680bf2b211bbd52cf959ca17ee98c7f657f5/lib/internal/url.js#L490
 	    // and https://github.com/nodejs/node/blob/e46c680bf2b211bbd52cf959ca17ee98c7f657f5/lib/internal/url.js#L1100
 
-	    // Set source to the result of running the application/x-www-form-urlencoded serializer with object?�s list.
+	    // Set source to the result of running the application/x-www-form-urlencoded serializer with object’s list.
 	    source = object.toString();
 
 	    // Set type to `application/x-www-form-urlencoded;charset=UTF-8`.
@@ -8223,7 +8223,7 @@ function requireBody$1 () {
 	    const normalizeLinefeeds = (value) => value.replace(/\r?\n|\r/g, '\r\n');
 
 	    // Set action to this step: run the multipart/form-data
-	    // encoding algorithm, with object?�s entry list and UTF-8.
+	    // encoding algorithm, with object’s entry list and UTF-8.
 	    // - This ensures that the body is immutable and can't be changed afterwords
 	    // - That the content-length is calculated in advance.
 	    // - And that all parts are pre-encoded and ready to be sent.
@@ -8288,10 +8288,10 @@ function requireBody$1 () {
 	    // Set source to object.
 	    source = object;
 
-	    // Set length to object?�s size.
+	    // Set length to object’s size.
 	    length = object.size;
 
-	    // If object?�s type attribute is not the empty byte sequence, set
+	    // If object’s type attribute is not the empty byte sequence, set
 	    // type to its value.
 	    if (object.type) {
 	      type = object.type;
@@ -8314,7 +8314,7 @@ function requireBody$1 () {
 	  }
 
 	  // 11. If source is a byte sequence, then set action to a
-	  // step that returns source and length to source?�s length.
+	  // step that returns source and length to source’s length.
 	  if (typeof source === 'string' || util.isBuffer(source)) {
 	    length = Buffer.byteLength(source);
 	  }
@@ -8386,10 +8386,10 @@ function requireBody$1 () {
 
 	  // https://fetch.spec.whatwg.org/#concept-body-clone
 
-	  // 1. Let « out1, out2 » be the result of teeing body?�s stream.
+	  // 1. Let « out1, out2 » be the result of teeing body’s stream.
 	  const [out1, out2] = body.stream.tee();
 
-	  // 2. Set body?�s stream to out1.
+	  // 2. Set body’s stream to out1.
 	  body.stream = out1;
 
 	  // 3. Return a body whose stream is out2 and other members are copied from body.
@@ -8412,7 +8412,7 @@ function requireBody$1 () {
 	      // The blob() method steps are to return the result of
 	      // running consume body with this and the following step
 	      // given a byte sequence bytes: return a Blob whose
-	      // contents are bytes and whose type attribute is this?�s
+	      // contents are bytes and whose type attribute is this’s
 	      // MIME type.
 	      return consumeBody(this, (bytes) => {
 	        let mimeType = bodyMimeType(this);
@@ -8458,7 +8458,7 @@ function requireBody$1 () {
 	        // 1. Let mimeType be the result of get the MIME type with this.
 	        const mimeType = bodyMimeType(this);
 
-	        // 2. If mimeType is non-null, then switch on mimeType?�s essence and run
+	        // 2. If mimeType is non-null, then switch on mimeType’s essence and run
 	        //    the corresponding steps:
 	        if (mimeType !== null) {
 	          switch (mimeType.essence) {
@@ -8506,7 +8506,7 @@ function requireBody$1 () {
 	    bytes () {
 	      // The bytes() method steps are to return the result of running consume body
 	      // with this and the following step given a byte sequence bytes: return the
-	      // result of creating a Uint8Array from bytes in this?�s relevant realm.
+	      // result of creating a Uint8Array from bytes in this’s relevant realm.
 	      return consumeBody(this, (bytes) => {
 	        return new Uint8Array(bytes)
 	      }, instance)
@@ -8555,15 +8555,15 @@ function requireBody$1 () {
 	    }
 	  };
 
-	  // 5. If object?�s body is null, then run successSteps with an
+	  // 5. If object’s body is null, then run successSteps with an
 	  //    empty byte sequence.
 	  if (object[kState].body == null) {
 	    successSteps(Buffer.allocUnsafe(0));
 	    return promise.promise
 	  }
 
-	  // 6. Otherwise, fully read object?�s body given successSteps,
-	  //    errorSteps, and object?�s relevant global object.
+	  // 6. Otherwise, fully read object’s body given successSteps,
+	  //    errorSteps, and object’s relevant global object.
 	  await fullyReadBody(object[kState].body, successSteps, errorSteps);
 
 	  // 7. Return promise.
@@ -8576,7 +8576,7 @@ function requireBody$1 () {
 
 	  // An object including the Body interface mixin is
 	  // said to be unusable if its body is non-null and
-	  // its body?�s stream is disturbed or locked.
+	  // its body’s stream is disturbed or locked.
 	  return body != null && (body.stream.locked || util.isDisturbed(body.stream))
 	}
 
@@ -8594,8 +8594,8 @@ function requireBody$1 () {
 	 */
 	function bodyMimeType (requestOrResponse) {
 	  // 1. Let headers be null.
-	  // 2. If requestOrResponse is a Request object, then set headers to requestOrResponse?�s request?�s header list.
-	  // 3. Otherwise, set headers to requestOrResponse?�s response?�s header list.
+	  // 2. If requestOrResponse is a Request object, then set headers to requestOrResponse’s request’s header list.
+	  // 3. Otherwise, set headers to requestOrResponse’s response’s header list.
 	  /** @type {import('./headers').HeadersList} */
 	  const headers = requestOrResponse[kState].headersList;
 
@@ -15700,11 +15700,11 @@ function requirePendingInterceptorsFormatter$1 () {
 	const { Transform } = require$$0$7;
 	const { Console } = require$$1$5;
 
-	const PERSISTENT = process.versions.icu ? '?? : 'Y ';
-	const NOT_PERSISTENT = process.versions.icu ? '?? : 'N ';
+	const PERSISTENT = process.versions.icu ? '✅' : 'Y ';
+	const NOT_PERSISTENT = process.versions.icu ? '❌' : 'N ';
 
 	/**
-	 * Gets the output of `console.table(??` as a string.
+	 * Gets the output of `console.table(…)` as a string.
 	 */
 	pendingInterceptorsFormatter$1 = class PendingInterceptorsFormatter {
 	  constructor ({ disableColors } = {}) {
@@ -16634,13 +16634,13 @@ function requireHeaders$2 () {
 	        })
 	      }
 
-	      // 2. Append (header?�s first item, header?�s second item) to headers.
+	      // 2. Append (header’s first item, header’s second item) to headers.
 	      appendHeader(headers, header[0], header[1]);
 	    }
 	  } else if (typeof object === 'object' && object !== null) {
 	    // Note: null should throw
 
-	    // 2. Otherwise, object is a record, then for each key ??value in object,
+	    // 2. Otherwise, object is a record, then for each key → value in object,
 	    //    append (key, value) to headers
 	    const keys = Object.keys(object);
 	    for (let i = 0; i < keys.length; ++i) {
@@ -16678,23 +16678,23 @@ function requireHeaders$2 () {
 	    })
 	  }
 
-	  // 3. If headers?�s guard is "immutable", then throw a TypeError.
-	  // 4. Otherwise, if headers?�s guard is "request" and name is a
+	  // 3. If headers’s guard is "immutable", then throw a TypeError.
+	  // 4. Otherwise, if headers’s guard is "request" and name is a
 	  //    forbidden header name, return.
-	  // 5. Otherwise, if headers?�s guard is "request-no-cors":
+	  // 5. Otherwise, if headers’s guard is "request-no-cors":
 	  //    TODO
 	  // Note: undici does not implement forbidden header names
 	  if (getHeadersGuard(headers) === 'immutable') {
 	    throw new TypeError('immutable')
 	  }
 
-	  // 6. Otherwise, if headers?�s guard is "response" and name is a
+	  // 6. Otherwise, if headers’s guard is "response" and name is a
 	  //    forbidden response-header name, return.
 
-	  // 7. Append (name, value) to headers?�s header list.
+	  // 7. Append (name, value) to headers’s header list.
 	  return getHeadersList(headers).append(name, value, false)
 
-	  // 8. If headers?�s guard is "request-no-cors", then remove
+	  // 8. If headers’s guard is "request-no-cors", then remove
 	  //    privileged no-CORS request headers from headers
 	}
 
@@ -16746,7 +16746,7 @@ function requireHeaders$2 () {
 	    this[kHeadersSortedMap] = null;
 
 	    // 1. If list contains name, then set name to the first such
-	    //    header?�s name.
+	    //    header’s name.
 	    const lowercaseName = isLowerCase ? name : name.toLowerCase();
 	    const exists = this[kHeadersMap].get(lowercaseName);
 
@@ -16948,7 +16948,7 @@ function requireHeaders$2 () {
 
 	    // The new Headers(init) constructor steps are:
 
-	    // 1. Set this?�s guard to "none".
+	    // 1. Set this’s guard to "none".
 	    this.#guard = 'none';
 
 	    // 2. If init is given, then fill this with init.
@@ -16989,28 +16989,28 @@ function requireHeaders$2 () {
 	      })
 	    }
 
-	    // 2. If this?�s guard is "immutable", then throw a TypeError.
-	    // 3. Otherwise, if this?�s guard is "request" and name is a
+	    // 2. If this’s guard is "immutable", then throw a TypeError.
+	    // 3. Otherwise, if this’s guard is "request" and name is a
 	    //    forbidden header name, return.
-	    // 4. Otherwise, if this?�s guard is "request-no-cors", name
+	    // 4. Otherwise, if this’s guard is "request-no-cors", name
 	    //    is not a no-CORS-safelisted request-header name, and
 	    //    name is not a privileged no-CORS request-header name,
 	    //    return.
-	    // 5. Otherwise, if this?�s guard is "response" and name is
+	    // 5. Otherwise, if this’s guard is "response" and name is
 	    //    a forbidden response-header name, return.
 	    // Note: undici does not implement forbidden header names
 	    if (this.#guard === 'immutable') {
 	      throw new TypeError('immutable')
 	    }
 
-	    // 6. If this?�s header list does not contain name, then
+	    // 6. If this’s header list does not contain name, then
 	    //    return.
 	    if (!this.#headersList.contains(name, false)) {
 	      return
 	    }
 
-	    // 7. Delete name from this?�s header list.
-	    // 8. If this?�s guard is "request-no-cors", then remove
+	    // 7. Delete name from this’s header list.
+	    // 8. If this’s guard is "request-no-cors", then remove
 	    //    privileged no-CORS request headers from this.
 	    this.#headersList.delete(name, false);
 	  }
@@ -17033,7 +17033,7 @@ function requireHeaders$2 () {
 	      })
 	    }
 
-	    // 2. Return the result of getting name from this?�s header
+	    // 2. Return the result of getting name from this’s header
 	    //    list.
 	    return this.#headersList.get(name, false)
 	  }
@@ -17056,7 +17056,7 @@ function requireHeaders$2 () {
 	      })
 	    }
 
-	    // 2. Return true if this?�s header list contains name;
+	    // 2. Return true if this’s header list contains name;
 	    //    otherwise false.
 	    return this.#headersList.contains(name, false)
 	  }
@@ -17090,21 +17090,21 @@ function requireHeaders$2 () {
 	      })
 	    }
 
-	    // 3. If this?�s guard is "immutable", then throw a TypeError.
-	    // 4. Otherwise, if this?�s guard is "request" and name is a
+	    // 3. If this’s guard is "immutable", then throw a TypeError.
+	    // 4. Otherwise, if this’s guard is "request" and name is a
 	    //    forbidden header name, return.
-	    // 5. Otherwise, if this?�s guard is "request-no-cors" and
+	    // 5. Otherwise, if this’s guard is "request-no-cors" and
 	    //    name/value is not a no-CORS-safelisted request-header,
 	    //    return.
-	    // 6. Otherwise, if this?�s guard is "response" and name is a
+	    // 6. Otherwise, if this’s guard is "response" and name is a
 	    //    forbidden response-header name, return.
 	    // Note: undici does not implement forbidden header names
 	    if (this.#guard === 'immutable') {
 	      throw new TypeError('immutable')
 	    }
 
-	    // 7. Set (name, value) in this?�s header list.
-	    // 8. If this?�s guard is "request-no-cors", then remove
+	    // 7. Set (name, value) in this’s header list.
+	    // 8. If this’s guard is "request-no-cors", then remove
 	    //    privileged no-CORS request headers from this
 	    this.#headersList.set(name, value, false);
 	  }
@@ -17113,8 +17113,8 @@ function requireHeaders$2 () {
 	  getSetCookie () {
 	    webidl.brandCheck(this, Headers);
 
-	    // 1. If this?�s header list does not contain `Set-Cookie`, then return « ».
-	    // 2. Return the values of all headers in this?�s header list whose name is
+	    // 1. If this’s header list does not contain `Set-Cookie`, then return « ».
+	    // 2. Return the values of all headers in this’s header list whose name is
 	    //    a byte-case-insensitive match for `Set-Cookie`, in order.
 
 	    const list = this.#headersList.cookies;
@@ -17308,7 +17308,7 @@ function requireResponse$1 () {
 	  // Creates network error Response.
 	  static error () {
 	    // The static error() method steps are to return the result of creating a
-	    // Response object, given a new network error, "immutable", and this?�s
+	    // Response object, given a new network error, "immutable", and this’s
 	    // relevant Realm.
 	    const responseObject = fromInnerResponse(makeNetworkError(), 'immutable');
 
@@ -17332,7 +17332,7 @@ function requireResponse$1 () {
 	    const body = extractBody(bytes);
 
 	    // 3. Let responseObject be the result of creating a Response object, given a new response,
-	    //    "response", and this?�s relevant Realm.
+	    //    "response", and this’s relevant Realm.
 	    const responseObject = fromInnerResponse(makeResponse({}), 'response');
 
 	    // 4. Perform initialize a response given responseObject, init, and (body, "application/json").
@@ -17350,7 +17350,7 @@ function requireResponse$1 () {
 	    status = webidl.converters['unsigned short'](status);
 
 	    // 1. Let parsedURL be the result of parsing url with current settings
-	    // object?�s API base URL.
+	    // object’s API base URL.
 	    // 2. If parsedURL is failure, then throw a TypeError.
 	    // TODO: base-URL?
 	    let parsedURL;
@@ -17366,16 +17366,16 @@ function requireResponse$1 () {
 	    }
 
 	    // 4. Let responseObject be the result of creating a Response object,
-	    // given a new response, "immutable", and this?�s relevant Realm.
+	    // given a new response, "immutable", and this’s relevant Realm.
 	    const responseObject = fromInnerResponse(makeResponse({}), 'immutable');
 
-	    // 5. Set responseObject?�s response?�s status to status.
+	    // 5. Set responseObject’s response’s status to status.
 	    responseObject[kState].status = status;
 
 	    // 6. Let value be parsedURL, serialized and isomorphic encoded.
 	    const value = isomorphicEncode(URLSerializer(parsedURL));
 
-	    // 7. Append `Location`/value to responseObject?�s response?�s header list.
+	    // 7. Append `Location`/value to responseObject’s response’s header list.
 	    responseObject[kState].headersList.append('location', value, true);
 
 	    // 8. Return responseObject.
@@ -17395,11 +17395,11 @@ function requireResponse$1 () {
 
 	    init = webidl.converters.ResponseInit(init);
 
-	    // 1. Set this?�s response to a new response.
+	    // 1. Set this’s response to a new response.
 	    this[kState] = makeResponse({});
 
-	    // 2. Set this?�s headers to a new Headers object with this?�s relevant
-	    // Realm, whose header list is this?�s response?�s header list and guard
+	    // 2. Set this’s headers to a new Headers object with this’s relevant
+	    // Realm, whose header list is this’s response’s header list and guard
 	    // is "response".
 	    this[kHeaders] = new Headers(kConstruct);
 	    setHeadersGuard(this[kHeaders], 'response');
@@ -17418,22 +17418,22 @@ function requireResponse$1 () {
 	    initializeResponse(this, init, bodyWithType);
 	  }
 
-	  // Returns response?�s type, e.g., "cors".
+	  // Returns response’s type, e.g., "cors".
 	  get type () {
 	    webidl.brandCheck(this, Response);
 
-	    // The type getter steps are to return this?�s response?�s type.
+	    // The type getter steps are to return this’s response’s type.
 	    return this[kState].type
 	  }
 
-	  // Returns response?�s URL, if it has one; otherwise the empty string.
+	  // Returns response’s URL, if it has one; otherwise the empty string.
 	  get url () {
 	    webidl.brandCheck(this, Response);
 
 	    const urlList = this[kState].urlList;
 
-	    // The url getter steps are to return the empty string if this?�s
-	    // response?�s URL is null; otherwise this?�s response?�s URL,
+	    // The url getter steps are to return the empty string if this’s
+	    // response’s URL is null; otherwise this’s response’s URL,
 	    // serialized with exclude fragment set to true.
 	    const url = urlList[urlList.length - 1] ?? null;
 
@@ -17448,42 +17448,42 @@ function requireResponse$1 () {
 	  get redirected () {
 	    webidl.brandCheck(this, Response);
 
-	    // The redirected getter steps are to return true if this?�s response?�s URL
+	    // The redirected getter steps are to return true if this’s response’s URL
 	    // list has more than one item; otherwise false.
 	    return this[kState].urlList.length > 1
 	  }
 
-	  // Returns response?�s status.
+	  // Returns response’s status.
 	  get status () {
 	    webidl.brandCheck(this, Response);
 
-	    // The status getter steps are to return this?�s response?�s status.
+	    // The status getter steps are to return this’s response’s status.
 	    return this[kState].status
 	  }
 
-	  // Returns whether response?�s status is an ok status.
+	  // Returns whether response’s status is an ok status.
 	  get ok () {
 	    webidl.brandCheck(this, Response);
 
-	    // The ok getter steps are to return true if this?�s response?�s status is an
+	    // The ok getter steps are to return true if this’s response’s status is an
 	    // ok status; otherwise false.
 	    return this[kState].status >= 200 && this[kState].status <= 299
 	  }
 
-	  // Returns response?�s status message.
+	  // Returns response’s status message.
 	  get statusText () {
 	    webidl.brandCheck(this, Response);
 
-	    // The statusText getter steps are to return this?�s response?�s status
+	    // The statusText getter steps are to return this’s response’s status
 	    // message.
 	    return this[kState].statusText
 	  }
 
-	  // Returns response?�s headers as Headers.
+	  // Returns response’s headers as Headers.
 	  get headers () {
 	    webidl.brandCheck(this, Response);
 
-	    // The headers getter steps are to return this?�s headers.
+	    // The headers getter steps are to return this’s headers.
 	    return this[kHeaders]
 	  }
 
@@ -17511,7 +17511,7 @@ function requireResponse$1 () {
 	      })
 	    }
 
-	    // 2. Let clonedResponse be the result of cloning this?�s response.
+	    // 2. Let clonedResponse be the result of cloning this’s response.
 	    const clonedResponse = cloneResponse(this[kState]);
 
 	    // Note: To re-register because of a new stream.
@@ -17520,7 +17520,7 @@ function requireResponse$1 () {
 	    }
 
 	    // 3. Return the result of creating a Response object, given
-	    // clonedResponse, this?�s headers?�s guard, and this?�s relevant Realm.
+	    // clonedResponse, this’s headers’s guard, and this’s relevant Realm.
 	    return fromInnerResponse(clonedResponse, getHeadersGuard(this[kHeaders]))
 	  }
 
@@ -17577,7 +17577,7 @@ function requireResponse$1 () {
 	  // To clone a response response, run these steps:
 
 	  // 1. If response is a filtered response, then return a new identical
-	  // filtered response whose internal response is a clone of response?�s
+	  // filtered response whose internal response is a clone of response’s
 	  // internal response.
 	  if (response.internalResponse) {
 	    return filterResponse(
@@ -17589,8 +17589,8 @@ function requireResponse$1 () {
 	  // 2. Let newResponse be a copy of response, except for its body.
 	  const newResponse = makeResponse({ ...response, body: null });
 
-	  // 3. If response?�s body is non-null, then set newResponse?�s body to the
-	  // result of cloning response?�s body.
+	  // 3. If response’s body is non-null, then set newResponse’s body to the
+	  // result of cloning response’s body.
 	  if (response.body != null) {
 	    newResponse.body = cloneBody(newResponse, response.body);
 	  }
@@ -17661,10 +17661,10 @@ function requireResponse$1 () {
 	// https://fetch.spec.whatwg.org/#concept-filtered-response
 	function filterResponse (response, type) {
 	  // Set response to the following filtered response with response as its
-	  // internal response, depending on request?�s response tainting:
+	  // internal response, depending on request’s response tainting:
 	  if (type === 'basic') {
 	    // A basic filtered response is a filtered response whose type is "basic"
-	    // and header list excludes any headers in internal response?�s header list
+	    // and header list excludes any headers in internal response’s header list
 	    // whose name is a forbidden response-header name.
 
 	    // Note: undici does not implement forbidden response-header names
@@ -17674,9 +17674,9 @@ function requireResponse$1 () {
 	    })
 	  } else if (type === 'cors') {
 	    // A CORS filtered response is a filtered response whose type is "cors"
-	    // and header list excludes any headers in internal response?�s header
+	    // and header list excludes any headers in internal response’s header
 	    // list whose name is not a CORS-safelisted response-header name, given
-	    // internal response?�s CORS-exposed header-name list.
+	    // internal response’s CORS-exposed header-name list.
 
 	    // Note: undici does not implement CORS-safelisted response-header names
 	    return makeFilteredResponse(response, {
@@ -17742,17 +17742,17 @@ function requireResponse$1 () {
 	    }
 	  }
 
-	  // 3. Set response?�s response?�s status to init["status"].
+	  // 3. Set response’s response’s status to init["status"].
 	  if ('status' in init && init.status != null) {
 	    response[kState].status = init.status;
 	  }
 
-	  // 4. Set response?�s response?�s status message to init["statusText"].
+	  // 4. Set response’s response’s status message to init["statusText"].
 	  if ('statusText' in init && init.statusText != null) {
 	    response[kState].statusText = init.statusText;
 	  }
 
-	  // 5. If init["headers"] exists, then fill response?�s headers with init["headers"].
+	  // 5. If init["headers"] exists, then fill response’s headers with init["headers"].
 	  if ('headers' in init && init.headers != null) {
 	    fill(response[kHeaders], init.headers);
 	  }
@@ -18045,7 +18045,7 @@ function requireRequest$2 () {
 	    // 2. Let fallbackMode be null.
 	    let fallbackMode = null;
 
-	    // 3. Let baseURL be this?�s relevant settings object?�s API base URL.
+	    // 3. Let baseURL be this’s relevant settings object’s API base URL.
 	    const baseUrl = environmentSettingsObject.settingsObject.baseUrl;
 
 	    // 4. Let signal be null.
@@ -18085,21 +18085,21 @@ function requireRequest$2 () {
 	      // 7. Assert: input is a Request object.
 	      assert(input instanceof Request);
 
-	      // 8. Set request to input?�s request.
+	      // 8. Set request to input’s request.
 	      request = input[kState];
 
-	      // 9. Set signal to input?�s signal.
+	      // 9. Set signal to input’s signal.
 	      signal = input[kSignal];
 	    }
 
-	    // 7. Let origin be this?�s relevant settings object?�s origin.
+	    // 7. Let origin be this’s relevant settings object’s origin.
 	    const origin = environmentSettingsObject.settingsObject.origin;
 
 	    // 8. Let window be "client".
 	    let window = 'client';
 
-	    // 9. If request?�s window is an environment settings object and its origin
-	    // is same origin with origin, then set window to request?�s window.
+	    // 9. If request’s window is an environment settings object and its origin
+	    // is same origin with origin, then set window to request’s window.
 	    if (
 	      request.window?.constructor?.name === 'EnvironmentSettingsObject' &&
 	      sameOrigin(request.window, origin)
@@ -18119,46 +18119,46 @@ function requireRequest$2 () {
 
 	    // 12. Set request to a new request with the following properties:
 	    request = makeRequest({
-	      // URL request?�s URL.
+	      // URL request’s URL.
 	      // undici implementation note: this is set as the first item in request's urlList in makeRequest
-	      // method request?�s method.
+	      // method request’s method.
 	      method: request.method,
-	      // header list A copy of request?�s header list.
+	      // header list A copy of request’s header list.
 	      // undici implementation note: headersList is cloned in makeRequest
 	      headersList: request.headersList,
 	      // unsafe-request flag Set.
 	      unsafeRequest: request.unsafeRequest,
-	      // client This?�s relevant settings object.
+	      // client This’s relevant settings object.
 	      client: environmentSettingsObject.settingsObject,
 	      // window window.
 	      window,
-	      // priority request?�s priority.
+	      // priority request’s priority.
 	      priority: request.priority,
-	      // origin request?�s origin. The propagation of the origin is only significant for navigation requests
+	      // origin request’s origin. The propagation of the origin is only significant for navigation requests
 	      // being handled by a service worker. In this scenario a request can have an origin that is different
 	      // from the current client.
 	      origin: request.origin,
-	      // referrer request?�s referrer.
+	      // referrer request’s referrer.
 	      referrer: request.referrer,
-	      // referrer policy request?�s referrer policy.
+	      // referrer policy request’s referrer policy.
 	      referrerPolicy: request.referrerPolicy,
-	      // mode request?�s mode.
+	      // mode request’s mode.
 	      mode: request.mode,
-	      // credentials mode request?�s credentials mode.
+	      // credentials mode request’s credentials mode.
 	      credentials: request.credentials,
-	      // cache mode request?�s cache mode.
+	      // cache mode request’s cache mode.
 	      cache: request.cache,
-	      // redirect mode request?�s redirect mode.
+	      // redirect mode request’s redirect mode.
 	      redirect: request.redirect,
-	      // integrity metadata request?�s integrity metadata.
+	      // integrity metadata request’s integrity metadata.
 	      integrity: request.integrity,
-	      // keepalive request?�s keepalive.
+	      // keepalive request’s keepalive.
 	      keepalive: request.keepalive,
-	      // reload-navigation flag request?�s reload-navigation flag.
+	      // reload-navigation flag request’s reload-navigation flag.
 	      reloadNavigation: request.reloadNavigation,
-	      // history-navigation flag request?�s history-navigation flag.
+	      // history-navigation flag request’s history-navigation flag.
 	      historyNavigation: request.historyNavigation,
-	      // URL list A clone of request?�s URL list.
+	      // URL list A clone of request’s URL list.
 	      urlList: [...request.urlList]
 	    });
 
@@ -18166,30 +18166,30 @@ function requireRequest$2 () {
 
 	    // 13. If init is not empty, then:
 	    if (initHasKey) {
-	      // 1. If request?�s mode is "navigate", then set it to "same-origin".
+	      // 1. If request’s mode is "navigate", then set it to "same-origin".
 	      if (request.mode === 'navigate') {
 	        request.mode = 'same-origin';
 	      }
 
-	      // 2. Unset request?�s reload-navigation flag.
+	      // 2. Unset request’s reload-navigation flag.
 	      request.reloadNavigation = false;
 
-	      // 3. Unset request?�s history-navigation flag.
+	      // 3. Unset request’s history-navigation flag.
 	      request.historyNavigation = false;
 
-	      // 4. Set request?�s origin to "client".
+	      // 4. Set request’s origin to "client".
 	      request.origin = 'client';
 
-	      // 5. Set request?�s referrer to "client"
+	      // 5. Set request’s referrer to "client"
 	      request.referrer = 'client';
 
-	      // 6. Set request?�s referrer policy to the empty string.
+	      // 6. Set request’s referrer policy to the empty string.
 	      request.referrerPolicy = '';
 
-	      // 7. Set request?�s URL to request?�s current URL.
+	      // 7. Set request’s URL to request’s current URL.
 	      request.url = request.urlList[request.urlList.length - 1];
 
-	      // 8. Set request?�s URL list to « request?�s URL ».
+	      // 8. Set request’s URL list to « request’s URL ».
 	      request.urlList = [request.url];
 	    }
 
@@ -18198,7 +18198,7 @@ function requireRequest$2 () {
 	      // 1. Let referrer be init["referrer"].
 	      const referrer = init.referrer;
 
-	      // 2. If referrer is the empty string, then set request?�s referrer to "no-referrer".
+	      // 2. If referrer is the empty string, then set request’s referrer to "no-referrer".
 	      if (referrer === '') {
 	        request.referrer = 'no-referrer';
 	      } else {
@@ -18213,22 +18213,22 @@ function requireRequest$2 () {
 	        }
 
 	        // 3. If one of the following is true
-	        // - parsedReferrer?�s scheme is "about" and path is the string "client"
-	        // - parsedReferrer?�s origin is not same origin with origin
-	        // then set request?�s referrer to "client".
+	        // - parsedReferrer’s scheme is "about" and path is the string "client"
+	        // - parsedReferrer’s origin is not same origin with origin
+	        // then set request’s referrer to "client".
 	        if (
 	          (parsedReferrer.protocol === 'about:' && parsedReferrer.hostname === 'client') ||
 	          (origin && !sameOrigin(parsedReferrer, environmentSettingsObject.settingsObject.baseUrl))
 	        ) {
 	          request.referrer = 'client';
 	        } else {
-	          // 4. Otherwise, set request?�s referrer to parsedReferrer.
+	          // 4. Otherwise, set request’s referrer to parsedReferrer.
 	          request.referrer = parsedReferrer;
 	        }
 	      }
 	    }
 
-	    // 15. If init["referrerPolicy"] exists, then set request?�s referrer policy
+	    // 15. If init["referrerPolicy"] exists, then set request’s referrer policy
 	    // to it.
 	    if (init.referrerPolicy !== undefined) {
 	      request.referrerPolicy = init.referrerPolicy;
@@ -18250,23 +18250,23 @@ function requireRequest$2 () {
 	      })
 	    }
 
-	    // 18. If mode is non-null, set request?�s mode to mode.
+	    // 18. If mode is non-null, set request’s mode to mode.
 	    if (mode != null) {
 	      request.mode = mode;
 	    }
 
-	    // 19. If init["credentials"] exists, then set request?�s credentials mode
+	    // 19. If init["credentials"] exists, then set request’s credentials mode
 	    // to it.
 	    if (init.credentials !== undefined) {
 	      request.credentials = init.credentials;
 	    }
 
-	    // 18. If init["cache"] exists, then set request?�s cache mode to it.
+	    // 18. If init["cache"] exists, then set request’s cache mode to it.
 	    if (init.cache !== undefined) {
 	      request.cache = init.cache;
 	    }
 
-	    // 21. If request?�s cache mode is "only-if-cached" and request?�s mode is
+	    // 21. If request’s cache mode is "only-if-cached" and request’s mode is
 	    // not "same-origin", then throw a TypeError.
 	    if (request.cache === 'only-if-cached' && request.mode !== 'same-origin') {
 	      throw new TypeError(
@@ -18274,17 +18274,17 @@ function requireRequest$2 () {
 	      )
 	    }
 
-	    // 22. If init["redirect"] exists, then set request?�s redirect mode to it.
+	    // 22. If init["redirect"] exists, then set request’s redirect mode to it.
 	    if (init.redirect !== undefined) {
 	      request.redirect = init.redirect;
 	    }
 
-	    // 23. If init["integrity"] exists, then set request?�s integrity metadata to it.
+	    // 23. If init["integrity"] exists, then set request’s integrity metadata to it.
 	    if (init.integrity != null) {
 	      request.integrity = String(init.integrity);
 	    }
 
-	    // 24. If init["keepalive"] exists, then set request?�s keepalive to it.
+	    // 24. If init["keepalive"] exists, then set request’s keepalive to it.
 	    if (init.keepalive !== undefined) {
 	      request.keepalive = Boolean(init.keepalive);
 	    }
@@ -18317,7 +18317,7 @@ function requireRequest$2 () {
 	        // Note: must be in uppercase
 	        method = normalizedMethodRecordsBase[upperCase] ?? method;
 
-	        // 4. Set request?�s method to method.
+	        // 4. Set request’s method to method.
 	        request.method = method;
 	      }
 
@@ -18335,17 +18335,17 @@ function requireRequest$2 () {
 	      signal = init.signal;
 	    }
 
-	    // 27. Set this?�s request to request.
+	    // 27. Set this’s request to request.
 	    this[kState] = request;
 
-	    // 28. Set this?�s signal to a new AbortSignal object with this?�s relevant
+	    // 28. Set this’s signal to a new AbortSignal object with this’s relevant
 	    // Realm.
 	    // TODO: could this be simplified with AbortSignal.any
 	    // (https://dom.spec.whatwg.org/#dom-abortsignal-any)
 	    const ac = new AbortController();
 	    this[kSignal] = ac.signal;
 
-	    // 29. If signal is not null, then make this?�s signal follow signal.
+	    // 29. If signal is not null, then make this’s signal follow signal.
 	    if (signal != null) {
 	      if (
 	        !signal ||
@@ -18390,16 +18390,16 @@ function requireRequest$2 () {
 	      }
 	    }
 
-	    // 30. Set this?�s headers to a new Headers object with this?�s relevant
-	    // Realm, whose header list is request?�s header list and guard is
+	    // 30. Set this’s headers to a new Headers object with this’s relevant
+	    // Realm, whose header list is request’s header list and guard is
 	    // "request".
 	    this[kHeaders] = new Headers(kConstruct);
 	    setHeadersList(this[kHeaders], request.headersList);
 	    setHeadersGuard(this[kHeaders], 'request');
 
-	    // 31. If this?�s request?�s mode is "no-cors", then:
+	    // 31. If this’s request’s mode is "no-cors", then:
 	    if (mode === 'no-cors') {
-	      // 1. If this?�s request?�s method is not a CORS-safelisted method,
+	      // 1. If this’s request’s method is not a CORS-safelisted method,
 	      // then throw a TypeError.
 	      if (!corsSafeListedMethodsSet.has(request.method)) {
 	        throw new TypeError(
@@ -18407,7 +18407,7 @@ function requireRequest$2 () {
 	        )
 	      }
 
-	      // 2. Set this?�s headers?�s guard to "request-no-cors".
+	      // 2. Set this’s headers’s guard to "request-no-cors".
 	      setHeadersGuard(this[kHeaders], 'request-no-cors');
 	    }
 
@@ -18415,16 +18415,16 @@ function requireRequest$2 () {
 	    if (initHasKey) {
 	      /** @type {HeadersList} */
 	      const headersList = getHeadersList(this[kHeaders]);
-	      // 1. Let headers be a copy of this?�s headers and its associated header
+	      // 1. Let headers be a copy of this’s headers and its associated header
 	      // list.
 	      // 2. If init["headers"] exists, then set headers to init["headers"].
 	      const headers = init.headers !== undefined ? init.headers : new HeadersList(headersList);
 
-	      // 3. Empty this?�s headers?�s header list.
+	      // 3. Empty this’s headers’s header list.
 	      headersList.clear();
 
 	      // 4. If headers is a Headers object, then for each header in its header
-	      // list, append header?�s name/header?�s value to this?�s headers.
+	      // list, append header’s name/header’s value to this’s headers.
 	      if (headers instanceof HeadersList) {
 	        for (const { name, value } of headers.rawValues()) {
 	          headersList.append(name, value, false);
@@ -18432,17 +18432,17 @@ function requireRequest$2 () {
 	        // Note: Copy the `set-cookie` meta-data.
 	        headersList.cookies = headers.cookies;
 	      } else {
-	        // 5. Otherwise, fill this?�s headers with headers.
+	        // 5. Otherwise, fill this’s headers with headers.
 	        fillHeaders(this[kHeaders], headers);
 	      }
 	    }
 
-	    // 33. Let inputBody be input?�s request?�s body if input is a Request
+	    // 33. Let inputBody be input’s request’s body if input is a Request
 	    // object; otherwise null.
 	    const inputBody = input instanceof Request ? input[kState].body : null;
 
 	    // 34. If either init["body"] exists and is non-null or inputBody is
-	    // non-null, and request?�s method is `GET` or `HEAD`, then throw a
+	    // non-null, and request’s method is `GET` or `HEAD`, then throw a
 	    // TypeError.
 	    if (
 	      (init.body != null || inputBody != null) &&
@@ -18458,16 +18458,16 @@ function requireRequest$2 () {
 	    if (init.body != null) {
 	      // 1. Let Content-Type be null.
 	      // 2. Set initBody and Content-Type to the result of extracting
-	      // init["body"], with keepalive set to request?�s keepalive.
+	      // init["body"], with keepalive set to request’s keepalive.
 	      const [extractedBody, contentType] = extractBody(
 	        init.body,
 	        request.keepalive
 	      );
 	      initBody = extractedBody;
 
-	      // 3, If Content-Type is non-null and this?�s headers?�s header list does
+	      // 3, If Content-Type is non-null and this’s headers’s header list does
 	      // not contain `Content-Type`, then append `Content-Type`/Content-Type to
-	      // this?�s headers.
+	      // this’s headers.
 	      if (contentType && !getHeadersList(this[kHeaders]).contains('content-type', true)) {
 	        this[kHeaders].append('content-type', contentType);
 	      }
@@ -18477,7 +18477,7 @@ function requireRequest$2 () {
 	    // inputBody.
 	    const inputOrInitBody = initBody ?? inputBody;
 
-	    // 38. If inputOrInitBody is non-null and inputOrInitBody?�s source is
+	    // 38. If inputOrInitBody is non-null and inputOrInitBody’s source is
 	    // null, then:
 	    if (inputOrInitBody != null && inputOrInitBody.source == null) {
 	      // 1. If initBody is non-null and init["duplex"] does not exist,
@@ -18486,7 +18486,7 @@ function requireRequest$2 () {
 	        throw new TypeError('RequestInit: duplex option is required when sending a body.')
 	      }
 
-	      // 2. If this?�s request?�s mode is neither "same-origin" nor "cors",
+	      // 2. If this’s request’s mode is neither "same-origin" nor "cors",
 	      // then throw a TypeError.
 	      if (request.mode !== 'same-origin' && request.mode !== 'cors') {
 	        throw new TypeError(
@@ -18494,7 +18494,7 @@ function requireRequest$2 () {
 	        )
 	      }
 
-	      // 3. Set this?�s request?�s use-CORS-preflight flag.
+	      // 3. Set this’s request’s use-CORS-preflight flag.
 	      request.useCORSPreflightFlag = true;
 	    }
 
@@ -18521,15 +18521,15 @@ function requireRequest$2 () {
 	      };
 	    }
 
-	    // 41. Set this?�s request?�s body to finalBody.
+	    // 41. Set this’s request’s body to finalBody.
 	    this[kState].body = finalBody;
 	  }
 
-	  // Returns request?�s HTTP method, which is "GET" by default.
+	  // Returns request’s HTTP method, which is "GET" by default.
 	  get method () {
 	    webidl.brandCheck(this, Request);
 
-	    // The method getter steps are to return this?�s request?�s method.
+	    // The method getter steps are to return this’s request’s method.
 	    return this[kState].method
 	  }
 
@@ -18537,7 +18537,7 @@ function requireRequest$2 () {
 	  get url () {
 	    webidl.brandCheck(this, Request);
 
-	    // The url getter steps are to return this?�s request?�s URL, serialized.
+	    // The url getter steps are to return this’s request’s URL, serialized.
 	    return URLSerializer(this[kState].url)
 	  }
 
@@ -18547,7 +18547,7 @@ function requireRequest$2 () {
 	  get headers () {
 	    webidl.brandCheck(this, Request);
 
-	    // The headers getter steps are to return this?�s headers.
+	    // The headers getter steps are to return this’s headers.
 	    return this[kHeaders]
 	  }
 
@@ -18556,41 +18556,41 @@ function requireRequest$2 () {
 	  get destination () {
 	    webidl.brandCheck(this, Request);
 
-	    // The destination getter are to return this?�s request?�s destination.
+	    // The destination getter are to return this’s request’s destination.
 	    return this[kState].destination
 	  }
 
 	  // Returns the referrer of request. Its value can be a same-origin URL if
 	  // explicitly set in init, the empty string to indicate no referrer, and
-	  // "about:client" when defaulting to the global?�s default. This is used
+	  // "about:client" when defaulting to the global’s default. This is used
 	  // during fetching to determine the value of the `Referer` header of the
 	  // request being made.
 	  get referrer () {
 	    webidl.brandCheck(this, Request);
 
-	    // 1. If this?�s request?�s referrer is "no-referrer", then return the
+	    // 1. If this’s request’s referrer is "no-referrer", then return the
 	    // empty string.
 	    if (this[kState].referrer === 'no-referrer') {
 	      return ''
 	    }
 
-	    // 2. If this?�s request?�s referrer is "client", then return
+	    // 2. If this’s request’s referrer is "client", then return
 	    // "about:client".
 	    if (this[kState].referrer === 'client') {
 	      return 'about:client'
 	    }
 
-	    // Return this?�s request?�s referrer, serialized.
+	    // Return this’s request’s referrer, serialized.
 	    return this[kState].referrer.toString()
 	  }
 
 	  // Returns the referrer policy associated with request.
-	  // This is used during fetching to compute the value of the request?�s
+	  // This is used during fetching to compute the value of the request’s
 	  // referrer.
 	  get referrerPolicy () {
 	    webidl.brandCheck(this, Request);
 
-	    // The referrerPolicy getter steps are to return this?�s request?�s referrer policy.
+	    // The referrerPolicy getter steps are to return this’s request’s referrer policy.
 	    return this[kState].referrerPolicy
 	  }
 
@@ -18600,7 +18600,7 @@ function requireRequest$2 () {
 	  get mode () {
 	    webidl.brandCheck(this, Request);
 
-	    // The mode getter steps are to return this?�s request?�s mode.
+	    // The mode getter steps are to return this’s request’s mode.
 	    return this[kState].mode
 	  }
 
@@ -18608,17 +18608,17 @@ function requireRequest$2 () {
 	  // which is a string indicating whether credentials will be sent with the
 	  // request always, never, or only when sent to a same-origin URL.
 	  get credentials () {
-	    // The credentials getter steps are to return this?�s request?�s credentials mode.
+	    // The credentials getter steps are to return this’s request’s credentials mode.
 	    return this[kState].credentials
 	  }
 
 	  // Returns the cache mode associated with request,
 	  // which is a string indicating how the request will
-	  // interact with the browser?�s cache when fetching.
+	  // interact with the browser’s cache when fetching.
 	  get cache () {
 	    webidl.brandCheck(this, Request);
 
-	    // The cache getter steps are to return this?�s request?�s cache mode.
+	    // The cache getter steps are to return this’s request’s cache mode.
 	    return this[kState].cache
 	  }
 
@@ -18629,17 +18629,17 @@ function requireRequest$2 () {
 	  get redirect () {
 	    webidl.brandCheck(this, Request);
 
-	    // The redirect getter steps are to return this?�s request?�s redirect mode.
+	    // The redirect getter steps are to return this’s request’s redirect mode.
 	    return this[kState].redirect
 	  }
 
-	  // Returns request?�s subresource integrity metadata, which is a
+	  // Returns request’s subresource integrity metadata, which is a
 	  // cryptographic hash of the resource being fetched. Its value
 	  // consists of multiple hashes separated by whitespace. [SRI]
 	  get integrity () {
 	    webidl.brandCheck(this, Request);
 
-	    // The integrity getter steps are to return this?�s request?�s integrity
+	    // The integrity getter steps are to return this’s request’s integrity
 	    // metadata.
 	    return this[kState].integrity
 	  }
@@ -18649,7 +18649,7 @@ function requireRequest$2 () {
 	  get keepalive () {
 	    webidl.brandCheck(this, Request);
 
-	    // The keepalive getter steps are to return this?�s request?�s keepalive.
+	    // The keepalive getter steps are to return this’s request’s keepalive.
 	    return this[kState].keepalive
 	  }
 
@@ -18658,8 +18658,8 @@ function requireRequest$2 () {
 	  get isReloadNavigation () {
 	    webidl.brandCheck(this, Request);
 
-	    // The isReloadNavigation getter steps are to return true if this?�s
-	    // request?�s reload-navigation flag is set; otherwise false.
+	    // The isReloadNavigation getter steps are to return true if this’s
+	    // request’s reload-navigation flag is set; otherwise false.
 	    return this[kState].reloadNavigation
 	  }
 
@@ -18668,7 +18668,7 @@ function requireRequest$2 () {
 	  get isHistoryNavigation () {
 	    webidl.brandCheck(this, Request);
 
-	    // The isHistoryNavigation getter steps are to return true if this?�s request?�s
+	    // The isHistoryNavigation getter steps are to return true if this’s request’s
 	    // history-navigation flag is set; otherwise false.
 	    return this[kState].historyNavigation
 	  }
@@ -18679,7 +18679,7 @@ function requireRequest$2 () {
 	  get signal () {
 	    webidl.brandCheck(this, Request);
 
-	    // The signal getter steps are to return this?�s signal.
+	    // The signal getter steps are to return this’s signal.
 	    return this[kSignal]
 	  }
 
@@ -18710,12 +18710,12 @@ function requireRequest$2 () {
 	      throw new TypeError('unusable')
 	    }
 
-	    // 2. Let clonedRequest be the result of cloning this?�s request.
+	    // 2. Let clonedRequest be the result of cloning this’s request.
 	    const clonedRequest = cloneRequest(this[kState]);
 
 	    // 3. Let clonedRequestObject be the result of creating a Request object,
-	    // given clonedRequest, this?�s headers?�s guard, and this?�s relevant Realm.
-	    // 4. Make clonedRequestObject?�s signal follow this?�s signal.
+	    // given clonedRequest, this’s headers’s guard, and this’s relevant Realm.
+	    // 4. Make clonedRequestObject’s signal follow this’s signal.
 	    const ac = new AbortController();
 	    if (this.signal.aborted) {
 	      ac.abort(this.signal.reason);
@@ -18821,8 +18821,8 @@ function requireRequest$2 () {
 	  // 1. Let newRequest be a copy of request, except for its body.
 	  const newRequest = makeRequest({ ...request, body: null });
 
-	  // 2. If request?�s body is non-null, set newRequest?�s body to the
-	  // result of cloning request?�s body.
+	  // 2. If request’s body is non-null, set newRequest’s body to the
+	  // result of cloning request’s body.
 	  if (request.body != null) {
 	    newRequest.body = cloneBody(newRequest, request.body);
 	  }
@@ -19088,7 +19088,7 @@ function requireFetch$1 () {
 	      return
 	    }
 
-	    // 1. Set controller?�s state to "aborted".
+	    // 1. Set controller’s state to "aborted".
 	    this.state = 'aborted';
 
 	    // 2. Let fallbackError be an "AbortError" DOMException.
@@ -19101,7 +19101,7 @@ function requireFetch$1 () {
 	    //    If that threw an exception, catch it, and let
 	    //    serializedError be StructuredSerialize(fallbackError).
 
-	    // 5. Set controller?�s serialized abort reason to serializedError.
+	    // 5. Set controller’s serialized abort reason to serializedError.
 	    this.serializedAbortReason = error;
 
 	    this.connection?.destroy(error);
@@ -19132,24 +19132,24 @@ function requireFetch$1 () {
 	    return p.promise
 	  }
 
-	  // 3. Let request be requestObject?�s request.
+	  // 3. Let request be requestObject’s request.
 	  const request = requestObject[kState];
 
-	  // 4. If requestObject?�s signal?�s aborted flag is set, then:
+	  // 4. If requestObject’s signal’s aborted flag is set, then:
 	  if (requestObject.signal.aborted) {
 	    // 1. Abort the fetch() call with p, request, null, and
-	    //    requestObject?�s signal?�s abort reason.
+	    //    requestObject’s signal’s abort reason.
 	    abortFetch(p, request, null, requestObject.signal.reason);
 
 	    // 2. Return p.
 	    return p.promise
 	  }
 
-	  // 5. Let globalObject be request?�s client?�s global object.
+	  // 5. Let globalObject be request’s client’s global object.
 	  const globalObject = request.client.globalObject;
 
 	  // 6. If globalObject is a ServiceWorkerGlobalScope object, then set
-	  // request?�s service-workers mode to "none".
+	  // request’s service-workers mode to "none".
 	  if (globalObject?.constructor?.name === 'ServiceWorkerGlobalScope') {
 	    request.serviceWorkers = 'none';
 	  }
@@ -19157,7 +19157,7 @@ function requireFetch$1 () {
 	  // 7. Let responseObject be null.
 	  let responseObject = null;
 
-	  // 8. Let relevantRealm be this?�s relevant Realm.
+	  // 8. Let relevantRealm be this’s relevant Realm.
 
 	  // 9. Let locallyAborted be false.
 	  let locallyAborted = false;
@@ -19165,7 +19165,7 @@ function requireFetch$1 () {
 	  // 10. Let controller be null.
 	  let controller = null;
 
-	  // 11. Add the following abort steps to requestObject?�s signal:
+	  // 11. Add the following abort steps to requestObject’s signal:
 	  addAbortListener(
 	    requestObject.signal,
 	    () => {
@@ -19175,13 +19175,13 @@ function requireFetch$1 () {
 	      // 2. Assert: controller is non-null.
 	      assert(controller != null);
 
-	      // 3. Abort controller with requestObject?�s signal?�s abort reason.
+	      // 3. Abort controller with requestObject’s signal’s abort reason.
 	      controller.abort(requestObject.signal.reason);
 
 	      const realResponse = responseObject?.deref();
 
 	      // 4. Abort the fetch() call with p, request, responseObject,
-	      //    and requestObject?�s signal?�s abort reason.
+	      //    and requestObject’s signal’s abort reason.
 	      abortFetch(p, request, realResponse, requestObject.signal.reason);
 	    }
 	  );
@@ -19200,10 +19200,10 @@ function requireFetch$1 () {
 	      return
 	    }
 
-	    // 2. If response?�s aborted flag is set, then:
+	    // 2. If response’s aborted flag is set, then:
 	    if (response.aborted) {
 	      // 1. Let deserializedError be the result of deserialize a serialized
-	      //    abort reason given controller?�s serialized abort reason and
+	      //    abort reason given controller’s serialized abort reason and
 	      //    relevantRealm.
 
 	      // 2. Abort the fetch() call with p, request, responseObject, and
@@ -19247,21 +19247,21 @@ function requireFetch$1 () {
 	    return
 	  }
 
-	  // 2. If response?�s URL list is null or empty, then return.
+	  // 2. If response’s URL list is null or empty, then return.
 	  if (!response.urlList?.length) {
 	    return
 	  }
 
-	  // 3. Let originalURL be response?�s URL list[0].
+	  // 3. Let originalURL be response’s URL list[0].
 	  const originalURL = response.urlList[0];
 
-	  // 4. Let timingInfo be response?�s timing info.
+	  // 4. Let timingInfo be response’s timing info.
 	  let timingInfo = response.timingInfo;
 
-	  // 5. Let cacheState be response?�s cache state.
+	  // 5. Let cacheState be response’s cache state.
 	  let cacheState = response.cacheState;
 
-	  // 6. If originalURL?�s scheme is not an HTTP(S) scheme, then return.
+	  // 6. If originalURL’s scheme is not an HTTP(S) scheme, then return.
 	  if (!urlIsHttpHttpsScheme(originalURL)) {
 	    return
 	  }
@@ -19271,7 +19271,7 @@ function requireFetch$1 () {
 	    return
 	  }
 
-	  // 8. If response?�s timing allow passed flag is not set, then:
+	  // 8. If response’s timing allow passed flag is not set, then:
 	  if (!response.timingAllowPassed) {
 	    //  1. Set timingInfo to a the result of creating an opaque timing info for timingInfo.
 	    timingInfo = createOpaqueTimingInfo({
@@ -19282,14 +19282,14 @@ function requireFetch$1 () {
 	    cacheState = '';
 	  }
 
-	  // 9. Set timingInfo?�s end time to the coarsened shared current time
-	  // given global?�s relevant settings object?�s cross-origin isolated
+	  // 9. Set timingInfo’s end time to the coarsened shared current time
+	  // given global’s relevant settings object’s cross-origin isolated
 	  // capability.
-	  // TODO: given global?�s relevant settings object?�s cross-origin isolated
+	  // TODO: given global’s relevant settings object’s cross-origin isolated
 	  // capability?
 	  timingInfo.endTime = coarsenedSharedCurrentTime();
 
-	  // 10. Set response?�s timing info to timingInfo.
+	  // 10. Set response’s timing info to timingInfo.
 	  response.timingInfo = timingInfo;
 
 	  // 11. Mark resource timing for timingInfo, originalURL, initiatorType,
@@ -19314,7 +19314,7 @@ function requireFetch$1 () {
 	    p.reject(error);
 	  }
 
-	  // 2. If request?�s body is not null and is readable, then cancel request?�s
+	  // 2. If request’s body is not null and is readable, then cancel request’s
 	  // body with error.
 	  if (request.body != null && isReadable(request.body?.stream)) {
 	    request.body.stream.cancel(error).catch((err) => {
@@ -19331,10 +19331,10 @@ function requireFetch$1 () {
 	    return
 	  }
 
-	  // 4. Let response be responseObject?�s response.
+	  // 4. Let response be responseObject’s response.
 	  const response = responseObject[kState];
 
-	  // 5. If response?�s body is not null and is readable, then error response?�s
+	  // 5. If response’s body is not null and is readable, then error response’s
 	  // body with error.
 	  if (response.body != null && isReadable(response.body?.stream)) {
 	    response.body.stream.cancel(error).catch((err) => {
@@ -19367,12 +19367,12 @@ function requireFetch$1 () {
 	  // 2. Let crossOriginIsolatedCapability be false.
 	  let crossOriginIsolatedCapability = false;
 
-	  // 3. If request?�s client is non-null, then:
+	  // 3. If request’s client is non-null, then:
 	  if (request.client != null) {
-	    // 1. Set taskDestination to request?�s client?�s global object.
+	    // 1. Set taskDestination to request’s client’s global object.
 	    taskDestination = request.client.globalObject;
 
-	    // 2. Set crossOriginIsolatedCapability to request?�s client?�s cross-origin
+	    // 2. Set crossOriginIsolatedCapability to request’s client’s cross-origin
 	    // isolated capability.
 	    crossOriginIsolatedCapability =
 	      request.client.crossOriginIsolatedCapability;
@@ -19413,14 +19413,14 @@ function requireFetch$1 () {
 	    crossOriginIsolatedCapability
 	  };
 
-	  // 7. If request?�s body is a byte sequence, then set request?�s body to
-	  //    request?�s body as a body.
+	  // 7. If request’s body is a byte sequence, then set request’s body to
+	  //    request’s body as a body.
 	  // NOTE: Since fetching is only called from fetch, body should already be
 	  // extracted.
 	  assert(!request.body || request.body.stream);
 
-	  // 8. If request?�s window is "client", then set request?�s window to request?�s
-	  // client, if request?�s client?�s global object is a Window object; otherwise
+	  // 8. If request’s window is "client", then set request’s window to request’s
+	  // client, if request’s client’s global object is a Window object; otherwise
 	  // "no-window".
 	  if (request.window === 'client') {
 	    // TODO: What if request.client is null?
@@ -19430,8 +19430,8 @@ function requireFetch$1 () {
 	        : 'no-window';
 	  }
 
-	  // 9. If request?�s origin is "client", then set request?�s origin to request?�s
-	  // client?�s origin.
+	  // 9. If request’s origin is "client", then set request’s origin to request’s
+	  // client’s origin.
 	  if (request.origin === 'client') {
 	    request.origin = request.client.origin;
 	  }
@@ -19439,28 +19439,28 @@ function requireFetch$1 () {
 	  // 10. If all of the following conditions are true:
 	  // TODO
 
-	  // 11. If request?�s policy container is "client", then:
+	  // 11. If request’s policy container is "client", then:
 	  if (request.policyContainer === 'client') {
-	    // 1. If request?�s client is non-null, then set request?�s policy
-	    // container to a clone of request?�s client?�s policy container. [HTML]
+	    // 1. If request’s client is non-null, then set request’s policy
+	    // container to a clone of request’s client’s policy container. [HTML]
 	    if (request.client != null) {
 	      request.policyContainer = clonePolicyContainer(
 	        request.client.policyContainer
 	      );
 	    } else {
-	      // 2. Otherwise, set request?�s policy container to a new policy
+	      // 2. Otherwise, set request’s policy container to a new policy
 	      // container.
 	      request.policyContainer = makePolicyContainer();
 	    }
 	  }
 
-	  // 12. If request?�s header list does not contain `Accept`, then:
+	  // 12. If request’s header list does not contain `Accept`, then:
 	  if (!request.headersList.contains('accept', true)) {
 	    // 1. Let value be `*/*`.
 	    const value = '*/*';
 
 	    // 2. A user agent should set value to the first matching statement, if
-	    // any, switching on request?�s destination:
+	    // any, switching on request’s destination:
 	    // "document"
 	    // "frame"
 	    // "iframe"
@@ -19471,19 +19471,19 @@ function requireFetch$1 () {
 	    // `text/css,*/*;q=0.1`
 	    // TODO
 
-	    // 3. Append `Accept`/value to request?�s header list.
+	    // 3. Append `Accept`/value to request’s header list.
 	    request.headersList.append('accept', value, true);
 	  }
 
-	  // 13. If request?�s header list does not contain `Accept-Language`, then
+	  // 13. If request’s header list does not contain `Accept-Language`, then
 	  // user agents should append `Accept-Language`/an appropriate value to
-	  // request?�s header list.
+	  // request’s header list.
 	  if (!request.headersList.contains('accept-language', true)) {
 	    request.headersList.append('accept-language', '*', true);
 	  }
 
-	  // 14. If request?�s priority is null, then use request?�s initiator and
-	  // destination appropriately in setting request?�s priority to a
+	  // 14. If request’s priority is null, then use request’s initiator and
+	  // destination appropriately in setting request’s priority to a
 	  // user-agent-defined object.
 	  if (request.priority === null) ;
 
@@ -19502,13 +19502,13 @@ function requireFetch$1 () {
 
 	// https://fetch.spec.whatwg.org/#concept-main-fetch
 	async function mainFetch (fetchParams, recursive = false) {
-	  // 1. Let request be fetchParams?�s request.
+	  // 1. Let request be fetchParams’s request.
 	  const request = fetchParams.request;
 
 	  // 2. Let response be null.
 	  let response = null;
 
-	  // 3. If request?�s local-URLs-only flag is set and request?�s current URL is
+	  // 3. If request’s local-URLs-only flag is set and request’s current URL is
 	  // not local, then set response to a network error.
 	  if (request.localURLsOnly && !urlIsLocal(requestCurrentURL(request))) {
 	    response = makeNetworkError('local URLs only');
@@ -19529,23 +19529,23 @@ function requireFetch$1 () {
 	  // TODO: should fetching request be blocked as mixed content?
 	  // TODO: should request be blocked by Content Security Policy?
 
-	  // 7. If request?�s referrer policy is the empty string, then set request?�s
-	  // referrer policy to request?�s policy container?�s referrer policy.
+	  // 7. If request’s referrer policy is the empty string, then set request’s
+	  // referrer policy to request’s policy container’s referrer policy.
 	  if (request.referrerPolicy === '') {
 	    request.referrerPolicy = request.policyContainer.referrerPolicy;
 	  }
 
-	  // 8. If request?�s referrer is not "no-referrer", then set request?�s
-	  // referrer to the result of invoking determine request?�s referrer.
+	  // 8. If request’s referrer is not "no-referrer", then set request’s
+	  // referrer to the result of invoking determine request’s referrer.
 	  if (request.referrer !== 'no-referrer') {
 	    request.referrer = determineRequestsReferrer(request);
 	  }
 
-	  // 9. Set request?�s current URL?�s scheme to "https" if all of the following
+	  // 9. Set request’s current URL’s scheme to "https" if all of the following
 	  // conditions are true:
-	  // - request?�s current URL?�s scheme is "http"
-	  // - request?�s current URL?�s host is a domain
-	  // - Matching request?�s current URL?�s host per Known HSTS Host Domain Name
+	  // - request’s current URL’s scheme is "http"
+	  // - request’s current URL’s host is a domain
+	  // - Matching request’s current URL’s host per Known HSTS Host Domain Name
 	  //   Matching results in either a superdomain match with an asserted
 	  //   includeSubDomains directive or a congruent match (with or without an
 	  //   asserted includeSubDomains directive). [HSTS]
@@ -19561,30 +19561,30 @@ function requireFetch$1 () {
 	      const currentURL = requestCurrentURL(request);
 
 	      if (
-	        // - request?�s current URL?�s origin is same origin with request?�s origin,
-	        //   and request?�s response tainting is "basic"
+	        // - request’s current URL’s origin is same origin with request’s origin,
+	        //   and request’s response tainting is "basic"
 	        (sameOrigin(currentURL, request.url) && request.responseTainting === 'basic') ||
-	        // request?�s current URL?�s scheme is "data"
+	        // request’s current URL’s scheme is "data"
 	        (currentURL.protocol === 'data:') ||
-	        // - request?�s mode is "navigate" or "websocket"
+	        // - request’s mode is "navigate" or "websocket"
 	        (request.mode === 'navigate' || request.mode === 'websocket')
 	      ) {
-	        // 1. Set request?�s response tainting to "basic".
+	        // 1. Set request’s response tainting to "basic".
 	        request.responseTainting = 'basic';
 
 	        // 2. Return the result of running scheme fetch given fetchParams.
 	        return await schemeFetch(fetchParams)
 	      }
 
-	      // request?�s mode is "same-origin"
+	      // request’s mode is "same-origin"
 	      if (request.mode === 'same-origin') {
 	        // 1. Return a network error.
 	        return makeNetworkError('request mode cannot be "same-origin"')
 	      }
 
-	      // request?�s mode is "no-cors"
+	      // request’s mode is "no-cors"
 	      if (request.mode === 'no-cors') {
-	        // 1. If request?�s redirect mode is not "follow", then return a network
+	        // 1. If request’s redirect mode is not "follow", then return a network
 	        // error.
 	        if (request.redirect !== 'follow') {
 	          return makeNetworkError(
@@ -19592,24 +19592,24 @@ function requireFetch$1 () {
 	          )
 	        }
 
-	        // 2. Set request?�s response tainting to "opaque".
+	        // 2. Set request’s response tainting to "opaque".
 	        request.responseTainting = 'opaque';
 
 	        // 3. Return the result of running scheme fetch given fetchParams.
 	        return await schemeFetch(fetchParams)
 	      }
 
-	      // request?�s current URL?�s scheme is not an HTTP(S) scheme
+	      // request’s current URL’s scheme is not an HTTP(S) scheme
 	      if (!urlIsHttpHttpsScheme(requestCurrentURL(request))) {
 	        // Return a network error.
 	        return makeNetworkError('URL scheme must be a HTTP(S) scheme')
 	      }
 
-	      // - request?�s use-CORS-preflight flag is set
-	      // - request?�s unsafe-request flag is set and either request?�s method is
+	      // - request’s use-CORS-preflight flag is set
+	      // - request’s unsafe-request flag is set and either request’s method is
 	      //   not a CORS-safelisted method or CORS-unsafe request-header names with
-	      //   request?�s header list is not empty
-	      //    1. Set request?�s response tainting to "cors".
+	      //   request’s header list is not empty
+	      //    1. Set request’s response tainting to "cors".
 	      //    2. Let corsWithPreflightResponse be the result of running HTTP fetch
 	      //    given fetchParams and true.
 	      //    3. If corsWithPreflightResponse is a network error, then clear cache
@@ -19618,7 +19618,7 @@ function requireFetch$1 () {
 	      // TODO
 
 	      // Otherwise
-	      //    1. Set request?�s response tainting to "cors".
+	      //    1. Set request’s response tainting to "cors".
 	      request.responseTainting = 'cors';
 
 	      //    2. Return the result of running HTTP fetch given fetchParams.
@@ -19634,11 +19634,11 @@ function requireFetch$1 () {
 	  // 13. If response is not a network error and response is not a filtered
 	  // response, then:
 	  if (response.status !== 0 && !response.internalResponse) {
-	    // If request?�s response tainting is "cors", then:
+	    // If request’s response tainting is "cors", then:
 	    if (request.responseTainting === 'cors') ;
 
 	    // Set response to the following filtered response with response as its
-	    // internal response, depending on request?�s response tainting:
+	    // internal response, depending on request’s response tainting:
 	    if (request.responseTainting === 'basic') {
 	      response = filterResponse(response, 'basic');
 	    } else if (request.responseTainting === 'cors') {
@@ -19651,18 +19651,18 @@ function requireFetch$1 () {
 	  }
 
 	  // 14. Let internalResponse be response, if response is a network error,
-	  // and response?�s internal response otherwise.
+	  // and response’s internal response otherwise.
 	  let internalResponse =
 	    response.status === 0 ? response : response.internalResponse;
 
-	  // 15. If internalResponse?�s URL list is empty, then set it to a clone of
-	  // request?�s URL list.
+	  // 15. If internalResponse’s URL list is empty, then set it to a clone of
+	  // request’s URL list.
 	  if (internalResponse.urlList.length === 0) {
 	    internalResponse.urlList.push(...request.urlList);
 	  }
 
-	  // 16. If request?�s timing allow failed flag is unset, then set
-	  // internalResponse?�s timing allow passed flag.
+	  // 16. If request’s timing allow failed flag is unset, then set
+	  // internalResponse’s timing allow passed flag.
 	  if (!request.timingAllowFailed) {
 	    response.timingAllowPassed = true;
 	  }
@@ -19675,8 +19675,8 @@ function requireFetch$1 () {
 	  // - should internalResponse to request be blocked due to nosniff
 	  // TODO
 
-	  // 18. If response?�s type is "opaque", internalResponse?�s status is 206,
-	  // internalResponse?�s range-requested flag is set, and request?�s header
+	  // 18. If response’s type is "opaque", internalResponse’s status is 206,
+	  // internalResponse’s range-requested flag is set, and request’s header
 	  // list does not contain `Range`, then set response and internalResponse
 	  // to a network error.
 	  if (
@@ -19688,9 +19688,9 @@ function requireFetch$1 () {
 	    response = internalResponse = makeNetworkError();
 	  }
 
-	  // 19. If response is not a network error and either request?�s method is
-	  // `HEAD` or `CONNECT`, or internalResponse?�s status is a null body status,
-	  // set internalResponse?�s body to null and disregard any enqueuing toward
+	  // 19. If response is not a network error and either request’s method is
+	  // `HEAD` or `CONNECT`, or internalResponse’s status is a null body status,
+	  // set internalResponse’s body to null and disregard any enqueuing toward
 	  // it (if any).
 	  if (
 	    response.status !== 0 &&
@@ -19702,14 +19702,14 @@ function requireFetch$1 () {
 	    fetchParams.controller.dump = true;
 	  }
 
-	  // 20. If request?�s integrity metadata is not the empty string, then:
+	  // 20. If request’s integrity metadata is not the empty string, then:
 	  if (request.integrity) {
 	    // 1. Let processBodyError be this step: run fetch finale given fetchParams
 	    // and a network error.
 	    const processBodyError = (reason) =>
 	      fetchFinale(fetchParams, makeNetworkError(reason));
 
-	    // 2. If request?�s response tainting is "opaque", or response?�s body is null,
+	    // 2. If request’s response tainting is "opaque", or response’s body is null,
 	    // then run processBodyError and abort these steps.
 	    if (request.responseTainting === 'opaque' || response.body == null) {
 	      processBodyError(response.error);
@@ -19718,21 +19718,21 @@ function requireFetch$1 () {
 
 	    // 3. Let processBody given bytes be these steps:
 	    const processBody = (bytes) => {
-	      // 1. If bytes do not match request?�s integrity metadata,
+	      // 1. If bytes do not match request’s integrity metadata,
 	      // then run processBodyError and abort these steps. [SRI]
 	      if (!bytesMatch(bytes, request.integrity)) {
 	        processBodyError('integrity mismatch');
 	        return
 	      }
 
-	      // 2. Set response?�s body to bytes as a body.
+	      // 2. Set response’s body to bytes as a body.
 	      response.body = safelyExtractBody(bytes)[0];
 
 	      // 3. Run fetch finale given fetchParams and response.
 	      fetchFinale(fetchParams, response);
 	    };
 
-	    // 4. Fully read response?�s body given processBody and processBodyError.
+	    // 4. Fully read response’s body given processBody and processBodyError.
 	    await fullyReadBody(response.body, processBody, processBodyError);
 	  } else {
 	    // 21. Otherwise, run fetch finale given fetchParams and response.
@@ -19751,15 +19751,15 @@ function requireFetch$1 () {
 	    return Promise.resolve(makeAppropriateNetworkError(fetchParams))
 	  }
 
-	  // 2. Let request be fetchParams?�s request.
+	  // 2. Let request be fetchParams’s request.
 	  const { request } = fetchParams;
 
 	  const { protocol: scheme } = requestCurrentURL(request);
 
-	  // 3. Switch on request?�s current URL?�s scheme and run the associated steps:
+	  // 3. Switch on request’s current URL’s scheme and run the associated steps:
 	  switch (scheme) {
 	    case 'about:': {
-	      // If request?�s current URL?�s path is the string "blank", then return a new response
+	      // If request’s current URL’s path is the string "blank", then return a new response
 	      // whose status message is `OK`, header list is « (`Content-Type`, `text/html;charset=utf-8`) »,
 	      // and body is the empty byte sequence as a body.
 
@@ -19771,7 +19771,7 @@ function requireFetch$1 () {
 	        resolveObjectURL = require$$0$4.resolveObjectURL;
 	      }
 
-	      // 1. Let blobURLEntry be request?�s current URL?�s blob URL entry.
+	      // 1. Let blobURLEntry be request’s current URL’s blob URL entry.
 	      const blobURLEntry = requestCurrentURL(request);
 
 	      // https://github.com/web-platform-tests/wpt/blob/7b0ebaccc62b566a1965396e5be7bb2bc06f841f/FileAPI/url/resources/fetch-tests.js#L52-L56
@@ -19782,28 +19782,28 @@ function requireFetch$1 () {
 
 	      const blob = resolveObjectURL(blobURLEntry.toString());
 
-	      // 2. If request?�s method is not `GET`, blobURLEntry is null, or blobURLEntry?�s
+	      // 2. If request’s method is not `GET`, blobURLEntry is null, or blobURLEntry’s
 	      //    object is not a Blob object, then return a network error.
 	      if (request.method !== 'GET' || !isBlobLike(blob)) {
 	        return Promise.resolve(makeNetworkError('invalid method'))
 	      }
 
-	      // 3. Let blob be blobURLEntry?�s object.
+	      // 3. Let blob be blobURLEntry’s object.
 	      // Note: done above
 
 	      // 4. Let response be a new response.
 	      const response = makeResponse();
 
-	      // 5. Let fullLength be blob?�s size.
+	      // 5. Let fullLength be blob’s size.
 	      const fullLength = blob.size;
 
 	      // 6. Let serializedFullLength be fullLength, serialized and isomorphic encoded.
 	      const serializedFullLength = isomorphicEncode(`${fullLength}`);
 
-	      // 7. Let type be blob?�s type.
+	      // 7. Let type be blob’s type.
 	      const type = blob.type;
 
-	      // 8. If request?�s header list does not contain `Range`:
+	      // 8. If request’s header list does not contain `Range`:
 	      // 9. Otherwise:
 	      if (!request.headersList.contains('range', true)) {
 	        // 1. Let bodyWithType be the result of safely extracting blob.
@@ -19812,20 +19812,20 @@ function requireFetch$1 () {
 	        // use extractBody directly.
 	        const bodyWithType = extractBody(blob);
 
-	        // 2. Set response?�s status message to `OK`.
+	        // 2. Set response’s status message to `OK`.
 	        response.statusText = 'OK';
 
-	        // 3. Set response?�s body to bodyWithType?�s body.
+	        // 3. Set response’s body to bodyWithType’s body.
 	        response.body = bodyWithType[0];
 
-	        // 4. Set response?�s header list to « (`Content-Length`, serializedFullLength), (`Content-Type`, type) ».
+	        // 4. Set response’s header list to « (`Content-Length`, serializedFullLength), (`Content-Type`, type) ».
 	        response.headersList.set('content-length', serializedFullLength, true);
 	        response.headersList.set('content-type', type, true);
 	      } else {
-	        // 1. Set response?�s range-requested flag.
+	        // 1. Set response’s range-requested flag.
 	        response.rangeRequested = true;
 
-	        // 2. Let rangeHeader be the result of getting `Range` from request?�s header list.
+	        // 2. Let rangeHeader be the result of getting `Range` from request’s header list.
 	        const rangeHeader = request.headersList.get('range', true);
 
 	        // 3. Let rangeValue be the result of parsing a single range header value given rangeHeader and true.
@@ -19842,10 +19842,10 @@ function requireFetch$1 () {
 	        // 6. If rangeStart is null:
 	        // 7. Otherwise:
 	        if (rangeStart === null) {
-	          // 1. Set rangeStart to fullLength ??rangeEnd.
+	          // 1. Set rangeStart to fullLength − rangeEnd.
 	          rangeStart = fullLength - rangeEnd;
 
-	          // 2. Set rangeEnd to rangeStart + rangeEnd ??1.
+	          // 2. Set rangeEnd to rangeStart + rangeEnd − 1.
 	          rangeEnd = rangeStart + rangeEnd - 1;
 	        } else {
 	          // 1. If rangeStart is greater than or equal to fullLength, then return a network error.
@@ -19854,7 +19854,7 @@ function requireFetch$1 () {
 	          }
 
 	          // 2. If rangeEnd is null or rangeEnd is greater than or equal to fullLength, then set
-	          //    rangeEnd to fullLength ??1.
+	          //    rangeEnd to fullLength − 1.
 	          if (rangeEnd === null || rangeEnd >= fullLength) {
 	            rangeEnd = fullLength - 1;
 	          }
@@ -19868,23 +19868,23 @@ function requireFetch$1 () {
 	        // Note: same reason as mentioned above as to why we use extractBody
 	        const slicedBodyWithType = extractBody(slicedBlob);
 
-	        // 10. Set response?�s body to slicedBodyWithType?�s body.
+	        // 10. Set response’s body to slicedBodyWithType’s body.
 	        response.body = slicedBodyWithType[0];
 
-	        // 11. Let serializedSlicedLength be slicedBlob?�s size, serialized and isomorphic encoded.
+	        // 11. Let serializedSlicedLength be slicedBlob’s size, serialized and isomorphic encoded.
 	        const serializedSlicedLength = isomorphicEncode(`${slicedBlob.size}`);
 
 	        // 12. Let contentRange be the result of invoking build a content range given rangeStart,
 	        //     rangeEnd, and fullLength.
 	        const contentRange = buildContentRange(rangeStart, rangeEnd, fullLength);
 
-	        // 13. Set response?�s status to 206.
+	        // 13. Set response’s status to 206.
 	        response.status = 206;
 
-	        // 14. Set response?�s status message to `Partial Content`.
+	        // 14. Set response’s status message to `Partial Content`.
 	        response.statusText = 'Partial Content';
 
-	        // 15. Set response?�s header list to « (`Content-Length`, serializedSlicedLength),
+	        // 15. Set response’s header list to « (`Content-Length`, serializedSlicedLength),
 	        //     (`Content-Type`, type), (`Content-Range`, contentRange) ».
 	        response.headersList.set('content-length', serializedSlicedLength, true);
 	        response.headersList.set('content-type', type, true);
@@ -19896,7 +19896,7 @@ function requireFetch$1 () {
 	    }
 	    case 'data:': {
 	      // 1. Let dataURLStruct be the result of running the
-	      //    data: URL processor on request?�s current URL.
+	      //    data: URL processor on request’s current URL.
 	      const currentURL = requestCurrentURL(request);
 	      const dataURLStruct = dataURLProcessor(currentURL);
 
@@ -19906,12 +19906,12 @@ function requireFetch$1 () {
 	        return Promise.resolve(makeNetworkError('failed to fetch the data URL'))
 	      }
 
-	      // 3. Let mimeType be dataURLStruct?�s MIME type, serialized.
+	      // 3. Let mimeType be dataURLStruct’s MIME type, serialized.
 	      const mimeType = serializeAMimeType(dataURLStruct.mimeType);
 
 	      // 4. Return a response whose status message is `OK`,
 	      //    header list is « (`Content-Type`, mimeType) »,
-	      //    and body is dataURLStruct?�s body as a body.
+	      //    and body is dataURLStruct’s body as a body.
 	      return Promise.resolve(makeResponse({
 	        statusText: 'OK',
 	        headersList: [
@@ -19940,12 +19940,12 @@ function requireFetch$1 () {
 
 	// https://fetch.spec.whatwg.org/#finalize-response
 	function finalizeResponse (fetchParams, response) {
-	  // 1. Set fetchParams?�s request?�s done flag.
+	  // 1. Set fetchParams’s request’s done flag.
 	  fetchParams.request.done = true;
 
-	  // 2, If fetchParams?�s process response done is not null, then queue a fetch
-	  // task to run fetchParams?�s process response done given response, with
-	  // fetchParams?�s task destination.
+	  // 2, If fetchParams’s process response done is not null, then queue a fetch
+	  // task to run fetchParams’s process response done given response, with
+	  // fetchParams’s task destination.
 	  if (fetchParams.processResponseDone != null) {
 	    queueMicrotask(() => fetchParams.processResponseDone(response));
 	  }
@@ -19953,12 +19953,12 @@ function requireFetch$1 () {
 
 	// https://fetch.spec.whatwg.org/#fetch-finale
 	function fetchFinale (fetchParams, response) {
-	  // 1. Let timingInfo be fetchParams?�s timing info.
+	  // 1. Let timingInfo be fetchParams’s timing info.
 	  let timingInfo = fetchParams.timingInfo;
 
-	  // 2. If response is not a network error and fetchParams?�s request?�s client is a secure context,
-	  //    then set timingInfo?�s server-timing headers to the result of getting, decoding, and splitting
-	  //    `Server-Timing` from response?�s internal response?�s header list.
+	  // 2. If response is not a network error and fetchParams’s request’s client is a secure context,
+	  //    then set timingInfo’s server-timing headers to the result of getting, decoding, and splitting
+	  //    `Server-Timing` from response’s internal response’s header list.
 	  // TODO
 
 	  // 3. Let processResponseEndOfBody be the following steps:
@@ -19966,29 +19966,29 @@ function requireFetch$1 () {
 	    // 1. Let unsafeEndTime be the unsafe shared current time.
 	    const unsafeEndTime = Date.now(); // ?
 
-	    // 2. If fetchParams?�s request?�s destination is "document", then set fetchParams?�s controller?�s
-	    //    full timing info to fetchParams?�s timing info.
+	    // 2. If fetchParams’s request’s destination is "document", then set fetchParams’s controller’s
+	    //    full timing info to fetchParams’s timing info.
 	    if (fetchParams.request.destination === 'document') {
 	      fetchParams.controller.fullTimingInfo = timingInfo;
 	    }
 
-	    // 3. Set fetchParams?�s controller?�s report timing steps to the following steps given a global object global:
+	    // 3. Set fetchParams’s controller’s report timing steps to the following steps given a global object global:
 	    fetchParams.controller.reportTimingSteps = () => {
-	      // 1. If fetchParams?�s request?�s URL?�s scheme is not an HTTP(S) scheme, then return.
+	      // 1. If fetchParams’s request’s URL’s scheme is not an HTTP(S) scheme, then return.
 	      if (fetchParams.request.url.protocol !== 'https:') {
 	        return
 	      }
 
-	      // 2. Set timingInfo?�s end time to the relative high resolution time given unsafeEndTime and global.
+	      // 2. Set timingInfo’s end time to the relative high resolution time given unsafeEndTime and global.
 	      timingInfo.endTime = unsafeEndTime;
 
-	      // 3. Let cacheState be response?�s cache state.
+	      // 3. Let cacheState be response’s cache state.
 	      let cacheState = response.cacheState;
 
-	      // 4. Let bodyInfo be response?�s body info.
+	      // 4. Let bodyInfo be response’s body info.
 	      const bodyInfo = response.bodyInfo;
 
-	      // 5. If response?�s timing allow passed flag is not set, then set timingInfo to the result of creating an
+	      // 5. If response’s timing allow passed flag is not set, then set timingInfo to the result of creating an
 	      //    opaque timing info for timingInfo and set cacheState to the empty string.
 	      if (!response.timingAllowPassed) {
 	        timingInfo = createOpaqueTimingInfo(timingInfo);
@@ -19999,22 +19999,22 @@ function requireFetch$1 () {
 	      // 6. Let responseStatus be 0.
 	      let responseStatus = 0;
 
-	      // 7. If fetchParams?�s request?�s mode is not "navigate" or response?�s has-cross-origin-redirects is false:
+	      // 7. If fetchParams’s request’s mode is not "navigate" or response’s has-cross-origin-redirects is false:
 	      if (fetchParams.request.mode !== 'navigator' || !response.hasCrossOriginRedirects) {
-	        // 1. Set responseStatus to response?�s status.
+	        // 1. Set responseStatus to response’s status.
 	        responseStatus = response.status;
 
-	        // 2. Let mimeType be the result of extracting a MIME type from response?�s header list.
+	        // 2. Let mimeType be the result of extracting a MIME type from response’s header list.
 	        const mimeType = extractMimeType(response.headersList);
 
-	        // 3. If mimeType is not failure, then set bodyInfo?�s content type to the result of minimizing a supported MIME type given mimeType.
+	        // 3. If mimeType is not failure, then set bodyInfo’s content type to the result of minimizing a supported MIME type given mimeType.
 	        if (mimeType !== 'failure') {
 	          bodyInfo.contentType = minimizeSupportedMimeType(mimeType);
 	        }
 	      }
 
-	      // 8. If fetchParams?�s request?�s initiator type is non-null, then mark resource timing given timingInfo,
-	      //    fetchParams?�s request?�s URL, fetchParams?�s request?�s initiator type, global, cacheState, bodyInfo,
+	      // 8. If fetchParams’s request’s initiator type is non-null, then mark resource timing given timingInfo,
+	      //    fetchParams’s request’s URL, fetchParams’s request’s initiator type, global, cacheState, bodyInfo,
 	      //    and responseStatus.
 	      if (fetchParams.request.initiatorType != null) {
 	        // TODO: update markresourcetiming
@@ -20024,29 +20024,29 @@ function requireFetch$1 () {
 
 	    // 4. Let processResponseEndOfBodyTask be the following steps:
 	    const processResponseEndOfBodyTask = () => {
-	      // 1. Set fetchParams?�s request?�s done flag.
+	      // 1. Set fetchParams’s request’s done flag.
 	      fetchParams.request.done = true;
 
-	      // 2. If fetchParams?�s process response end-of-body is non-null, then run fetchParams?�s process
+	      // 2. If fetchParams’s process response end-of-body is non-null, then run fetchParams’s process
 	      //    response end-of-body given response.
 	      if (fetchParams.processResponseEndOfBody != null) {
 	        queueMicrotask(() => fetchParams.processResponseEndOfBody(response));
 	      }
 
-	      // 3. If fetchParams?�s request?�s initiator type is non-null and fetchParams?�s request?�s client?�s
-	      //    global object is fetchParams?�s task destination, then run fetchParams?�s controller?�s report
-	      //    timing steps given fetchParams?�s request?�s client?�s global object.
+	      // 3. If fetchParams’s request’s initiator type is non-null and fetchParams’s request’s client’s
+	      //    global object is fetchParams’s task destination, then run fetchParams’s controller’s report
+	      //    timing steps given fetchParams’s request’s client’s global object.
 	      if (fetchParams.request.initiatorType != null) {
 	        fetchParams.controller.reportTimingSteps();
 	      }
 	    };
 
-	    // 5. Queue a fetch task to run processResponseEndOfBodyTask with fetchParams?�s task destination
+	    // 5. Queue a fetch task to run processResponseEndOfBodyTask with fetchParams’s task destination
 	    queueMicrotask(() => processResponseEndOfBodyTask());
 	  };
 
-	  // 4. If fetchParams?�s process response is non-null, then queue a fetch task to run fetchParams?�s
-	  //    process response given response, with fetchParams?�s task destination.
+	  // 4. If fetchParams’s process response is non-null, then queue a fetch task to run fetchParams’s
+	  //    process response given response, with fetchParams’s task destination.
 	  if (fetchParams.processResponse != null) {
 	    queueMicrotask(() => {
 	      fetchParams.processResponse(response);
@@ -20054,10 +20054,10 @@ function requireFetch$1 () {
 	    });
 	  }
 
-	  // 5. Let internalResponse be response, if response is a network error; otherwise response?�s internal response.
+	  // 5. Let internalResponse be response, if response is a network error; otherwise response’s internal response.
 	  const internalResponse = response.type === 'error' ? response : (response.internalResponse ?? response);
 
-	  // 6. If internalResponse?�s body is null, then run processResponseEndOfBody.
+	  // 6. If internalResponse’s body is null, then run processResponseEndOfBody.
 	  // 7. Otherwise:
 	  if (internalResponse.body == null) {
 	    processResponseEndOfBody();
@@ -20070,7 +20070,7 @@ function requireFetch$1 () {
 	    // 2. Let identityTransformAlgorithm be an algorithm which, given chunk, enqueues chunk in transformStream.
 	    // 3. Set up transformStream with transformAlgorithm set to identityTransformAlgorithm and flushAlgorithm
 	    //    set to processResponseEndOfBody.
-	    // 4. Set internalResponse?�s body?�s stream to the result of internalResponse?�s body?�s stream piped through transformStream.
+	    // 4. Set internalResponse’s body’s stream to the result of internalResponse’s body’s stream piped through transformStream.
 
 	    finished(internalResponse.body.stream, () => {
 	      processResponseEndOfBody();
@@ -20080,7 +20080,7 @@ function requireFetch$1 () {
 
 	// https://fetch.spec.whatwg.org/#http-fetch
 	async function httpFetch (fetchParams) {
-	  // 1. Let request be fetchParams?�s request.
+	  // 1. Let request be fetchParams’s request.
 	  const request = fetchParams.request;
 
 	  // 2. Let response be null.
@@ -20089,10 +20089,10 @@ function requireFetch$1 () {
 	  // 3. Let actualResponse be null.
 	  let actualResponse = null;
 
-	  // 4. Let timingInfo be fetchParams?�s timing info.
+	  // 4. Let timingInfo be fetchParams’s timing info.
 	  const timingInfo = fetchParams.timingInfo;
 
-	  // 5. If request?�s service-workers mode is "all", then:
+	  // 5. If request’s service-workers mode is "all", then:
 	  if (request.serviceWorkers === 'all') ;
 
 	  // 6. If response is null, then:
@@ -20100,7 +20100,7 @@ function requireFetch$1 () {
 	    // 1. If makeCORSPreflight is true and one of these conditions is true:
 	    // TODO
 
-	    // 2. If request?�s redirect mode is "follow", then set request?�s
+	    // 2. If request’s redirect mode is "follow", then set request’s
 	    // service-workers mode to "none".
 	    if (request.redirect === 'follow') {
 	      request.serviceWorkers = 'none';
@@ -20110,7 +20110,7 @@ function requireFetch$1 () {
 	    // HTTP-network-or-cache fetch given fetchParams.
 	    actualResponse = response = await httpNetworkOrCacheFetch(fetchParams);
 
-	    // 4. If request?�s response tainting is "cors" and a CORS check
+	    // 4. If request’s response tainting is "cors" and a CORS check
 	    // for request and response returns failure, then return a network error.
 	    if (
 	      request.responseTainting === 'cors' &&
@@ -20120,15 +20120,15 @@ function requireFetch$1 () {
 	    }
 
 	    // 5. If the TAO check for request and response returns failure, then set
-	    // request?�s timing allow failed flag.
+	    // request’s timing allow failed flag.
 	    if (TAOCheck(request, response) === 'failure') {
 	      request.timingAllowFailed = true;
 	    }
 	  }
 
-	  // 7. If either request?�s response tainting or response?�s type
+	  // 7. If either request’s response tainting or response’s type
 	  // is "opaque", and the cross-origin resource policy check with
-	  // request?�s origin, request?�s client, request?�s destination,
+	  // request’s origin, request’s client, request’s destination,
 	  // and actualResponse returns blocked, then return a network error.
 	  if (
 	    (request.responseTainting === 'opaque' || response.type === 'opaque') &&
@@ -20142,9 +20142,9 @@ function requireFetch$1 () {
 	    return makeNetworkError('blocked')
 	  }
 
-	  // 8. If actualResponse?�s status is a redirect status, then:
+	  // 8. If actualResponse’s status is a redirect status, then:
 	  if (redirectStatusSet.has(actualResponse.status)) {
-	    // 1. If actualResponse?�s status is not 303, request?�s body is not null,
+	    // 1. If actualResponse’s status is not 303, request’s body is not null,
 	    // and the connection uses HTTP/2, then user agents may, and are even
 	    // encouraged to, transmit an RST_STREAM frame.
 	    // See, https://github.com/whatwg/fetch/issues/1288
@@ -20152,7 +20152,7 @@ function requireFetch$1 () {
 	      fetchParams.controller.connection.destroy(undefined, false);
 	    }
 
-	    // 2. Switch on request?�s redirect mode:
+	    // 2. Switch on request’s redirect mode:
 	    if (request.redirect === 'error') {
 	      // Set response to a network error.
 	      response = makeNetworkError('unexpected redirect');
@@ -20172,7 +20172,7 @@ function requireFetch$1 () {
 	    }
 	  }
 
-	  // 9. Set response?�s timing info to timingInfo.
+	  // 9. Set response’s timing info to timingInfo.
 	  response.timingInfo = timingInfo;
 
 	  // 10. Return response.
@@ -20181,17 +20181,17 @@ function requireFetch$1 () {
 
 	// https://fetch.spec.whatwg.org/#http-redirect-fetch
 	function httpRedirectFetch (fetchParams, response) {
-	  // 1. Let request be fetchParams?�s request.
+	  // 1. Let request be fetchParams’s request.
 	  const request = fetchParams.request;
 
 	  // 2. Let actualResponse be response, if response is not a filtered response,
-	  // and response?�s internal response otherwise.
+	  // and response’s internal response otherwise.
 	  const actualResponse = response.internalResponse
 	    ? response.internalResponse
 	    : response;
 
-	  // 3. Let locationURL be actualResponse?�s location URL given request?�s current
-	  // URL?�s fragment.
+	  // 3. Let locationURL be actualResponse’s location URL given request’s current
+	  // URL’s fragment.
 	  let locationURL;
 
 	  try {
@@ -20209,22 +20209,22 @@ function requireFetch$1 () {
 	    return Promise.resolve(makeNetworkError(err))
 	  }
 
-	  // 6. If locationURL?�s scheme is not an HTTP(S) scheme, then return a network
+	  // 6. If locationURL’s scheme is not an HTTP(S) scheme, then return a network
 	  // error.
 	  if (!urlIsHttpHttpsScheme(locationURL)) {
 	    return Promise.resolve(makeNetworkError('URL scheme must be a HTTP(S) scheme'))
 	  }
 
-	  // 7. If request?�s redirect count is 20, then return a network error.
+	  // 7. If request’s redirect count is 20, then return a network error.
 	  if (request.redirectCount === 20) {
 	    return Promise.resolve(makeNetworkError('redirect count exceeded'))
 	  }
 
-	  // 8. Increase request?�s redirect count by 1.
+	  // 8. Increase request’s redirect count by 1.
 	  request.redirectCount += 1;
 
-	  // 9. If request?�s mode is "cors", locationURL includes credentials, and
-	  // request?�s origin is not same origin with locationURL?�s origin, then return
+	  // 9. If request’s mode is "cors", locationURL includes credentials, and
+	  // request’s origin is not same origin with locationURL’s origin, then return
 	  //  a network error.
 	  if (
 	    request.mode === 'cors' &&
@@ -20234,7 +20234,7 @@ function requireFetch$1 () {
 	    return Promise.resolve(makeNetworkError('cross origin not allowed for request mode "cors"'))
 	  }
 
-	  // 10. If request?�s response tainting is "cors" and locationURL includes
+	  // 10. If request’s response tainting is "cors" and locationURL includes
 	  // credentials, then return a network error.
 	  if (
 	    request.responseTainting === 'cors' &&
@@ -20245,8 +20245,8 @@ function requireFetch$1 () {
 	    ))
 	  }
 
-	  // 11. If actualResponse?�s status is not 303, request?�s body is non-null,
-	  // and request?�s body?�s source is null, then return a network error.
+	  // 11. If actualResponse’s status is not 303, request’s body is non-null,
+	  // and request’s body’s source is null, then return a network error.
 	  if (
 	    actualResponse.status !== 303 &&
 	    request.body != null &&
@@ -20256,28 +20256,28 @@ function requireFetch$1 () {
 	  }
 
 	  // 12. If one of the following is true
-	  // - actualResponse?�s status is 301 or 302 and request?�s method is `POST`
-	  // - actualResponse?�s status is 303 and request?�s method is not `GET` or `HEAD`
+	  // - actualResponse’s status is 301 or 302 and request’s method is `POST`
+	  // - actualResponse’s status is 303 and request’s method is not `GET` or `HEAD`
 	  if (
 	    ([301, 302].includes(actualResponse.status) && request.method === 'POST') ||
 	    (actualResponse.status === 303 &&
 	      !GET_OR_HEAD.includes(request.method))
 	  ) {
 	    // then:
-	    // 1. Set request?�s method to `GET` and request?�s body to null.
+	    // 1. Set request’s method to `GET` and request’s body to null.
 	    request.method = 'GET';
 	    request.body = null;
 
 	    // 2. For each headerName of request-body-header name, delete headerName from
-	    // request?�s header list.
+	    // request’s header list.
 	    for (const headerName of requestBodyHeader) {
 	      request.headersList.delete(headerName);
 	    }
 	  }
 
-	  // 13. If request?�s current URL?�s origin is not same origin with locationURL?�s
+	  // 13. If request’s current URL’s origin is not same origin with locationURL’s
 	  //     origin, then for each headerName of CORS non-wildcard request-header name,
-	  //     delete headerName from request?�s header list.
+	  //     delete headerName from request’s header list.
 	  if (!sameOrigin(requestCurrentURL(request), locationURL)) {
 	    // https://fetch.spec.whatwg.org/#cors-non-wildcard-request-header-name
 	    request.headersList.delete('authorization', true);
@@ -20290,32 +20290,32 @@ function requireFetch$1 () {
 	    request.headersList.delete('host', true);
 	  }
 
-	  // 14. If request?�s body is non-null, then set request?�s body to the first return
-	  // value of safely extracting request?�s body?�s source.
+	  // 14. If request’s body is non-null, then set request’s body to the first return
+	  // value of safely extracting request’s body’s source.
 	  if (request.body != null) {
 	    assert(request.body.source != null);
 	    request.body = safelyExtractBody(request.body.source)[0];
 	  }
 
-	  // 15. Let timingInfo be fetchParams?�s timing info.
+	  // 15. Let timingInfo be fetchParams’s timing info.
 	  const timingInfo = fetchParams.timingInfo;
 
-	  // 16. Set timingInfo?�s redirect end time and post-redirect start time to the
-	  // coarsened shared current time given fetchParams?�s cross-origin isolated
+	  // 16. Set timingInfo’s redirect end time and post-redirect start time to the
+	  // coarsened shared current time given fetchParams’s cross-origin isolated
 	  // capability.
 	  timingInfo.redirectEndTime = timingInfo.postRedirectStartTime =
 	    coarsenedSharedCurrentTime(fetchParams.crossOriginIsolatedCapability);
 
-	  // 17. If timingInfo?�s redirect start time is 0, then set timingInfo?�s
-	  //  redirect start time to timingInfo?�s start time.
+	  // 17. If timingInfo’s redirect start time is 0, then set timingInfo’s
+	  //  redirect start time to timingInfo’s start time.
 	  if (timingInfo.redirectStartTime === 0) {
 	    timingInfo.redirectStartTime = timingInfo.startTime;
 	  }
 
-	  // 18. Append locationURL to request?�s URL list.
+	  // 18. Append locationURL to request’s URL list.
 	  request.urlList.push(locationURL);
 
-	  // 19. Invoke set request?�s referrer policy on redirect on request and
+	  // 19. Invoke set request’s referrer policy on redirect on request and
 	  // actualResponse.
 	  setRequestReferrerPolicyOnRedirect(request, actualResponse);
 
@@ -20329,7 +20329,7 @@ function requireFetch$1 () {
 	  isAuthenticationFetch = false,
 	  isNewConnectionFetch = false
 	) {
-	  // 1. Let request be fetchParams?�s request.
+	  // 1. Let request be fetchParams’s request.
 	  const request = fetchParams.request;
 
 	  // 2. Let httpFetchParams be null.
@@ -20343,7 +20343,7 @@ function requireFetch$1 () {
 
 	  // 8. Run these steps, but abort when the ongoing fetch is terminated:
 
-	  //    1. If request?�s window is "no-window" and request?�s redirect mode is
+	  //    1. If request’s window is "no-window" and request’s redirect mode is
 	  //    "error", then set httpFetchParams to fetchParams and httpRequest to
 	  //    request.
 	  if (request.window === 'no-window' && request.redirect === 'error') {
@@ -20358,7 +20358,7 @@ function requireFetch$1 () {
 	    // 2. Set httpFetchParams to a copy of fetchParams.
 	    httpFetchParams = { ...fetchParams };
 
-	    // 3. Set httpFetchParams?�s request to httpRequest.
+	    // 3. Set httpFetchParams’s request to httpRequest.
 	    httpFetchParams.request = httpRequest;
 	  }
 
@@ -20368,14 +20368,14 @@ function requireFetch$1 () {
 	    (request.credentials === 'same-origin' &&
 	      request.responseTainting === 'basic');
 
-	  //    4. Let contentLength be httpRequest?�s body?�s length, if httpRequest?�s
+	  //    4. Let contentLength be httpRequest’s body’s length, if httpRequest’s
 	  //    body is non-null; otherwise null.
 	  const contentLength = httpRequest.body ? httpRequest.body.length : null;
 
 	  //    5. Let contentLengthHeaderValue be null.
 	  let contentLengthHeaderValue = null;
 
-	  //    6. If httpRequest?�s body is null and httpRequest?�s method is `POST` or
+	  //    6. If httpRequest’s body is null and httpRequest’s method is `POST` or
 	  //    `PUT`, then set contentLengthHeaderValue to `0`.
 	  if (
 	    httpRequest.body == null &&
@@ -20391,22 +20391,22 @@ function requireFetch$1 () {
 	  }
 
 	  //    8. If contentLengthHeaderValue is non-null, then append
-	  //    `Content-Length`/contentLengthHeaderValue to httpRequest?�s header
+	  //    `Content-Length`/contentLengthHeaderValue to httpRequest’s header
 	  //    list.
 	  if (contentLengthHeaderValue != null) {
 	    httpRequest.headersList.append('content-length', contentLengthHeaderValue, true);
 	  }
 
 	  //    9. If contentLengthHeaderValue is non-null, then append (`Content-Length`,
-	  //    contentLengthHeaderValue) to httpRequest?�s header list.
+	  //    contentLengthHeaderValue) to httpRequest’s header list.
 
-	  //    10. If contentLength is non-null and httpRequest?�s keepalive is true,
+	  //    10. If contentLength is non-null and httpRequest’s keepalive is true,
 	  //    then:
 	  if (contentLength != null && httpRequest.keepalive) ;
 
-	  //    11. If httpRequest?�s referrer is a URL, then append
-	  //    `Referer`/httpRequest?�s referrer, serialized and isomorphic encoded,
-	  //     to httpRequest?�s header list.
+	  //    11. If httpRequest’s referrer is a URL, then append
+	  //    `Referer`/httpRequest’s referrer, serialized and isomorphic encoded,
+	  //     to httpRequest’s header list.
 	  if (httpRequest.referrer instanceof URL) {
 	    httpRequest.headersList.append('referer', isomorphicEncode(httpRequest.referrer.href), true);
 	  }
@@ -20417,17 +20417,17 @@ function requireFetch$1 () {
 	  //    13. Append the Fetch metadata headers for httpRequest. [FETCH-METADATA]
 	  appendFetchMetadata(httpRequest);
 
-	  //    14. If httpRequest?�s header list does not contain `User-Agent`, then
+	  //    14. If httpRequest’s header list does not contain `User-Agent`, then
 	  //    user agents should append `User-Agent`/default `User-Agent` value to
-	  //    httpRequest?�s header list.
+	  //    httpRequest’s header list.
 	  if (!httpRequest.headersList.contains('user-agent', true)) {
 	    httpRequest.headersList.append('user-agent', defaultUserAgent);
 	  }
 
-	  //    15. If httpRequest?�s cache mode is "default" and httpRequest?�s header
+	  //    15. If httpRequest’s cache mode is "default" and httpRequest’s header
 	  //    list contains `If-Modified-Since`, `If-None-Match`,
 	  //    `If-Unmodified-Since`, `If-Match`, or `If-Range`, then set
-	  //    httpRequest?�s cache mode to "no-store".
+	  //    httpRequest’s cache mode to "no-store".
 	  if (
 	    httpRequest.cache === 'default' &&
 	    (httpRequest.headersList.contains('if-modified-since', true) ||
@@ -20439,10 +20439,10 @@ function requireFetch$1 () {
 	    httpRequest.cache = 'no-store';
 	  }
 
-	  //    16. If httpRequest?�s cache mode is "no-cache", httpRequest?�s prevent
+	  //    16. If httpRequest’s cache mode is "no-cache", httpRequest’s prevent
 	  //    no-cache cache-control header modification flag is unset, and
-	  //    httpRequest?�s header list does not contain `Cache-Control`, then append
-	  //    `Cache-Control`/`max-age=0` to httpRequest?�s header list.
+	  //    httpRequest’s header list does not contain `Cache-Control`, then append
+	  //    `Cache-Control`/`max-age=0` to httpRequest’s header list.
 	  if (
 	    httpRequest.cache === 'no-cache' &&
 	    !httpRequest.preventNoCacheCacheControlHeaderModification &&
@@ -20451,29 +20451,29 @@ function requireFetch$1 () {
 	    httpRequest.headersList.append('cache-control', 'max-age=0', true);
 	  }
 
-	  //    17. If httpRequest?�s cache mode is "no-store" or "reload", then:
+	  //    17. If httpRequest’s cache mode is "no-store" or "reload", then:
 	  if (httpRequest.cache === 'no-store' || httpRequest.cache === 'reload') {
-	    // 1. If httpRequest?�s header list does not contain `Pragma`, then append
-	    // `Pragma`/`no-cache` to httpRequest?�s header list.
+	    // 1. If httpRequest’s header list does not contain `Pragma`, then append
+	    // `Pragma`/`no-cache` to httpRequest’s header list.
 	    if (!httpRequest.headersList.contains('pragma', true)) {
 	      httpRequest.headersList.append('pragma', 'no-cache', true);
 	    }
 
-	    // 2. If httpRequest?�s header list does not contain `Cache-Control`,
-	    // then append `Cache-Control`/`no-cache` to httpRequest?�s header list.
+	    // 2. If httpRequest’s header list does not contain `Cache-Control`,
+	    // then append `Cache-Control`/`no-cache` to httpRequest’s header list.
 	    if (!httpRequest.headersList.contains('cache-control', true)) {
 	      httpRequest.headersList.append('cache-control', 'no-cache', true);
 	    }
 	  }
 
-	  //    18. If httpRequest?�s header list contains `Range`, then append
-	  //    `Accept-Encoding`/`identity` to httpRequest?�s header list.
+	  //    18. If httpRequest’s header list contains `Range`, then append
+	  //    `Accept-Encoding`/`identity` to httpRequest’s header list.
 	  if (httpRequest.headersList.contains('range', true)) {
 	    httpRequest.headersList.append('accept-encoding', 'identity', true);
 	  }
 
-	  //    19. Modify httpRequest?�s header list per HTTP. Do not append a given
-	  //    header if httpRequest?�s header list contains that header?�s name.
+	  //    19. Modify httpRequest’s header list per HTTP. Do not append a given
+	  //    header if httpRequest’s header list contains that header’s name.
 	  //    TODO: https://github.com/whatwg/fetch/issues/1285#issuecomment-896560129
 	  if (!httpRequest.headersList.contains('accept-encoding', true)) {
 	    if (urlHasHttpsScheme(requestCurrentURL(httpRequest))) {
@@ -20485,20 +20485,20 @@ function requireFetch$1 () {
 
 	  httpRequest.headersList.delete('host', true);
 
-	  //    21. If there?�s a proxy-authentication entry, use it as appropriate.
+	  //    21. If there’s a proxy-authentication entry, use it as appropriate.
 	  //    TODO: proxy-authentication
 
 	  //    22. Set httpCache to the result of determining the HTTP cache
 	  //    partition, given httpRequest.
 	  //    TODO: cache
 
-	  //    23. If httpCache is null, then set httpRequest?�s cache mode to
+	  //    23. If httpCache is null, then set httpRequest’s cache mode to
 	  //    "no-store".
 	  {
 	    httpRequest.cache = 'no-store';
 	  }
 
-	  //    24. If httpRequest?�s cache mode is neither "no-store" nor "reload",
+	  //    24. If httpRequest’s cache mode is neither "no-store" nor "reload",
 	  //    then:
 	  if (httpRequest.cache !== 'no-store' && httpRequest.cache !== 'reload') ;
 
@@ -20507,7 +20507,7 @@ function requireFetch$1 () {
 
 	  // 10. If response is null, then:
 	  if (response == null) {
-	    // 1. If httpRequest?�s cache mode is "only-if-cached", then return a
+	    // 1. If httpRequest’s cache mode is "only-if-cached", then return a
 	    // network error.
 	    if (httpRequest.cache === 'only-if-cached') {
 	      return makeNetworkError('only if cached')
@@ -20521,7 +20521,7 @@ function requireFetch$1 () {
 	      isNewConnectionFetch
 	    );
 
-	    // 3. If httpRequest?�s method is unsafe and forwardResponse?�s status is
+	    // 3. If httpRequest’s method is unsafe and forwardResponse’s status is
 	    // in the range 200 to 399, inclusive, invalidate appropriate stored
 	    // responses in httpCache, as per the "Invalidation" chapter of HTTP
 	    // Caching, and set storedResponse to null. [HTTP-CACHING]
@@ -20542,26 +20542,26 @@ function requireFetch$1 () {
 	    }
 	  }
 
-	  // 11. Set response?�s URL list to a clone of httpRequest?�s URL list.
+	  // 11. Set response’s URL list to a clone of httpRequest’s URL list.
 	  response.urlList = [...httpRequest.urlList];
 
-	  // 12. If httpRequest?�s header list contains `Range`, then set response?�s
+	  // 12. If httpRequest’s header list contains `Range`, then set response’s
 	  // range-requested flag.
 	  if (httpRequest.headersList.contains('range', true)) {
 	    response.rangeRequested = true;
 	  }
 
-	  // 13. Set response?�s request-includes-credentials to includeCredentials.
+	  // 13. Set response’s request-includes-credentials to includeCredentials.
 	  response.requestIncludesCredentials = includeCredentials;
 
-	  // 14. If response?�s status is 401, httpRequest?�s response tainting is not
-	  // "cors", includeCredentials is true, and request?�s window is an environment
+	  // 14. If response’s status is 401, httpRequest’s response tainting is not
+	  // "cors", includeCredentials is true, and request’s window is an environment
 	  // settings object, then:
 	  // TODO
 
-	  // 15. If response?�s status is 407, then:
+	  // 15. If response’s status is 407, then:
 	  if (response.status === 407) {
-	    // 1. If request?�s window is "no-window", then return a network error.
+	    // 1. If request’s window is "no-window", then return a network error.
 	    if (request.window === 'no-window') {
 	      return makeNetworkError()
 	    }
@@ -20573,7 +20573,7 @@ function requireFetch$1 () {
 	      return makeAppropriateNetworkError(fetchParams)
 	    }
 
-	    // 4. Prompt the end user as appropriate in request?�s window and store
+	    // 4. Prompt the end user as appropriate in request’s window and store
 	    // the result as a proxy-authentication entry. [HTTP-AUTH]
 	    // TODO: Invoke some kind of callback?
 
@@ -20585,11 +20585,11 @@ function requireFetch$1 () {
 
 	  // 16. If all of the following are true
 	  if (
-	    // response?�s status is 421
+	    // response’s status is 421
 	    response.status === 421 &&
 	    // isNewConnectionFetch is false
 	    !isNewConnectionFetch &&
-	    // request?�s body is null, or request?�s body is non-null and request?�s body?�s source is non-null
+	    // request’s body is null, or request’s body is non-null and request’s body’s source is non-null
 	    (request.body == null || request.body.source != null)
 	  ) {
 	    // then:
@@ -20639,38 +20639,38 @@ function requireFetch$1 () {
 	    }
 	  };
 
-	  // 1. Let request be fetchParams?�s request.
+	  // 1. Let request be fetchParams’s request.
 	  const request = fetchParams.request;
 
 	  // 2. Let response be null.
 	  let response = null;
 
-	  // 3. Let timingInfo be fetchParams?�s timing info.
+	  // 3. Let timingInfo be fetchParams’s timing info.
 	  const timingInfo = fetchParams.timingInfo;
 
-	  // 5. If httpCache is null, then set request?�s cache mode to "no-store".
+	  // 5. If httpCache is null, then set request’s cache mode to "no-store".
 	  {
 	    request.cache = 'no-store';
 	  }
 
-	  // 8. Switch on request?�s mode:
+	  // 8. Switch on request’s mode:
 	  if (request.mode === 'websocket') ;
 
 	  // 9. Run these steps, but abort when the ongoing fetch is terminated:
 
 	  //    1. If connection is failure, then return a network error.
 
-	  //    2. Set timingInfo?�s final connection timing info to the result of
-	  //    calling clamp and coarsen connection timing info with connection?�s
-	  //    timing info, timingInfo?�s post-redirect start time, and fetchParams?�s
+	  //    2. Set timingInfo’s final connection timing info to the result of
+	  //    calling clamp and coarsen connection timing info with connection’s
+	  //    timing info, timingInfo’s post-redirect start time, and fetchParams’s
 	  //    cross-origin isolated capability.
 
-	  //    3. If connection is not an HTTP/2 connection, request?�s body is non-null,
-	  //    and request?�s body?�s source is null, then append (`Transfer-Encoding`,
-	  //    `chunked`) to request?�s header list.
+	  //    3. If connection is not an HTTP/2 connection, request’s body is non-null,
+	  //    and request’s body’s source is null, then append (`Transfer-Encoding`,
+	  //    `chunked`) to request’s header list.
 
-	  //    4. Set timingInfo?�s final network-request start time to the coarsened
-	  //    shared current time given fetchParams?�s cross-origin isolated
+	  //    4. Set timingInfo’s final network-request start time to the coarsened
+	  //    shared current time given fetchParams’s cross-origin isolated
 	  //    capability.
 
 	  //    5. Set response to the result of making an HTTP request over connection
@@ -20679,15 +20679,15 @@ function requireFetch$1 () {
 	  //        - Follow the relevant requirements from HTTP. [HTTP] [HTTP-SEMANTICS]
 	  //        [HTTP-COND] [HTTP-CACHING] [HTTP-AUTH]
 
-	  //        - If request?�s body is non-null, and request?�s body?�s source is null,
+	  //        - If request’s body is non-null, and request’s body’s source is null,
 	  //        then the user agent may have a buffer of up to 64 kibibytes and store
-	  //        a part of request?�s body in that buffer. If the user agent reads from
-	  //        request?�s body beyond that buffer?�s size and the user agent needs to
+	  //        a part of request’s body in that buffer. If the user agent reads from
+	  //        request’s body beyond that buffer’s size and the user agent needs to
 	  //        resend request, then instead return a network error.
 
-	  //        - Set timingInfo?�s final network-response start time to the coarsened
-	  //        shared current time given fetchParams?�s cross-origin isolated capability,
-	  //        immediately after the user agent?�s HTTP parser receives the first byte
+	  //        - Set timingInfo’s final network-response start time to the coarsened
+	  //        shared current time given fetchParams’s cross-origin isolated capability,
+	  //        immediately after the user agent’s HTTP parser receives the first byte
 	  //        of the response (e.g., frame header bytes for HTTP/2 or response status
 	  //        line for HTTP/1.x).
 
@@ -20695,24 +20695,24 @@ function requireFetch$1 () {
 
 	  //        - Any responses whose status is in the range 100 to 199, inclusive,
 	  //        and is not 101, are to be ignored, except for the purposes of setting
-	  //        timingInfo?�s final network-response start time above.
+	  //        timingInfo’s final network-response start time above.
 
-	  //    - If request?�s header list contains `Transfer-Encoding`/`chunked` and
+	  //    - If request’s header list contains `Transfer-Encoding`/`chunked` and
 	  //    response is transferred via HTTP/1.0 or older, then return a network
 	  //    error.
 
 	  //    - If the HTTP request results in a TLS client certificate dialog, then:
 
-	  //        1. If request?�s window is an environment settings object, make the
-	  //        dialog available in request?�s window.
+	  //        1. If request’s window is an environment settings object, make the
+	  //        dialog available in request’s window.
 
 	  //        2. Otherwise, return a network error.
 
-	  // To transmit request?�s body body, run these steps:
+	  // To transmit request’s body body, run these steps:
 	  let requestBody = null;
-	  // 1. If body is null and fetchParams?�s process request end-of-body is
-	  // non-null, then queue a fetch task given fetchParams?�s process request
-	  // end-of-body and fetchParams?�s task destination.
+	  // 1. If body is null and fetchParams’s process request end-of-body is
+	  // non-null, then queue a fetch task given fetchParams’s process request
+	  // end-of-body and fetchParams’s task destination.
 	  if (request.body == null && fetchParams.processRequestEndOfBody) {
 	    queueMicrotask(() => fetchParams.processRequestEndOfBody());
 	  } else if (request.body != null) {
@@ -20728,8 +20728,8 @@ function requireFetch$1 () {
 	      // 2. Run this step in parallel: transmit bytes.
 	      yield bytes;
 
-	      // 3. If fetchParams?�s process request body is non-null, then run
-	      // fetchParams?�s process request body given bytes?�s length.
+	      // 3. If fetchParams’s process request body is non-null, then run
+	      // fetchParams’s process request body given bytes’s length.
 	      fetchParams.processRequestBodyChunkLength?.(bytes.byteLength);
 	    };
 
@@ -20740,8 +20740,8 @@ function requireFetch$1 () {
 	        return
 	      }
 
-	      // 2. If fetchParams?�s process request end-of-body is non-null,
-	      // then run fetchParams?�s process request end-of-body.
+	      // 2. If fetchParams’s process request end-of-body is non-null,
+	      // then run fetchParams’s process request end-of-body.
 	      if (fetchParams.processRequestEndOfBody) {
 	        fetchParams.processRequestEndOfBody();
 	      }
@@ -20754,7 +20754,7 @@ function requireFetch$1 () {
 	        return
 	      }
 
-	      // 2. If e is an "AbortError" DOMException, then abort fetchParams?�s controller.
+	      // 2. If e is an "AbortError" DOMException, then abort fetchParams’s controller.
 	      if (e.name === 'AbortError') {
 	        fetchParams.controller.abort();
 	      } else {
@@ -20762,8 +20762,8 @@ function requireFetch$1 () {
 	      }
 	    };
 
-	    // 4. Incrementally read request?�s body given processBodyChunk, processEndOfBody,
-	    // processBodyError, and fetchParams?�s task destination.
+	    // 4. Incrementally read request’s body given processBodyChunk, processEndOfBody,
+	    // processBodyError, and fetchParams’s task destination.
 	    requestBody = (async function * () {
 	      try {
 	        for await (const bytes of request.body.stream) {
@@ -20807,7 +20807,7 @@ function requireFetch$1 () {
 	    await fetchParams.controller.resume();
 	  };
 
-	  // 12. Let cancelAlgorithm be an algorithm that aborts fetchParams?�s
+	  // 12. Let cancelAlgorithm be an algorithm that aborts fetchParams’s
 	  // controller with reason, given reason.
 	  const cancelAlgorithm = (reason) => {
 	    // If the aborted fetch was already terminated, then we do not
@@ -20845,10 +20845,10 @@ function requireFetch$1 () {
 
 	  // 17. Run these steps, but abort when the ongoing fetch is terminated:
 
-	  //    1. Set response?�s body to a new body whose stream is stream.
+	  //    1. Set response’s body to a new body whose stream is stream.
 	  response.body = { stream, source: null, length: null };
 
-	  //    2. If response is not a network error and request?�s cache mode is
+	  //    2. If response is not a network error and request’s cache mode is
 	  //    not "no-store", then update response in httpCache for request.
 	  //    TODO
 
@@ -20856,7 +20856,7 @@ function requireFetch$1 () {
 	  //    to block cookies for request (see section 7 of [COOKIES]), then run the
 	  //    "set-cookie-string" parsing algorithm (see section 5.2 of [COOKIES]) on
 	  //    the value of each header whose name is a byte-case-insensitive match for
-	  //    `Set-Cookie` in response?�s header list, if any, and request?�s current URL.
+	  //    `Set-Cookie` in response’s header list, if any, and request’s current URL.
 	  //    TODO
 
 	  // 18. If aborted, then:
@@ -20898,7 +20898,7 @@ function requireFetch$1 () {
 	      }
 
 	      if (bytes === undefined) {
-	        // 2. Otherwise, if the bytes transmission for response?�s message
+	        // 2. Otherwise, if the bytes transmission for response’s message
 	        // body is done normally and stream is readable, then close
 	        // stream, finalize response for fetchParams and response, and
 	        // abort these in-parallel steps.
@@ -20909,10 +20909,10 @@ function requireFetch$1 () {
 	        return
 	      }
 
-	      // 5. Increase timingInfo?�s decoded body size by bytes?�s length.
+	      // 5. Increase timingInfo’s decoded body size by bytes’s length.
 	      timingInfo.decodedBodySize += bytes?.byteLength ?? 0;
 
-	      // 6. If bytes is failure, then terminate fetchParams?�s controller.
+	      // 6. If bytes is failure, then terminate fetchParams’s controller.
 	      if (isFailure) {
 	        fetchParams.controller.terminate(bytes);
 	        return
@@ -20931,7 +20931,7 @@ function requireFetch$1 () {
 	        return
 	      }
 
-	      // 9. If stream doesn?�t need more data ask the user agent to suspend
+	      // 9. If stream doesn’t need more data ask the user agent to suspend
 	      // the ongoing fetch.
 	      if (fetchParams.controller.controller.desiredSize <= 0) {
 	        return
@@ -20943,12 +20943,12 @@ function requireFetch$1 () {
 	  function onAborted (reason) {
 	    // 2. If fetchParams is aborted, then:
 	    if (isAborted(fetchParams)) {
-	      // 1. Set response?�s aborted flag.
+	      // 1. Set response’s aborted flag.
 	      response.aborted = true;
 
 	      // 2. If stream is readable, then error stream with the result of
-	      //    deserialize a serialized abort reason given fetchParams?�s
-	      //    controller?�s serialized abort reason and an
+	      //    deserialize a serialized abort reason given fetchParams’s
+	      //    controller’s serialized abort reason and an
 	      //    implementation-defined realm.
 	      if (isReadable(stream)) {
 	        fetchParams.controller.controller.error(
@@ -20995,9 +20995,9 @@ function requireFetch$1 () {
 	          // TODO (fix): Do we need connection here?
 	          const { connection } = fetchParams.controller;
 
-	          // Set timingInfo?�s final connection timing info to the result of calling clamp and coarsen
-	          // connection timing info with connection?�s timing info, timingInfo?�s post-redirect start
-	          // time, and fetchParams?�s cross-origin isolated capability.
+	          // Set timingInfo’s final connection timing info to the result of calling clamp and coarsen
+	          // connection timing info with connection’s timing info, timingInfo’s post-redirect start
+	          // time, and fetchParams’s cross-origin isolated capability.
 	          // TODO: implement connection timing
 	          timingInfo.finalConnectionTimingInfo = clampAndCoarsenConnectionTimingInfo(undefined, timingInfo.postRedirectStartTime, fetchParams.crossOriginIsolatedCapability);
 
@@ -21008,15 +21008,15 @@ function requireFetch$1 () {
 	            this.abort = connection.abort = abort;
 	          }
 
-	          // Set timingInfo?�s final network-request start time to the coarsened shared current time given
-	          // fetchParams?�s cross-origin isolated capability.
+	          // Set timingInfo’s final network-request start time to the coarsened shared current time given
+	          // fetchParams’s cross-origin isolated capability.
 	          timingInfo.finalNetworkRequestStartTime = coarsenedSharedCurrentTime(fetchParams.crossOriginIsolatedCapability);
 	        },
 
 	        onResponseStarted () {
-	          // Set timingInfo?�s final network-response start time to the coarsened shared current
-	          // time given fetchParams?�s cross-origin isolated capability, immediately after the
-	          // user agent?�s HTTP parser receives the first byte of the response (e.g., frame header
+	          // Set timingInfo’s final network-response start time to the coarsened shared current
+	          // time given fetchParams’s cross-origin isolated capability, immediately after the
+	          // user agent’s HTTP parser receives the first byte of the response (e.g., frame header
 	          // bytes for HTTP/2 or response status line for HTTP/1.x).
 	          timingInfo.finalNetworkResponseStartTime = coarsenedSharedCurrentTime(fetchParams.crossOriginIsolatedCapability);
 	        },
@@ -21110,17 +21110,17 @@ function requireFetch$1 () {
 	            return
 	          }
 
-	          // 1. If one or more bytes have been transmitted from response?�s
+	          // 1. If one or more bytes have been transmitted from response’s
 	          // message body, then:
 
 	          //  1. Let bytes be the transmitted bytes.
 	          const bytes = chunk;
 
 	          //  2. Let codings be the result of extracting header list values
-	          //  given `Content-Encoding` and response?�s header list.
+	          //  given `Content-Encoding` and response’s header list.
 	          //  See pullAlgorithm.
 
-	          //  3. Increase timingInfo?�s encoded body size by bytes?�s length.
+	          //  3. Increase timingInfo’s encoded body size by bytes’s length.
 	          timingInfo.encodedBodySize += bytes.byteLength;
 
 	          //  4. See pullAlgorithm...
@@ -21626,19 +21626,19 @@ function requireUtil$g () {
 	 * @param {string?} encodingName
 	 */
 	function readOperation (fr, blob, type, encodingName) {
-	  // 1. If fr?�s state is "loading", throw an InvalidStateError
+	  // 1. If fr’s state is "loading", throw an InvalidStateError
 	  //    DOMException.
 	  if (fr[kState] === 'loading') {
 	    throw new DOMException('Invalid state', 'InvalidStateError')
 	  }
 
-	  // 2. Set fr?�s state to "loading".
+	  // 2. Set fr’s state to "loading".
 	  fr[kState] = 'loading';
 
-	  // 3. Set fr?�s result to null.
+	  // 3. Set fr’s result to null.
 	  fr[kResult] = null;
 
-	  // 4. Set fr?�s error to null.
+	  // 4. Set fr’s error to null.
 	  fr[kError] = null;
 
 	  // 5. Let stream be the result of calling get stream on blob.
@@ -21716,11 +21716,11 @@ function requireUtil$g () {
 	          //    object whose done property is true, queue a task
 	          //    to run the following steps and abort this algorithm:
 	          queueMicrotask(() => {
-	            // 1. Set fr?�s state to "done".
+	            // 1. Set fr’s state to "done".
 	            fr[kState] = 'done';
 
 	            // 2. Let result be the result of package data given
-	            //    bytes, type, blob?�s type, and encodingName.
+	            //    bytes, type, blob’s type, and encodingName.
 	            try {
 	              const result = packageData(bytes, type, blob.type, encodingName);
 
@@ -21730,7 +21730,7 @@ function requireUtil$g () {
 	                return
 	              }
 
-	              // 1. Set fr?�s result to result.
+	              // 1. Set fr’s result to result.
 	              fr[kResult] = result;
 
 	              // 2. Fire a progress event called load at the fr.
@@ -21738,14 +21738,14 @@ function requireUtil$g () {
 	            } catch (error) {
 	              // 3. If package data threw an exception error:
 
-	              // 1. Set fr?�s error to error.
+	              // 1. Set fr’s error to error.
 	              fr[kError] = error;
 
 	              // 2. Fire a progress event called error at fr.
 	              fireAProgressEvent('error', fr);
 	            }
 
-	            // 5. If fr?�s state is not "loading", fire a progress
+	            // 5. If fr’s state is not "loading", fire a progress
 	            //    event called loadend at the fr.
 	            if (fr[kState] !== 'loading') {
 	              fireAProgressEvent('loadend', fr);
@@ -21763,16 +21763,16 @@ function requireUtil$g () {
 	        //    error error, queue a task to run the following
 	        //    steps and abort this algorithm:
 	        queueMicrotask(() => {
-	          // 1. Set fr?�s state to "done".
+	          // 1. Set fr’s state to "done".
 	          fr[kState] = 'done';
 
-	          // 2. Set fr?�s error to error.
+	          // 2. Set fr’s error to error.
 	          fr[kError] = error;
 
 	          // 3. Fire a progress event called error at fr.
 	          fireAProgressEvent('error', fr);
 
-	          // 4. If fr?�s state is not "loading", fire a progress
+	          // 4. If fr’s state is not "loading", fire a progress
 	          //    event called loadend at fr.
 	          if (fr[kState] !== 'loading') {
 	            fireAProgressEvent('loadend', fr);
@@ -21867,7 +21867,7 @@ function requireUtil$g () {
 	        const type = parseMIMEType(mimeType);
 
 	        // 2. If type is not failure, set encoding to the result
-	        //    of getting an encoding from type?�s parameters["charset"].
+	        //    of getting an encoding from type’s parameters["charset"].
 	        if (type !== 'failure') {
 	          encoding = getEncoding(type.parameters.get('charset'));
 	        }
@@ -21930,7 +21930,7 @@ function requireUtil$g () {
 	    slice = BOMEncoding === 'UTF-8' ? 3 : 2;
 	  }
 
-	  // 3. Process a queue with an instance of encoding?�s
+	  // 3. Process a queue with an instance of encoding’s
 	  //    decoder, ioQueue, output, and "replacement".
 
 	  // 4. Return output.
@@ -22153,7 +22153,7 @@ function requireFilereader$1 () {
 	  get result () {
 	    webidl.brandCheck(this, FileReader);
 
-	    // The result attribute?�s getter, when invoked, must return
+	    // The result attribute’s getter, when invoked, must return
 	    // this's result.
 	    return this[kResult]
 	  }
@@ -22164,7 +22164,7 @@ function requireFilereader$1 () {
 	  get error () {
 	    webidl.brandCheck(this, FileReader);
 
-	    // The error attribute?�s getter, when invoked, must return
+	    // The error attribute’s getter, when invoked, must return
 	    // this's error.
 	    return this[kError]
 	  }
@@ -24759,7 +24759,7 @@ function requireUtil$d () {
 
 	  // 2. Let event be the result of creating an event given eventConstructor,
 	  //    in the relevant realm of target.
-	  // 3. Initialize event?�s type attribute to e.
+	  // 3. Initialize event’s type attribute to e.
 	  const event = eventFactory(e, eventInitDict);
 
 	  // 4. Initialize any other IDL attributes of event as described in the
@@ -24810,7 +24810,7 @@ function requireUtil$d () {
 
 	  // 3. Fire an event named message at the WebSocket object, using MessageEvent,
 	  //    with the origin attribute initialized to the serialization of the WebSocket
-	  //    object?�s url's origin, and the data attribute initialized to dataForEvent.
+	  //    object’s url's origin, and the data attribute initialized to dataForEvent.
 	  fireEvent('message', ws, createFastMessageEvent, {
 	    origin: ws[kWebSocketURL].origin,
 	    data: dataForEvent
@@ -25160,7 +25160,7 @@ function requireConnection$1 () {
 	 * @param {Partial<import('../../types/websocket').WebSocketInit>} options
 	 */
 	function establishWebSocketConnection (url, protocols, client, ws, onEstablish, options) {
-	  // 1. Let requestURL be a copy of url, with its scheme set to "http", if url?�s
+	  // 1. Let requestURL be a copy of url, with its scheme set to "http", if url’s
 	  //    scheme is "ws", and to "https" otherwise.
 	  const requestURL = url;
 
@@ -25188,8 +25188,8 @@ function requireConnection$1 () {
 	    request.headersList = headersList;
 	  }
 
-	  // 3. Append (`Upgrade`, `websocket`) to request?�s header list.
-	  // 4. Append (`Connection`, `Upgrade`) to request?�s header list.
+	  // 3. Append (`Upgrade`, `websocket`) to request’s header list.
+	  // 4. Append (`Connection`, `Upgrade`) to request’s header list.
 	  // Note: both of these are handled by undici currently.
 	  // https://github.com/nodejs/undici/blob/68c269c4144c446f3f1220951338daef4a6b5ec4/lib/client.js#L1397
 
@@ -25198,16 +25198,16 @@ function requireConnection$1 () {
 	  //    isomorphic encoded.
 	  const keyValue = crypto.randomBytes(16).toString('base64');
 
-	  // 6. Append (`Sec-WebSocket-Key`, keyValue) to request?�s
+	  // 6. Append (`Sec-WebSocket-Key`, keyValue) to request’s
 	  //    header list.
 	  request.headersList.append('sec-websocket-key', keyValue);
 
-	  // 7. Append (`Sec-WebSocket-Version`, `13`) to request?�s
+	  // 7. Append (`Sec-WebSocket-Version`, `13`) to request’s
 	  //    header list.
 	  request.headersList.append('sec-websocket-version', '13');
 
 	  // 8. For each protocol in protocols, combine
-	  //    (`Sec-WebSocket-Protocol`, protocol) in request?�s header
+	  //    (`Sec-WebSocket-Protocol`, protocol) in request’s header
 	  //    list.
 	  for (const protocol of protocols) {
 	    request.headersList.append('sec-websocket-protocol', protocol);
@@ -25219,7 +25219,7 @@ function requireConnection$1 () {
 	  const permessageDeflate = 'permessage-deflate; client_max_window_bits';
 
 	  // 10. Append (`Sec-WebSocket-Extensions`, permessageDeflate) to
-	  //     request?�s header list.
+	  //     request’s header list.
 	  request.headersList.append('sec-websocket-extensions', permessageDeflate);
 
 	  // 11. Fetch request with useParallelQueue set to true, and
@@ -25237,7 +25237,7 @@ function requireConnection$1 () {
 	      }
 
 	      // 2. If protocols is not the empty list and extracting header
-	      //    list values given `Sec-WebSocket-Protocol` and response?�s
+	      //    list values given `Sec-WebSocket-Protocol` and response’s
 	      //    header list results in null, failure, or the empty byte
 	      //    sequence, then fail the WebSocket connection.
 	      if (protocols.length !== 0 && !response.headersList.get('Sec-WebSocket-Protocol')) {
@@ -26197,15 +26197,15 @@ function requireWebsocket$1 () {
 	      throw new DOMException(e, 'SyntaxError')
 	    }
 
-	    // 4. If urlRecord?�s scheme is "http", then set urlRecord?�s scheme to "ws".
+	    // 4. If urlRecord’s scheme is "http", then set urlRecord’s scheme to "ws".
 	    if (urlRecord.protocol === 'http:') {
 	      urlRecord.protocol = 'ws:';
 	    } else if (urlRecord.protocol === 'https:') {
-	      // 5. Otherwise, if urlRecord?�s scheme is "https", set urlRecord?�s scheme to "wss".
+	      // 5. Otherwise, if urlRecord’s scheme is "https", set urlRecord’s scheme to "wss".
 	      urlRecord.protocol = 'wss:';
 	    }
 
-	    // 6. If urlRecord?�s scheme is not "ws" or "wss", then throw a "SyntaxError" DOMException.
+	    // 6. If urlRecord’s scheme is not "ws" or "wss", then throw a "SyntaxError" DOMException.
 	    if (urlRecord.protocol !== 'ws:' && urlRecord.protocol !== 'wss:') {
 	      throw new DOMException(
 	        `Expected a ws: or wss: protocol, got ${urlRecord.protocol}`,
@@ -26213,7 +26213,7 @@ function requireWebsocket$1 () {
 	      )
 	    }
 
-	    // 7. If urlRecord?�s fragment is non-null, then throw a "SyntaxError"
+	    // 7. If urlRecord’s fragment is non-null, then throw a "SyntaxError"
 	    //    DOMException.
 	    if (urlRecord.hash || urlRecord.href.endsWith('#')) {
 	      throw new DOMException('Got fragment', 'SyntaxError')
@@ -26393,7 +26393,7 @@ function requireWebsocket$1 () {
 	      // described by the ArrayBuffer object that data references. Any
 	      // invocation of this method with this kind of argument that does
 	      // not throw an exception must increase the bufferedAmount attribute
-	      // by the length of data?�s buffer in bytes.
+	      // by the length of data’s buffer in bytes.
 
 	      this.#bufferedAmount += data.byteLength;
 	      this.#sendQueue.add(data, () => {
@@ -26409,7 +26409,7 @@ function requireWebsocket$1 () {
 	      // to be sent is the raw data represented by the Blob object. Any
 	      // invocation of this method with a Blob argument that does not throw
 	      // an exception must increase the bufferedAmount attribute by the size
-	      // of the Blob object?�s raw data, in bytes.
+	      // of the Blob object’s raw data, in bytes.
 
 	      this.#bufferedAmount += data.size;
 	      this.#sendQueue.add(data, () => {
@@ -26554,7 +26554,7 @@ function requireWebsocket$1 () {
 	   * @see https://websockets.spec.whatwg.org/#feedback-from-the-protocol
 	   */
 	  #onConnectionEstablished (response, parsedExtensions) {
-	    // processResponse is called when the "response?�s header list has been received and initialized."
+	    // processResponse is called when the "response’s header list has been received and initialized."
 	    // once this happens, the connection is open
 	    this[kResponse] = response;
 
@@ -26570,7 +26570,7 @@ function requireWebsocket$1 () {
 	    // 1. Change the ready state to OPEN (1).
 	    this[kReadyState] = states.OPEN;
 
-	    // 2. Change the extensions attribute?�s value to the extensions in use, if
+	    // 2. Change the extensions attribute’s value to the extensions in use, if
 	    //    it is not the null value.
 	    // https://datatracker.ietf.org/doc/html/rfc6455#section-9.1
 	    const extensions = response.headersList.get('sec-websocket-extensions');
@@ -26579,7 +26579,7 @@ function requireWebsocket$1 () {
 	      this.#extensions = extensions;
 	    }
 
-	    // 3. Change the protocol attribute?�s value to the subprotocol in use, if
+	    // 3. Change the protocol attribute’s value to the subprotocol in use, if
 	    //    it is not the null value.
 	    // https://datatracker.ietf.org/doc/html/rfc6455#section-1.9
 	    const protocol = response.headersList.get('sec-websocket-protocol');
@@ -36547,7 +36547,7 @@ function requireDataUrl () {
 	// https://fetch.spec.whatwg.org/#data-url-processor
 	/** @param {URL} dataURL */
 	function dataURLProcessor (dataURL) {
-	  // 1. Assert: dataURL?�s scheme is "data".
+	  // 1. Assert: dataURL’s scheme is "data".
 	  assert(dataURL.protocol === 'data:');
 
 	  // 2. Let input be the result of running the URL
@@ -36675,7 +36675,7 @@ function requireDataUrl () {
 	  // 1. Let result be the empty string.
 	  let result = '';
 
-	  // 2. While position doesn?�t point past the end of input and the
+	  // 2. While position doesn’t point past the end of input and the
 	  // code point at position within input meets the condition condition:
 	  while (position.position < input.length && condition(input[position.position])) {
 	    // 1. Append that code point to the end of result.
@@ -36940,8 +36940,8 @@ function requireDataUrl () {
 	    // - parameterName is not the empty string
 	    // - parameterName solely contains HTTP token code points
 	    // - parameterValue solely contains HTTP quoted-string token code points
-	    // - mimeType?�s parameters[parameterName] does not exist
-	    // then set mimeType?�s parameters[parameterName] to parameterValue.
+	    // - mimeType’s parameters[parameterName] does not exist
+	    // then set mimeType’s parameters[parameterName] to parameterValue.
 	    if (
 	      parameterName.length !== 0 &&
 	      HTTP_TOKEN_CODEPOINTS.test(parameterName) &&
@@ -36963,7 +36963,7 @@ function requireDataUrl () {
 	  data = data.replace(ASCII_WHITESPACE_REPLACE_REGEX, '');  // eslint-disable-line
 
 	  let dataLength = data.length;
-	  // 2. If data?�s code point length divides by 4 leaving
+	  // 2. If data’s code point length divides by 4 leaving
 	  // no remainder, then:
 	  if (dataLength % 4 === 0) {
 	    // 1. If data ends with one or two U+003D (=) code points,
@@ -36976,7 +36976,7 @@ function requireDataUrl () {
 	    }
 	  }
 
-	  // 3. If data?�s code point length divides by 4 leaving
+	  // 3. If data’s code point length divides by 4 leaving
 	  // a remainder of 1, then return failure.
 	  if (dataLength % 4 === 1) {
 	    return 'failure'
@@ -37081,11 +37081,11 @@ function requireDataUrl () {
 	  assert(mimeType !== 'failure');
 	  const { parameters, essence } = mimeType;
 
-	  // 1. Let serialization be the concatenation of mimeType?�s
-	  //    type, U+002F (/), and mimeType?�s subtype.
+	  // 1. Let serialization be the concatenation of mimeType’s
+	  //    type, U+002F (/), and mimeType’s subtype.
 	  let serialization = essence;
 
-	  // 2. For each name ??value of mimeType?�s parameters:
+	  // 2. For each name → value of mimeType’s parameters:
 	  for (let [name, value] of parameters.entries()) {
 	    // 1. Append U+003B (;) to serialization.
 	    serialization += ';';
@@ -37185,8 +37185,8 @@ function requireDataUrl () {
 	 */
 	function isomorphicDecode (input) {
 	  // 1. To isomorphic decode a byte sequence input, return a string whose code point
-	  //    length is equal to input?�s length and whose code points have the same values
-	  //    as the values of input?�s bytes, in the same order.
+	  //    length is equal to input’s length and whose code points have the same values
+	  //    as the values of input’s bytes, in the same order.
 	  const length = input.length;
 	  if ((2 << 15) - 1 > length) {
 	    return String.fromCharCode.apply(null, input)
@@ -37231,7 +37231,7 @@ function requireDataUrl () {
 	      // 2. If mimeType is a JSON MIME type, then return "application/json".
 	      return 'application/json'
 	    case 'image/svg+xml':
-	      // 3. If mimeType?�s essence is "image/svg+xml", then return "image/svg+xml".
+	      // 3. If mimeType’s essence is "image/svg+xml", then return "image/svg+xml".
 	      return 'image/svg+xml'
 	    case 'text/xml':
 	    case 'application/xml':
@@ -37249,7 +37249,7 @@ function requireDataUrl () {
 	    return 'application/xml'
 	  }
 
-	  // 5. If mimeType is supported by the user agent, then return mimeType?�s essence.
+	  // 5. If mimeType is supported by the user agent, then return mimeType’s essence.
 	  // Technically, node doesn't support any mimetypes.
 
 	  // 6. Return the empty string.
@@ -37376,14 +37376,14 @@ function requireWebidl () {
 
 	  // 1. If bitLength is 64, then:
 	  if (bitLength === 64) {
-	    // 1. Let upperBound be 2^53 ??1.
+	    // 1. Let upperBound be 2^53 − 1.
 	    upperBound = Math.pow(2, 53) - 1;
 
 	    // 2. If signedness is "unsigned", then let lowerBound be 0.
 	    if (signedness === 'unsigned') {
 	      lowerBound = 0;
 	    } else {
-	      // 3. Otherwise let lowerBound be ??^53 + 1.
+	      // 3. Otherwise let lowerBound be −2^53 + 1.
 	      lowerBound = Math.pow(-2, 53) + 1;
 	    }
 	  } else if (signedness === 'unsigned') {
@@ -37392,22 +37392,22 @@ function requireWebidl () {
 	    // 1. Let lowerBound be 0.
 	    lowerBound = 0;
 
-	    // 2. Let upperBound be 2^bitLength ??1.
+	    // 2. Let upperBound be 2^bitLength − 1.
 	    upperBound = Math.pow(2, bitLength) - 1;
 	  } else {
 	    // 3. Otherwise:
 
-	    // 1. Let lowerBound be -2^bitLength ??1.
+	    // 1. Let lowerBound be -2^bitLength − 1.
 	    lowerBound = Math.pow(-2, bitLength) - 1;
 
-	    // 2. Let upperBound be 2^bitLength ??1 ??1.
+	    // 2. Let upperBound be 2^bitLength − 1 − 1.
 	    upperBound = Math.pow(2, bitLength - 1) - 1;
 	  }
 
 	  // 4. Let x be ? ToNumber(V).
 	  let x = Number(V);
 
-	  // 5. If x is ??, then set x to +0.
+	  // 5. If x is −0, then set x to +0.
 	  if (x === 0) {
 	    x = 0;
 	  }
@@ -37415,7 +37415,7 @@ function requireWebidl () {
 	  // 6. If the conversion is to an IDL type associated
 	  //    with the [EnforceRange] extended attribute, then:
 	  if (opts?.enforceRange === true) {
-	    // 1. If x is NaN, +?? or ?�∞, then throw a TypeError.
+	    // 1. If x is NaN, +∞, or −∞, then throw a TypeError.
 	    if (
 	      Number.isNaN(x) ||
 	      x === Number.POSITIVE_INFINITY ||
@@ -37452,7 +37452,7 @@ function requireWebidl () {
 
 	    // 2. Round x to the nearest integer, choosing the
 	    //    even integer if it lies halfway between two,
-	    //    and choosing +0 rather than ??.
+	    //    and choosing +0 rather than −0.
 	    if (Math.floor(x) % 2 === 0) {
 	      x = Math.floor(x);
 	    } else {
@@ -37463,7 +37463,7 @@ function requireWebidl () {
 	    return x
 	  }
 
-	  // 8. If x is NaN, +0, +?? or ?�∞, then return +0.
+	  // 8. If x is NaN, +0, +∞, or −∞, then return +0.
 	  if (
 	    Number.isNaN(x) ||
 	    (x === 0 && Object.is(0, x)) ||
@@ -37479,8 +37479,8 @@ function requireWebidl () {
 	  // 10. Set x to x modulo 2^bitLength.
 	  x = x % Math.pow(2, bitLength);
 
-	  // 11. If signedness is "signed" and x ??2^bitLength ??1,
-	  //    then return x ??2^bitLength.
+	  // 11. If signedness is "signed" and x ≥ 2^bitLength − 1,
+	  //    then return x − 2^bitLength.
 	  if (signedness === 'signed' && x >= Math.pow(2, bitLength) - 1) {
 	    return x - Math.pow(2, bitLength)
 	  }
@@ -37860,7 +37860,7 @@ function requireWebidl () {
 
 	  // 2. If Type(V) is not Object, or V does not have a
 	  //    [[TypedArrayName]] internal slot with a value
-	  //    equal to T?�s name, then throw a TypeError.
+	  //    equal to T’s name, then throw a TypeError.
 	  if (
 	    webidl.util.Type(V) !== 'Object' ||
 	    !types.isTypedArray(V) ||
@@ -38012,7 +38012,7 @@ function requireUtil$a () {
 	function responseURL (response) {
 	  // https://fetch.spec.whatwg.org/#responses
 	  // A response has an associated URL. It is a pointer to the last URL
-	  // in response?�s URL list and null if response?�s URL list is empty.
+	  // in response’s URL list and null if response’s URL list is empty.
 	  const urlList = response.urlList;
 	  const length = urlList.length;
 	  return length === 0 ? null : urlList[length - 1].toString()
@@ -38020,17 +38020,17 @@ function requireUtil$a () {
 
 	// https://fetch.spec.whatwg.org/#concept-response-location-url
 	function responseLocationURL (response, requestFragment) {
-	  // 1. If response?�s status is not a redirect status, then return null.
+	  // 1. If response’s status is not a redirect status, then return null.
 	  if (!redirectStatusSet.has(response.status)) {
 	    return null
 	  }
 
 	  // 2. Let location be the result of extracting header list values given
-	  // `Location` and response?�s header list.
+	  // `Location` and response’s header list.
 	  let location = response.headersList.get('location', true);
 
 	  // 3. If location is a header value, then set location to the result of
-	  //    parsing location with response?�s URL.
+	  //    parsing location with response’s URL.
 	  if (location !== null && isValidHeaderValue(location)) {
 	    if (!isValidEncodedURL(location)) {
 	      // Some websites respond location header in UTF-8 form without encoding them as ASCII
@@ -38041,7 +38041,7 @@ function requireUtil$a () {
 	    location = new URL(location, responseURL(response));
 	  }
 
-	  // 4. If location is a URL whose fragment is null, then set location?�s
+	  // 4. If location is a URL whose fragment is null, then set location’s
 	  // fragment to requestFragment.
 	  if (location && !location.hash) {
 	    location.hash = requestFragment;
@@ -38086,10 +38086,10 @@ function requireUtil$a () {
 	}
 
 	function requestBadPort (request) {
-	  // 1. Let url be request?�s current URL.
+	  // 1. Let url be request’s current URL.
 	  const url = requestCurrentURL(request);
 
-	  // 2. If url?�s scheme is an HTTP(S) scheme and url?�s port is a bad port,
+	  // 2. If url’s scheme is an HTTP(S) scheme and url’s port is a bad port,
 	  // then return blocked.
 	  if (urlIsHttpHttpsScheme(url) && badPortsSet.has(url.port)) {
 	    return 'blocked'
@@ -38157,14 +38157,14 @@ function requireUtil$a () {
 	// https://w3c.github.io/webappsec-referrer-policy/#set-requests-referrer-policy-on-redirect
 	function setRequestReferrerPolicyOnRedirect (request, actualResponse) {
 	  //  Given a request request and a response actualResponse, this algorithm
-	  //  updates request?�s referrer policy according to the Referrer-Policy
+	  //  updates request’s referrer policy according to the Referrer-Policy
 	  //  header (if any) in actualResponse.
 
 	  // 1. Let policy be the result of executing § 8.1 Parse a referrer policy
 	  // from a Referrer-Policy header on actualResponse.
 
 	  // 8.1 Parse a referrer policy from a Referrer-Policy header
-	  // 1. Let policy-tokens be the result of extracting header list values given `Referrer-Policy` and response?�s header list.
+	  // 1. Let policy-tokens be the result of extracting header list values given `Referrer-Policy` and response’s header list.
 	  const { headersList } = actualResponse;
 	  // 2. Let policy be the empty string.
 	  // 3. For each token in policy-tokens, if token is a referrer policy and token is not the empty string, then set policy to token.
@@ -38188,7 +38188,7 @@ function requireUtil$a () {
 	    }
 	  }
 
-	  // 2. If policy is not the empty string, then set request?�s referrer policy to policy.
+	  // 2. If policy is not the empty string, then set request’s referrer policy to policy.
 	  if (policy !== '') {
 	    request.referrerPolicy = policy;
 	  }
@@ -38218,16 +38218,16 @@ function requireUtil$a () {
 
 	  //  https://w3c.github.io/webappsec-fetch-metadata/#sec-fetch-mode-header
 
-	  //  1. Assert: r?�s url is a potentially trustworthy URL.
+	  //  1. Assert: r’s url is a potentially trustworthy URL.
 	  //  TODO
 
 	  //  2. Let header be a Structured Header whose value is a token.
 	  let header = null;
 
-	  //  3. Set header?�s value to r?�s mode.
+	  //  3. Set header’s value to r’s mode.
 	  header = httpRequest.mode;
 
-	  //  4. Set a structured field value `Sec-Fetch-Mode`/header in r?�s header list.
+	  //  4. Set a structured field value `Sec-Fetch-Mode`/header in r’s header list.
 	  httpRequest.headersList.set('sec-fetch-mode', header, true);
 
 	  //  https://w3c.github.io/webappsec-fetch-metadata/#sec-fetch-site-header
@@ -38254,13 +38254,13 @@ function requireUtil$a () {
 	    return
 	  }
 
-	  // 2. If request?�s response tainting is "cors" or request?�s mode is "websocket",
-	  //    then append (`Origin`, serializedOrigin) to request?�s header list.
-	  // 3. Otherwise, if request?�s method is neither `GET` nor `HEAD`, then:
+	  // 2. If request’s response tainting is "cors" or request’s mode is "websocket",
+	  //    then append (`Origin`, serializedOrigin) to request’s header list.
+	  // 3. Otherwise, if request’s method is neither `GET` nor `HEAD`, then:
 	  if (request.responseTainting === 'cors' || request.mode === 'websocket') {
 	    request.headersList.append('origin', serializedOrigin, true);
 	  } else if (request.method !== 'GET' && request.method !== 'HEAD') {
-	    // 1. Switch on request?�s referrer policy:
+	    // 1. Switch on request’s referrer policy:
 	    switch (request.referrerPolicy) {
 	      case 'no-referrer':
 	        // Set serializedOrigin to `null`.
@@ -38269,15 +38269,15 @@ function requireUtil$a () {
 	      case 'no-referrer-when-downgrade':
 	      case 'strict-origin':
 	      case 'strict-origin-when-cross-origin':
-	        // If request?�s origin is a tuple origin, its scheme is "https", and
-	        // request?�s current URL?�s scheme is not "https", then set
+	        // If request’s origin is a tuple origin, its scheme is "https", and
+	        // request’s current URL’s scheme is not "https", then set
 	        // serializedOrigin to `null`.
 	        if (request.origin && urlHasHttpsScheme(request.origin) && !urlHasHttpsScheme(requestCurrentURL(request))) {
 	          serializedOrigin = null;
 	        }
 	        break
 	      case 'same-origin':
-	        // If request?�s origin is not same origin with request?�s current URL?�s
+	        // If request’s origin is not same origin with request’s current URL’s
 	        // origin, then set serializedOrigin to `null`.
 	        if (!sameOrigin(request, requestCurrentURL(request))) {
 	          serializedOrigin = null;
@@ -38286,7 +38286,7 @@ function requireUtil$a () {
 	        // Do nothing.
 	    }
 
-	    // 2. Append (`Origin`, serializedOrigin) to request?�s header list.
+	    // 2. Append (`Origin`, serializedOrigin) to request’s header list.
 	    request.headersList.append('origin', serializedOrigin, true);
 	  }
 	}
@@ -38365,11 +38365,11 @@ function requireUtil$a () {
 	  // Note: policy cannot (shouldn't) be null or an empty string.
 	  assert(policy);
 
-	  // 2. Let environment be request?�s client.
+	  // 2. Let environment be request’s client.
 
 	  let referrerSource = null;
 
-	  // 3. Switch on request?�s referrer:
+	  // 3. Switch on request’s referrer:
 	  if (request.referrer === 'client') {
 	    // Note: node isn't a browser and doesn't implement document/iframes,
 	    // so we bypass this step and replace it with our own.
@@ -38383,11 +38383,11 @@ function requireUtil$a () {
 	    // note: we need to clone it as it's mutated
 	    referrerSource = new URL(globalOrigin);
 	  } else if (request.referrer instanceof URL) {
-	    // Let referrerSource be request?�s referrer.
+	    // Let referrerSource be request’s referrer.
 	    referrerSource = request.referrer;
 	  }
 
-	  // 4. Let request?�s referrerURL be the result of stripping referrerSource for
+	  // 4. Let request’s referrerURL be the result of stripping referrerSource for
 	  //    use as a referrer.
 	  let referrerURL = stripURLForReferrer(referrerSource);
 
@@ -38416,13 +38416,13 @@ function requireUtil$a () {
 	    case 'strict-origin-when-cross-origin': {
 	      const currentURL = requestCurrentURL(request);
 
-	      // 1. If the origin of referrerURL and the origin of request?�s current
+	      // 1. If the origin of referrerURL and the origin of request’s current
 	      //    URL are the same, then return referrerURL.
 	      if (sameOrigin(referrerURL, currentURL)) {
 	        return referrerURL
 	      }
 
-	      // 2. If referrerURL is a potentially trustworthy URL and request?�s
+	      // 2. If referrerURL is a potentially trustworthy URL and request’s
 	      //    current URL is not a potentially trustworthy URL, then return no
 	      //    referrer.
 	      if (isURLPotentiallyTrustworthy(referrerURL) && !isURLPotentiallyTrustworthy(currentURL)) {
@@ -38435,14 +38435,14 @@ function requireUtil$a () {
 	    case 'strict-origin': // eslint-disable-line
 	      /**
 	         * 1. If referrerURL is a potentially trustworthy URL and
-	         * request?�s current URL is not a potentially trustworthy URL,
+	         * request’s current URL is not a potentially trustworthy URL,
 	         * then return no referrer.
 	         * 2. Return referrerOrigin
 	        */
 	    case 'no-referrer-when-downgrade': // eslint-disable-line
 	      /**
 	       * 1. If referrerURL is a potentially trustworthy URL and
-	       * request?�s current URL is not a potentially trustworthy URL,
+	       * request’s current URL is not a potentially trustworthy URL,
 	       * then return no referrer.
 	       * 2. Return referrerOrigin
 	      */
@@ -38463,26 +38463,26 @@ function requireUtil$a () {
 
 	  url = new URL(url);
 
-	  // 2. If url?�s scheme is a local scheme, then return no referrer.
+	  // 2. If url’s scheme is a local scheme, then return no referrer.
 	  if (url.protocol === 'file:' || url.protocol === 'about:' || url.protocol === 'blank:') {
 	    return 'no-referrer'
 	  }
 
-	  // 3. Set url?�s username to the empty string.
+	  // 3. Set url’s username to the empty string.
 	  url.username = '';
 
-	  // 4. Set url?�s password to the empty string.
+	  // 4. Set url’s password to the empty string.
 	  url.password = '';
 
-	  // 5. Set url?�s fragment to null.
+	  // 5. Set url’s fragment to null.
 	  url.hash = '';
 
 	  // 6. If the origin-only flag is true, then:
 	  if (originOnly) {
-	    // 1. Set url?�s path to « the empty string ».
+	    // 1. Set url’s path to « the empty string ».
 	    url.pathname = '';
 
-	    // 2. Set url?�s query to null.
+	    // 2. Set url’s query to null.
 	    url.search = '';
 	  }
 
@@ -38846,9 +38846,9 @@ function requireUtil$a () {
 	        )
 	      }
 
-	      // 6. Let index be object?�s index.
-	      // 7. Let kind be object?�s kind.
-	      // 8. Let values be object?�s target's value pairs to iterate over.
+	      // 6. Let index be object’s index.
+	      // 7. Let kind be object’s kind.
+	      // 8. Let values be object’s target's value pairs to iterate over.
 	      const index = this.#index;
 	      const values = this.#target[kInternalIterator];
 
@@ -38867,7 +38867,7 @@ function requireUtil$a () {
 	      // 11. Let pair be the entry in values at index index.
 	      const { [keyIndex]: key, [valueIndex]: value } = values[index];
 
-	      // 12. Set object?�s index to index + 1.
+	      // 12. Set object’s index to index + 1.
 	      this.#index = index + 1;
 
 	      // 13. Return the iterator result for pair and kind.
@@ -38878,22 +38878,22 @@ function requireUtil$a () {
 	      let result;
 	      switch (this.#kind) {
 	        case 'key':
-	          // 1. Let idlKey be pair?�s key.
+	          // 1. Let idlKey be pair’s key.
 	          // 2. Let key be the result of converting idlKey to an
 	          //    ECMAScript value.
 	          // 3. result is key.
 	          result = key;
 	          break
 	        case 'value':
-	          // 1. Let idlValue be pair?�s value.
+	          // 1. Let idlValue be pair’s value.
 	          // 2. Let value be the result of converting idlValue to
 	          //    an ECMAScript value.
 	          // 3. result is value.
 	          result = value;
 	          break
 	        case 'key+value':
-	          // 1. Let idlKey be pair?�s key.
-	          // 2. Let idlValue be pair?�s value.
+	          // 1. Let idlKey be pair’s key.
+	          // 2. Let idlValue be pair’s value.
 	          // 3. Let key be the result of converting idlKey to an
 	          //    ECMAScript value.
 	          // 4. Let value be the result of converting idlValue to
@@ -39024,7 +39024,7 @@ function requireUtil$a () {
 	  //    with taskDestination.
 	  const errorSteps = processBodyError;
 
-	  // 4. Let reader be the result of getting a reader for body?�s stream.
+	  // 4. Let reader be the result of getting a reader for body’s stream.
 	  //    If that threw an exception, then run errorSteps with that
 	  //    exception and return.
 	  let reader;
@@ -39076,9 +39076,9 @@ function requireUtil$a () {
 	  // 1. Assert: input contains no code points greater than U+00FF.
 	  assert(!invalidIsomorphicEncodeValueRegex.test(input));
 
-	  // 2. Return a byte sequence whose length is equal to input?�s code
+	  // 2. Return a byte sequence whose length is equal to input’s code
 	  //    point length and whose bytes have the same values as the
-	  //    values of input?�s code points, in the same order
+	  //    values of input’s code points, in the same order
 	  return input
 	}
 
@@ -39401,22 +39401,22 @@ function requireUtil$a () {
 	    // 6.3. Set mimeType to temporaryMimeType.
 	    mimeType = temporaryMimeType;
 
-	    // 6.4. If mimeType?�s essence is not essence, then:
+	    // 6.4. If mimeType’s essence is not essence, then:
 	    if (mimeType.essence !== essence) {
 	      // 6.4.1. Set charset to null.
 	      charset = null;
 
-	      // 6.4.2. If mimeType?�s parameters["charset"] exists, then set charset to
-	      //        mimeType?�s parameters["charset"].
+	      // 6.4.2. If mimeType’s parameters["charset"] exists, then set charset to
+	      //        mimeType’s parameters["charset"].
 	      if (mimeType.parameters.has('charset')) {
 	        charset = mimeType.parameters.get('charset');
 	      }
 
-	      // 6.4.3. Set essence to mimeType?�s essence.
+	      // 6.4.3. Set essence to mimeType’s essence.
 	      essence = mimeType.essence;
 	    } else if (!mimeType.parameters.has('charset') && charset !== null) {
-	      // 6.5. Otherwise, if mimeType?�s parameters["charset"] does not exist, and
-	      //      charset is non-null, set mimeType?�s parameters["charset"] to charset.
+	      // 6.5. Otherwise, if mimeType’s parameters["charset"] does not exist, and
+	      //      charset is non-null, set mimeType’s parameters["charset"] to charset.
 	      mimeType.parameters.set('charset', charset);
 	    }
 	  }
@@ -39534,7 +39534,7 @@ function requireUtil$a () {
 	    buffer = buffer.subarray(3);
 	  }
 
-	  // 3. Process a queue with an instance of UTF-8?�s
+	  // 3. Process a queue with an instance of UTF-8’s
 	  //    decoder, ioQueue, output, and "replacement".
 	  const output = textDecoder.decode(buffer);
 
@@ -39827,7 +39827,7 @@ function requireFormdata () {
 	    // name, value, and filename if given.
 	    const entry = makeEntry(name, value, filename);
 
-	    // 3. Append entry to this?�s entry list.
+	    // 3. Append entry to this’s entry list.
 	    this[kState].push(entry);
 	  }
 
@@ -39840,7 +39840,7 @@ function requireFormdata () {
 	    name = webidl.converters.USVString(name, prefix, 'name');
 
 	    // The delete(name) method steps are to remove all entries whose name
-	    // is name from this?�s entry list.
+	    // is name from this’s entry list.
 	    this[kState] = this[kState].filter(entry => entry.name !== name);
 	  }
 
@@ -39852,7 +39852,7 @@ function requireFormdata () {
 
 	    name = webidl.converters.USVString(name, prefix, 'name');
 
-	    // 1. If there is no entry whose name is name in this?�s entry list,
+	    // 1. If there is no entry whose name is name in this’s entry list,
 	    // then return null.
 	    const idx = this[kState].findIndex((entry) => entry.name === name);
 	    if (idx === -1) {
@@ -39860,7 +39860,7 @@ function requireFormdata () {
 	    }
 
 	    // 2. Return the value of the first entry whose name is name from
-	    // this?�s entry list.
+	    // this’s entry list.
 	    return this[kState][idx].value
 	  }
 
@@ -39872,10 +39872,10 @@ function requireFormdata () {
 
 	    name = webidl.converters.USVString(name, prefix, 'name');
 
-	    // 1. If there is no entry whose name is name in this?�s entry list,
+	    // 1. If there is no entry whose name is name in this’s entry list,
 	    // then return the empty list.
 	    // 2. Return the values of all entries whose name is name, in order,
-	    // from this?�s entry list.
+	    // from this’s entry list.
 	    return this[kState]
 	      .filter((entry) => entry.name === name)
 	      .map((entry) => entry.value)
@@ -39890,7 +39890,7 @@ function requireFormdata () {
 	    name = webidl.converters.USVString(name, prefix, 'name');
 
 	    // The has(name) method steps are to return true if there is an entry
-	    // whose name is name in this?�s entry list; otherwise false.
+	    // whose name is name in this’s entry list; otherwise false.
 	    return this[kState].findIndex((entry) => entry.name === name) !== -1
 	  }
 
@@ -39923,7 +39923,7 @@ function requireFormdata () {
 	    // filename if given.
 	    const entry = makeEntry(name, value, filename);
 
-	    // 3. If there are entries in this?�s entry list whose name is name, then
+	    // 3. If there are entries in this’s entry list whose name is name, then
 	    // replace the first such entry with entry and remove the others.
 	    const idx = this[kState].findIndex((entry) => entry.name === name);
 	    if (idx !== -1) {
@@ -39933,7 +39933,7 @@ function requireFormdata () {
 	        ...this[kState].slice(idx + 1).filter((entry) => entry.name !== name)
 	      ];
 	    } else {
-	      // 4. Otherwise, append entry to this?�s entry list.
+	      // 4. Otherwise, append entry to this’s entry list.
 	      this[kState].push(entry);
 	    }
 	  }
@@ -40098,13 +40098,13 @@ function requireFormdataParser () {
 	 * @param {ReturnType<import('./data-url')['parseMIMEType']>} mimeType
 	 */
 	function multipartFormDataParser (input, mimeType) {
-	  // 1. Assert: mimeType?�s essence is "multipart/form-data".
+	  // 1. Assert: mimeType’s essence is "multipart/form-data".
 	  assert(mimeType !== 'failure' && mimeType.essence === 'multipart/form-data');
 
 	  const boundaryString = mimeType.parameters.get('boundary');
 
-	  // 2. If mimeType?�s parameters["boundary"] does not exist, return failure.
-	  //    Otherwise, let boundary be the result of UTF-8 decoding mimeType?�s
+	  // 2. If mimeType’s parameters["boundary"] does not exist, return failure.
+	  //    Otherwise, let boundary be the result of UTF-8 decoding mimeType’s
 	  //    parameters["boundary"].
 	  if (boundaryString === undefined) {
 	    return 'failure'
@@ -40568,7 +40568,7 @@ function requireBody () {
 	    stream = object;
 	  } else if (isBlobLike(object)) {
 	    // 3. Otherwise, if object is a Blob object, set stream to the
-	    //    result of running object?�s get stream.
+	    //    result of running object’s get stream.
 	    stream = object.stream();
 	  } else {
 	    // 4. Otherwise, set stream to a new ReadableStream object, and set
@@ -40619,7 +40619,7 @@ function requireBody () {
 	    // See: https://github.com/nodejs/node/blob/e46c680bf2b211bbd52cf959ca17ee98c7f657f5/lib/internal/url.js#L490
 	    // and https://github.com/nodejs/node/blob/e46c680bf2b211bbd52cf959ca17ee98c7f657f5/lib/internal/url.js#L1100
 
-	    // Set source to the result of running the application/x-www-form-urlencoded serializer with object?�s list.
+	    // Set source to the result of running the application/x-www-form-urlencoded serializer with object’s list.
 	    source = object.toString();
 
 	    // Set type to `application/x-www-form-urlencoded;charset=UTF-8`.
@@ -40644,7 +40644,7 @@ function requireBody () {
 	    const normalizeLinefeeds = (value) => value.replace(/\r?\n|\r/g, '\r\n');
 
 	    // Set action to this step: run the multipart/form-data
-	    // encoding algorithm, with object?�s entry list and UTF-8.
+	    // encoding algorithm, with object’s entry list and UTF-8.
 	    // - This ensures that the body is immutable and can't be changed afterwords
 	    // - That the content-length is calculated in advance.
 	    // - And that all parts are pre-encoded and ready to be sent.
@@ -40709,10 +40709,10 @@ function requireBody () {
 	    // Set source to object.
 	    source = object;
 
-	    // Set length to object?�s size.
+	    // Set length to object’s size.
 	    length = object.size;
 
-	    // If object?�s type attribute is not the empty byte sequence, set
+	    // If object’s type attribute is not the empty byte sequence, set
 	    // type to its value.
 	    if (object.type) {
 	      type = object.type;
@@ -40735,7 +40735,7 @@ function requireBody () {
 	  }
 
 	  // 11. If source is a byte sequence, then set action to a
-	  // step that returns source and length to source?�s length.
+	  // step that returns source and length to source’s length.
 	  if (typeof source === 'string' || util.isBuffer(source)) {
 	    length = Buffer.byteLength(source);
 	  }
@@ -40807,10 +40807,10 @@ function requireBody () {
 
 	  // https://fetch.spec.whatwg.org/#concept-body-clone
 
-	  // 1. Let « out1, out2 » be the result of teeing body?�s stream.
+	  // 1. Let « out1, out2 » be the result of teeing body’s stream.
 	  const [out1, out2] = body.stream.tee();
 
-	  // 2. Set body?�s stream to out1.
+	  // 2. Set body’s stream to out1.
 	  body.stream = out1;
 
 	  // 3. Return a body whose stream is out2 and other members are copied from body.
@@ -40833,7 +40833,7 @@ function requireBody () {
 	      // The blob() method steps are to return the result of
 	      // running consume body with this and the following step
 	      // given a byte sequence bytes: return a Blob whose
-	      // contents are bytes and whose type attribute is this?�s
+	      // contents are bytes and whose type attribute is this’s
 	      // MIME type.
 	      return consumeBody(this, (bytes) => {
 	        let mimeType = bodyMimeType(this);
@@ -40879,7 +40879,7 @@ function requireBody () {
 	        // 1. Let mimeType be the result of get the MIME type with this.
 	        const mimeType = bodyMimeType(this);
 
-	        // 2. If mimeType is non-null, then switch on mimeType?�s essence and run
+	        // 2. If mimeType is non-null, then switch on mimeType’s essence and run
 	        //    the corresponding steps:
 	        if (mimeType !== null) {
 	          switch (mimeType.essence) {
@@ -40927,7 +40927,7 @@ function requireBody () {
 	    bytes () {
 	      // The bytes() method steps are to return the result of running consume body
 	      // with this and the following step given a byte sequence bytes: return the
-	      // result of creating a Uint8Array from bytes in this?�s relevant realm.
+	      // result of creating a Uint8Array from bytes in this’s relevant realm.
 	      return consumeBody(this, (bytes) => {
 	        return new Uint8Array(bytes)
 	      }, instance)
@@ -40976,15 +40976,15 @@ function requireBody () {
 	    }
 	  };
 
-	  // 5. If object?�s body is null, then run successSteps with an
+	  // 5. If object’s body is null, then run successSteps with an
 	  //    empty byte sequence.
 	  if (object[kState].body == null) {
 	    successSteps(Buffer.allocUnsafe(0));
 	    return promise.promise
 	  }
 
-	  // 6. Otherwise, fully read object?�s body given successSteps,
-	  //    errorSteps, and object?�s relevant global object.
+	  // 6. Otherwise, fully read object’s body given successSteps,
+	  //    errorSteps, and object’s relevant global object.
 	  await fullyReadBody(object[kState].body, successSteps, errorSteps);
 
 	  // 7. Return promise.
@@ -40997,7 +40997,7 @@ function requireBody () {
 
 	  // An object including the Body interface mixin is
 	  // said to be unusable if its body is non-null and
-	  // its body?�s stream is disturbed or locked.
+	  // its body’s stream is disturbed or locked.
 	  return body != null && (body.stream.locked || util.isDisturbed(body.stream))
 	}
 
@@ -41015,8 +41015,8 @@ function requireBody () {
 	 */
 	function bodyMimeType (requestOrResponse) {
 	  // 1. Let headers be null.
-	  // 2. If requestOrResponse is a Request object, then set headers to requestOrResponse?�s request?�s header list.
-	  // 3. Otherwise, set headers to requestOrResponse?�s response?�s header list.
+	  // 2. If requestOrResponse is a Request object, then set headers to requestOrResponse’s request’s header list.
+	  // 3. Otherwise, set headers to requestOrResponse’s response’s header list.
 	  /** @type {import('./headers').HeadersList} */
 	  const headers = requestOrResponse[kState].headersList;
 
@@ -41943,7 +41943,7 @@ function requireClientH1 () {
 	  // (#5493). setImmediate avoids that, but an *unref'd* Immediate lets poll
 	  // block for ~500ms when the event loop is otherwise idle (#5600 / #5606).
 	  // A ref'd Immediate both keeps the pending request alive and makes poll
-	  // return immediately ??the hybrid those issues asked for.
+	  // return immediately — the hybrid those issues asked for.
 	  socket[kIdleSocketValidationTimeout] = setImmediate(() => {
 	    socket[kIdleSocketValidationTimeout] = null;
 	    socket[kIdleSocketValidation] = 2;
@@ -48381,11 +48381,11 @@ function requirePendingInterceptorsFormatter () {
 	const { Transform } = require$$0$7;
 	const { Console } = require$$1$5;
 
-	const PERSISTENT = process.versions.icu ? '?? : 'Y ';
-	const NOT_PERSISTENT = process.versions.icu ? '?? : 'N ';
+	const PERSISTENT = process.versions.icu ? '✅' : 'Y ';
+	const NOT_PERSISTENT = process.versions.icu ? '❌' : 'N ';
 
 	/**
-	 * Gets the output of `console.table(??` as a string.
+	 * Gets the output of `console.table(…)` as a string.
 	 */
 	pendingInterceptorsFormatter = class PendingInterceptorsFormatter {
 	  constructor ({ disableColors } = {}) {
@@ -49315,13 +49315,13 @@ function requireHeaders$1 () {
 	        })
 	      }
 
-	      // 2. Append (header?�s first item, header?�s second item) to headers.
+	      // 2. Append (header’s first item, header’s second item) to headers.
 	      appendHeader(headers, header[0], header[1]);
 	    }
 	  } else if (typeof object === 'object' && object !== null) {
 	    // Note: null should throw
 
-	    // 2. Otherwise, object is a record, then for each key ??value in object,
+	    // 2. Otherwise, object is a record, then for each key → value in object,
 	    //    append (key, value) to headers
 	    const keys = Object.keys(object);
 	    for (let i = 0; i < keys.length; ++i) {
@@ -49359,23 +49359,23 @@ function requireHeaders$1 () {
 	    })
 	  }
 
-	  // 3. If headers?�s guard is "immutable", then throw a TypeError.
-	  // 4. Otherwise, if headers?�s guard is "request" and name is a
+	  // 3. If headers’s guard is "immutable", then throw a TypeError.
+	  // 4. Otherwise, if headers’s guard is "request" and name is a
 	  //    forbidden header name, return.
-	  // 5. Otherwise, if headers?�s guard is "request-no-cors":
+	  // 5. Otherwise, if headers’s guard is "request-no-cors":
 	  //    TODO
 	  // Note: undici does not implement forbidden header names
 	  if (getHeadersGuard(headers) === 'immutable') {
 	    throw new TypeError('immutable')
 	  }
 
-	  // 6. Otherwise, if headers?�s guard is "response" and name is a
+	  // 6. Otherwise, if headers’s guard is "response" and name is a
 	  //    forbidden response-header name, return.
 
-	  // 7. Append (name, value) to headers?�s header list.
+	  // 7. Append (name, value) to headers’s header list.
 	  return getHeadersList(headers).append(name, value, false)
 
-	  // 8. If headers?�s guard is "request-no-cors", then remove
+	  // 8. If headers’s guard is "request-no-cors", then remove
 	  //    privileged no-CORS request headers from headers
 	}
 
@@ -49427,7 +49427,7 @@ function requireHeaders$1 () {
 	    this[kHeadersSortedMap] = null;
 
 	    // 1. If list contains name, then set name to the first such
-	    //    header?�s name.
+	    //    header’s name.
 	    const lowercaseName = isLowerCase ? name : name.toLowerCase();
 	    const exists = this[kHeadersMap].get(lowercaseName);
 
@@ -49629,7 +49629,7 @@ function requireHeaders$1 () {
 
 	    // The new Headers(init) constructor steps are:
 
-	    // 1. Set this?�s guard to "none".
+	    // 1. Set this’s guard to "none".
 	    this.#guard = 'none';
 
 	    // 2. If init is given, then fill this with init.
@@ -49670,28 +49670,28 @@ function requireHeaders$1 () {
 	      })
 	    }
 
-	    // 2. If this?�s guard is "immutable", then throw a TypeError.
-	    // 3. Otherwise, if this?�s guard is "request" and name is a
+	    // 2. If this’s guard is "immutable", then throw a TypeError.
+	    // 3. Otherwise, if this’s guard is "request" and name is a
 	    //    forbidden header name, return.
-	    // 4. Otherwise, if this?�s guard is "request-no-cors", name
+	    // 4. Otherwise, if this’s guard is "request-no-cors", name
 	    //    is not a no-CORS-safelisted request-header name, and
 	    //    name is not a privileged no-CORS request-header name,
 	    //    return.
-	    // 5. Otherwise, if this?�s guard is "response" and name is
+	    // 5. Otherwise, if this’s guard is "response" and name is
 	    //    a forbidden response-header name, return.
 	    // Note: undici does not implement forbidden header names
 	    if (this.#guard === 'immutable') {
 	      throw new TypeError('immutable')
 	    }
 
-	    // 6. If this?�s header list does not contain name, then
+	    // 6. If this’s header list does not contain name, then
 	    //    return.
 	    if (!this.#headersList.contains(name, false)) {
 	      return
 	    }
 
-	    // 7. Delete name from this?�s header list.
-	    // 8. If this?�s guard is "request-no-cors", then remove
+	    // 7. Delete name from this’s header list.
+	    // 8. If this’s guard is "request-no-cors", then remove
 	    //    privileged no-CORS request headers from this.
 	    this.#headersList.delete(name, false);
 	  }
@@ -49714,7 +49714,7 @@ function requireHeaders$1 () {
 	      })
 	    }
 
-	    // 2. Return the result of getting name from this?�s header
+	    // 2. Return the result of getting name from this’s header
 	    //    list.
 	    return this.#headersList.get(name, false)
 	  }
@@ -49737,7 +49737,7 @@ function requireHeaders$1 () {
 	      })
 	    }
 
-	    // 2. Return true if this?�s header list contains name;
+	    // 2. Return true if this’s header list contains name;
 	    //    otherwise false.
 	    return this.#headersList.contains(name, false)
 	  }
@@ -49771,21 +49771,21 @@ function requireHeaders$1 () {
 	      })
 	    }
 
-	    // 3. If this?�s guard is "immutable", then throw a TypeError.
-	    // 4. Otherwise, if this?�s guard is "request" and name is a
+	    // 3. If this’s guard is "immutable", then throw a TypeError.
+	    // 4. Otherwise, if this’s guard is "request" and name is a
 	    //    forbidden header name, return.
-	    // 5. Otherwise, if this?�s guard is "request-no-cors" and
+	    // 5. Otherwise, if this’s guard is "request-no-cors" and
 	    //    name/value is not a no-CORS-safelisted request-header,
 	    //    return.
-	    // 6. Otherwise, if this?�s guard is "response" and name is a
+	    // 6. Otherwise, if this’s guard is "response" and name is a
 	    //    forbidden response-header name, return.
 	    // Note: undici does not implement forbidden header names
 	    if (this.#guard === 'immutable') {
 	      throw new TypeError('immutable')
 	    }
 
-	    // 7. Set (name, value) in this?�s header list.
-	    // 8. If this?�s guard is "request-no-cors", then remove
+	    // 7. Set (name, value) in this’s header list.
+	    // 8. If this’s guard is "request-no-cors", then remove
 	    //    privileged no-CORS request headers from this
 	    this.#headersList.set(name, value, false);
 	  }
@@ -49794,8 +49794,8 @@ function requireHeaders$1 () {
 	  getSetCookie () {
 	    webidl.brandCheck(this, Headers);
 
-	    // 1. If this?�s header list does not contain `Set-Cookie`, then return « ».
-	    // 2. Return the values of all headers in this?�s header list whose name is
+	    // 1. If this’s header list does not contain `Set-Cookie`, then return « ».
+	    // 2. Return the values of all headers in this’s header list whose name is
 	    //    a byte-case-insensitive match for `Set-Cookie`, in order.
 
 	    const list = this.#headersList.cookies;
@@ -49989,7 +49989,7 @@ function requireResponse () {
 	  // Creates network error Response.
 	  static error () {
 	    // The static error() method steps are to return the result of creating a
-	    // Response object, given a new network error, "immutable", and this?�s
+	    // Response object, given a new network error, "immutable", and this’s
 	    // relevant Realm.
 	    const responseObject = fromInnerResponse(makeNetworkError(), 'immutable');
 
@@ -50013,7 +50013,7 @@ function requireResponse () {
 	    const body = extractBody(bytes);
 
 	    // 3. Let responseObject be the result of creating a Response object, given a new response,
-	    //    "response", and this?�s relevant Realm.
+	    //    "response", and this’s relevant Realm.
 	    const responseObject = fromInnerResponse(makeResponse({}), 'response');
 
 	    // 4. Perform initialize a response given responseObject, init, and (body, "application/json").
@@ -50031,7 +50031,7 @@ function requireResponse () {
 	    status = webidl.converters['unsigned short'](status);
 
 	    // 1. Let parsedURL be the result of parsing url with current settings
-	    // object?�s API base URL.
+	    // object’s API base URL.
 	    // 2. If parsedURL is failure, then throw a TypeError.
 	    // TODO: base-URL?
 	    let parsedURL;
@@ -50047,16 +50047,16 @@ function requireResponse () {
 	    }
 
 	    // 4. Let responseObject be the result of creating a Response object,
-	    // given a new response, "immutable", and this?�s relevant Realm.
+	    // given a new response, "immutable", and this’s relevant Realm.
 	    const responseObject = fromInnerResponse(makeResponse({}), 'immutable');
 
-	    // 5. Set responseObject?�s response?�s status to status.
+	    // 5. Set responseObject’s response’s status to status.
 	    responseObject[kState].status = status;
 
 	    // 6. Let value be parsedURL, serialized and isomorphic encoded.
 	    const value = isomorphicEncode(URLSerializer(parsedURL));
 
-	    // 7. Append `Location`/value to responseObject?�s response?�s header list.
+	    // 7. Append `Location`/value to responseObject’s response’s header list.
 	    responseObject[kState].headersList.append('location', value, true);
 
 	    // 8. Return responseObject.
@@ -50076,11 +50076,11 @@ function requireResponse () {
 
 	    init = webidl.converters.ResponseInit(init);
 
-	    // 1. Set this?�s response to a new response.
+	    // 1. Set this’s response to a new response.
 	    this[kState] = makeResponse({});
 
-	    // 2. Set this?�s headers to a new Headers object with this?�s relevant
-	    // Realm, whose header list is this?�s response?�s header list and guard
+	    // 2. Set this’s headers to a new Headers object with this’s relevant
+	    // Realm, whose header list is this’s response’s header list and guard
 	    // is "response".
 	    this[kHeaders] = new Headers(kConstruct);
 	    setHeadersGuard(this[kHeaders], 'response');
@@ -50099,22 +50099,22 @@ function requireResponse () {
 	    initializeResponse(this, init, bodyWithType);
 	  }
 
-	  // Returns response?�s type, e.g., "cors".
+	  // Returns response’s type, e.g., "cors".
 	  get type () {
 	    webidl.brandCheck(this, Response);
 
-	    // The type getter steps are to return this?�s response?�s type.
+	    // The type getter steps are to return this’s response’s type.
 	    return this[kState].type
 	  }
 
-	  // Returns response?�s URL, if it has one; otherwise the empty string.
+	  // Returns response’s URL, if it has one; otherwise the empty string.
 	  get url () {
 	    webidl.brandCheck(this, Response);
 
 	    const urlList = this[kState].urlList;
 
-	    // The url getter steps are to return the empty string if this?�s
-	    // response?�s URL is null; otherwise this?�s response?�s URL,
+	    // The url getter steps are to return the empty string if this’s
+	    // response’s URL is null; otherwise this’s response’s URL,
 	    // serialized with exclude fragment set to true.
 	    const url = urlList[urlList.length - 1] ?? null;
 
@@ -50129,42 +50129,42 @@ function requireResponse () {
 	  get redirected () {
 	    webidl.brandCheck(this, Response);
 
-	    // The redirected getter steps are to return true if this?�s response?�s URL
+	    // The redirected getter steps are to return true if this’s response’s URL
 	    // list has more than one item; otherwise false.
 	    return this[kState].urlList.length > 1
 	  }
 
-	  // Returns response?�s status.
+	  // Returns response’s status.
 	  get status () {
 	    webidl.brandCheck(this, Response);
 
-	    // The status getter steps are to return this?�s response?�s status.
+	    // The status getter steps are to return this’s response’s status.
 	    return this[kState].status
 	  }
 
-	  // Returns whether response?�s status is an ok status.
+	  // Returns whether response’s status is an ok status.
 	  get ok () {
 	    webidl.brandCheck(this, Response);
 
-	    // The ok getter steps are to return true if this?�s response?�s status is an
+	    // The ok getter steps are to return true if this’s response’s status is an
 	    // ok status; otherwise false.
 	    return this[kState].status >= 200 && this[kState].status <= 299
 	  }
 
-	  // Returns response?�s status message.
+	  // Returns response’s status message.
 	  get statusText () {
 	    webidl.brandCheck(this, Response);
 
-	    // The statusText getter steps are to return this?�s response?�s status
+	    // The statusText getter steps are to return this’s response’s status
 	    // message.
 	    return this[kState].statusText
 	  }
 
-	  // Returns response?�s headers as Headers.
+	  // Returns response’s headers as Headers.
 	  get headers () {
 	    webidl.brandCheck(this, Response);
 
-	    // The headers getter steps are to return this?�s headers.
+	    // The headers getter steps are to return this’s headers.
 	    return this[kHeaders]
 	  }
 
@@ -50192,7 +50192,7 @@ function requireResponse () {
 	      })
 	    }
 
-	    // 2. Let clonedResponse be the result of cloning this?�s response.
+	    // 2. Let clonedResponse be the result of cloning this’s response.
 	    const clonedResponse = cloneResponse(this[kState]);
 
 	    // Note: To re-register because of a new stream.
@@ -50201,7 +50201,7 @@ function requireResponse () {
 	    }
 
 	    // 3. Return the result of creating a Response object, given
-	    // clonedResponse, this?�s headers?�s guard, and this?�s relevant Realm.
+	    // clonedResponse, this’s headers’s guard, and this’s relevant Realm.
 	    return fromInnerResponse(clonedResponse, getHeadersGuard(this[kHeaders]))
 	  }
 
@@ -50258,7 +50258,7 @@ function requireResponse () {
 	  // To clone a response response, run these steps:
 
 	  // 1. If response is a filtered response, then return a new identical
-	  // filtered response whose internal response is a clone of response?�s
+	  // filtered response whose internal response is a clone of response’s
 	  // internal response.
 	  if (response.internalResponse) {
 	    return filterResponse(
@@ -50270,8 +50270,8 @@ function requireResponse () {
 	  // 2. Let newResponse be a copy of response, except for its body.
 	  const newResponse = makeResponse({ ...response, body: null });
 
-	  // 3. If response?�s body is non-null, then set newResponse?�s body to the
-	  // result of cloning response?�s body.
+	  // 3. If response’s body is non-null, then set newResponse’s body to the
+	  // result of cloning response’s body.
 	  if (response.body != null) {
 	    newResponse.body = cloneBody(newResponse, response.body);
 	  }
@@ -50342,10 +50342,10 @@ function requireResponse () {
 	// https://fetch.spec.whatwg.org/#concept-filtered-response
 	function filterResponse (response, type) {
 	  // Set response to the following filtered response with response as its
-	  // internal response, depending on request?�s response tainting:
+	  // internal response, depending on request’s response tainting:
 	  if (type === 'basic') {
 	    // A basic filtered response is a filtered response whose type is "basic"
-	    // and header list excludes any headers in internal response?�s header list
+	    // and header list excludes any headers in internal response’s header list
 	    // whose name is a forbidden response-header name.
 
 	    // Note: undici does not implement forbidden response-header names
@@ -50355,9 +50355,9 @@ function requireResponse () {
 	    })
 	  } else if (type === 'cors') {
 	    // A CORS filtered response is a filtered response whose type is "cors"
-	    // and header list excludes any headers in internal response?�s header
+	    // and header list excludes any headers in internal response’s header
 	    // list whose name is not a CORS-safelisted response-header name, given
-	    // internal response?�s CORS-exposed header-name list.
+	    // internal response’s CORS-exposed header-name list.
 
 	    // Note: undici does not implement CORS-safelisted response-header names
 	    return makeFilteredResponse(response, {
@@ -50423,17 +50423,17 @@ function requireResponse () {
 	    }
 	  }
 
-	  // 3. Set response?�s response?�s status to init["status"].
+	  // 3. Set response’s response’s status to init["status"].
 	  if ('status' in init && init.status != null) {
 	    response[kState].status = init.status;
 	  }
 
-	  // 4. Set response?�s response?�s status message to init["statusText"].
+	  // 4. Set response’s response’s status message to init["statusText"].
 	  if ('statusText' in init && init.statusText != null) {
 	    response[kState].statusText = init.statusText;
 	  }
 
-	  // 5. If init["headers"] exists, then fill response?�s headers with init["headers"].
+	  // 5. If init["headers"] exists, then fill response’s headers with init["headers"].
 	  if ('headers' in init && init.headers != null) {
 	    fill(response[kHeaders], init.headers);
 	  }
@@ -50726,7 +50726,7 @@ function requireRequest () {
 	    // 2. Let fallbackMode be null.
 	    let fallbackMode = null;
 
-	    // 3. Let baseURL be this?�s relevant settings object?�s API base URL.
+	    // 3. Let baseURL be this’s relevant settings object’s API base URL.
 	    const baseUrl = environmentSettingsObject.settingsObject.baseUrl;
 
 	    // 4. Let signal be null.
@@ -50766,21 +50766,21 @@ function requireRequest () {
 	      // 7. Assert: input is a Request object.
 	      assert(input instanceof Request);
 
-	      // 8. Set request to input?�s request.
+	      // 8. Set request to input’s request.
 	      request = input[kState];
 
-	      // 9. Set signal to input?�s signal.
+	      // 9. Set signal to input’s signal.
 	      signal = input[kSignal];
 	    }
 
-	    // 7. Let origin be this?�s relevant settings object?�s origin.
+	    // 7. Let origin be this’s relevant settings object’s origin.
 	    const origin = environmentSettingsObject.settingsObject.origin;
 
 	    // 8. Let window be "client".
 	    let window = 'client';
 
-	    // 9. If request?�s window is an environment settings object and its origin
-	    // is same origin with origin, then set window to request?�s window.
+	    // 9. If request’s window is an environment settings object and its origin
+	    // is same origin with origin, then set window to request’s window.
 	    if (
 	      request.window?.constructor?.name === 'EnvironmentSettingsObject' &&
 	      sameOrigin(request.window, origin)
@@ -50800,46 +50800,46 @@ function requireRequest () {
 
 	    // 12. Set request to a new request with the following properties:
 	    request = makeRequest({
-	      // URL request?�s URL.
+	      // URL request’s URL.
 	      // undici implementation note: this is set as the first item in request's urlList in makeRequest
-	      // method request?�s method.
+	      // method request’s method.
 	      method: request.method,
-	      // header list A copy of request?�s header list.
+	      // header list A copy of request’s header list.
 	      // undici implementation note: headersList is cloned in makeRequest
 	      headersList: request.headersList,
 	      // unsafe-request flag Set.
 	      unsafeRequest: request.unsafeRequest,
-	      // client This?�s relevant settings object.
+	      // client This’s relevant settings object.
 	      client: environmentSettingsObject.settingsObject,
 	      // window window.
 	      window,
-	      // priority request?�s priority.
+	      // priority request’s priority.
 	      priority: request.priority,
-	      // origin request?�s origin. The propagation of the origin is only significant for navigation requests
+	      // origin request’s origin. The propagation of the origin is only significant for navigation requests
 	      // being handled by a service worker. In this scenario a request can have an origin that is different
 	      // from the current client.
 	      origin: request.origin,
-	      // referrer request?�s referrer.
+	      // referrer request’s referrer.
 	      referrer: request.referrer,
-	      // referrer policy request?�s referrer policy.
+	      // referrer policy request’s referrer policy.
 	      referrerPolicy: request.referrerPolicy,
-	      // mode request?�s mode.
+	      // mode request’s mode.
 	      mode: request.mode,
-	      // credentials mode request?�s credentials mode.
+	      // credentials mode request’s credentials mode.
 	      credentials: request.credentials,
-	      // cache mode request?�s cache mode.
+	      // cache mode request’s cache mode.
 	      cache: request.cache,
-	      // redirect mode request?�s redirect mode.
+	      // redirect mode request’s redirect mode.
 	      redirect: request.redirect,
-	      // integrity metadata request?�s integrity metadata.
+	      // integrity metadata request’s integrity metadata.
 	      integrity: request.integrity,
-	      // keepalive request?�s keepalive.
+	      // keepalive request’s keepalive.
 	      keepalive: request.keepalive,
-	      // reload-navigation flag request?�s reload-navigation flag.
+	      // reload-navigation flag request’s reload-navigation flag.
 	      reloadNavigation: request.reloadNavigation,
-	      // history-navigation flag request?�s history-navigation flag.
+	      // history-navigation flag request’s history-navigation flag.
 	      historyNavigation: request.historyNavigation,
-	      // URL list A clone of request?�s URL list.
+	      // URL list A clone of request’s URL list.
 	      urlList: [...request.urlList]
 	    });
 
@@ -50847,30 +50847,30 @@ function requireRequest () {
 
 	    // 13. If init is not empty, then:
 	    if (initHasKey) {
-	      // 1. If request?�s mode is "navigate", then set it to "same-origin".
+	      // 1. If request’s mode is "navigate", then set it to "same-origin".
 	      if (request.mode === 'navigate') {
 	        request.mode = 'same-origin';
 	      }
 
-	      // 2. Unset request?�s reload-navigation flag.
+	      // 2. Unset request’s reload-navigation flag.
 	      request.reloadNavigation = false;
 
-	      // 3. Unset request?�s history-navigation flag.
+	      // 3. Unset request’s history-navigation flag.
 	      request.historyNavigation = false;
 
-	      // 4. Set request?�s origin to "client".
+	      // 4. Set request’s origin to "client".
 	      request.origin = 'client';
 
-	      // 5. Set request?�s referrer to "client"
+	      // 5. Set request’s referrer to "client"
 	      request.referrer = 'client';
 
-	      // 6. Set request?�s referrer policy to the empty string.
+	      // 6. Set request’s referrer policy to the empty string.
 	      request.referrerPolicy = '';
 
-	      // 7. Set request?�s URL to request?�s current URL.
+	      // 7. Set request’s URL to request’s current URL.
 	      request.url = request.urlList[request.urlList.length - 1];
 
-	      // 8. Set request?�s URL list to « request?�s URL ».
+	      // 8. Set request’s URL list to « request’s URL ».
 	      request.urlList = [request.url];
 	    }
 
@@ -50879,7 +50879,7 @@ function requireRequest () {
 	      // 1. Let referrer be init["referrer"].
 	      const referrer = init.referrer;
 
-	      // 2. If referrer is the empty string, then set request?�s referrer to "no-referrer".
+	      // 2. If referrer is the empty string, then set request’s referrer to "no-referrer".
 	      if (referrer === '') {
 	        request.referrer = 'no-referrer';
 	      } else {
@@ -50894,22 +50894,22 @@ function requireRequest () {
 	        }
 
 	        // 3. If one of the following is true
-	        // - parsedReferrer?�s scheme is "about" and path is the string "client"
-	        // - parsedReferrer?�s origin is not same origin with origin
-	        // then set request?�s referrer to "client".
+	        // - parsedReferrer’s scheme is "about" and path is the string "client"
+	        // - parsedReferrer’s origin is not same origin with origin
+	        // then set request’s referrer to "client".
 	        if (
 	          (parsedReferrer.protocol === 'about:' && parsedReferrer.hostname === 'client') ||
 	          (origin && !sameOrigin(parsedReferrer, environmentSettingsObject.settingsObject.baseUrl))
 	        ) {
 	          request.referrer = 'client';
 	        } else {
-	          // 4. Otherwise, set request?�s referrer to parsedReferrer.
+	          // 4. Otherwise, set request’s referrer to parsedReferrer.
 	          request.referrer = parsedReferrer;
 	        }
 	      }
 	    }
 
-	    // 15. If init["referrerPolicy"] exists, then set request?�s referrer policy
+	    // 15. If init["referrerPolicy"] exists, then set request’s referrer policy
 	    // to it.
 	    if (init.referrerPolicy !== undefined) {
 	      request.referrerPolicy = init.referrerPolicy;
@@ -50931,23 +50931,23 @@ function requireRequest () {
 	      })
 	    }
 
-	    // 18. If mode is non-null, set request?�s mode to mode.
+	    // 18. If mode is non-null, set request’s mode to mode.
 	    if (mode != null) {
 	      request.mode = mode;
 	    }
 
-	    // 19. If init["credentials"] exists, then set request?�s credentials mode
+	    // 19. If init["credentials"] exists, then set request’s credentials mode
 	    // to it.
 	    if (init.credentials !== undefined) {
 	      request.credentials = init.credentials;
 	    }
 
-	    // 18. If init["cache"] exists, then set request?�s cache mode to it.
+	    // 18. If init["cache"] exists, then set request’s cache mode to it.
 	    if (init.cache !== undefined) {
 	      request.cache = init.cache;
 	    }
 
-	    // 21. If request?�s cache mode is "only-if-cached" and request?�s mode is
+	    // 21. If request’s cache mode is "only-if-cached" and request’s mode is
 	    // not "same-origin", then throw a TypeError.
 	    if (request.cache === 'only-if-cached' && request.mode !== 'same-origin') {
 	      throw new TypeError(
@@ -50955,17 +50955,17 @@ function requireRequest () {
 	      )
 	    }
 
-	    // 22. If init["redirect"] exists, then set request?�s redirect mode to it.
+	    // 22. If init["redirect"] exists, then set request’s redirect mode to it.
 	    if (init.redirect !== undefined) {
 	      request.redirect = init.redirect;
 	    }
 
-	    // 23. If init["integrity"] exists, then set request?�s integrity metadata to it.
+	    // 23. If init["integrity"] exists, then set request’s integrity metadata to it.
 	    if (init.integrity != null) {
 	      request.integrity = String(init.integrity);
 	    }
 
-	    // 24. If init["keepalive"] exists, then set request?�s keepalive to it.
+	    // 24. If init["keepalive"] exists, then set request’s keepalive to it.
 	    if (init.keepalive !== undefined) {
 	      request.keepalive = Boolean(init.keepalive);
 	    }
@@ -50998,7 +50998,7 @@ function requireRequest () {
 	        // Note: must be in uppercase
 	        method = normalizedMethodRecordsBase[upperCase] ?? method;
 
-	        // 4. Set request?�s method to method.
+	        // 4. Set request’s method to method.
 	        request.method = method;
 	      }
 
@@ -51016,17 +51016,17 @@ function requireRequest () {
 	      signal = init.signal;
 	    }
 
-	    // 27. Set this?�s request to request.
+	    // 27. Set this’s request to request.
 	    this[kState] = request;
 
-	    // 28. Set this?�s signal to a new AbortSignal object with this?�s relevant
+	    // 28. Set this’s signal to a new AbortSignal object with this’s relevant
 	    // Realm.
 	    // TODO: could this be simplified with AbortSignal.any
 	    // (https://dom.spec.whatwg.org/#dom-abortsignal-any)
 	    const ac = new AbortController();
 	    this[kSignal] = ac.signal;
 
-	    // 29. If signal is not null, then make this?�s signal follow signal.
+	    // 29. If signal is not null, then make this’s signal follow signal.
 	    if (signal != null) {
 	      if (
 	        !signal ||
@@ -51071,16 +51071,16 @@ function requireRequest () {
 	      }
 	    }
 
-	    // 30. Set this?�s headers to a new Headers object with this?�s relevant
-	    // Realm, whose header list is request?�s header list and guard is
+	    // 30. Set this’s headers to a new Headers object with this’s relevant
+	    // Realm, whose header list is request’s header list and guard is
 	    // "request".
 	    this[kHeaders] = new Headers(kConstruct);
 	    setHeadersList(this[kHeaders], request.headersList);
 	    setHeadersGuard(this[kHeaders], 'request');
 
-	    // 31. If this?�s request?�s mode is "no-cors", then:
+	    // 31. If this’s request’s mode is "no-cors", then:
 	    if (mode === 'no-cors') {
-	      // 1. If this?�s request?�s method is not a CORS-safelisted method,
+	      // 1. If this’s request’s method is not a CORS-safelisted method,
 	      // then throw a TypeError.
 	      if (!corsSafeListedMethodsSet.has(request.method)) {
 	        throw new TypeError(
@@ -51088,7 +51088,7 @@ function requireRequest () {
 	        )
 	      }
 
-	      // 2. Set this?�s headers?�s guard to "request-no-cors".
+	      // 2. Set this’s headers’s guard to "request-no-cors".
 	      setHeadersGuard(this[kHeaders], 'request-no-cors');
 	    }
 
@@ -51096,16 +51096,16 @@ function requireRequest () {
 	    if (initHasKey) {
 	      /** @type {HeadersList} */
 	      const headersList = getHeadersList(this[kHeaders]);
-	      // 1. Let headers be a copy of this?�s headers and its associated header
+	      // 1. Let headers be a copy of this’s headers and its associated header
 	      // list.
 	      // 2. If init["headers"] exists, then set headers to init["headers"].
 	      const headers = init.headers !== undefined ? init.headers : new HeadersList(headersList);
 
-	      // 3. Empty this?�s headers?�s header list.
+	      // 3. Empty this’s headers’s header list.
 	      headersList.clear();
 
 	      // 4. If headers is a Headers object, then for each header in its header
-	      // list, append header?�s name/header?�s value to this?�s headers.
+	      // list, append header’s name/header’s value to this’s headers.
 	      if (headers instanceof HeadersList) {
 	        for (const { name, value } of headers.rawValues()) {
 	          headersList.append(name, value, false);
@@ -51113,17 +51113,17 @@ function requireRequest () {
 	        // Note: Copy the `set-cookie` meta-data.
 	        headersList.cookies = headers.cookies;
 	      } else {
-	        // 5. Otherwise, fill this?�s headers with headers.
+	        // 5. Otherwise, fill this’s headers with headers.
 	        fillHeaders(this[kHeaders], headers);
 	      }
 	    }
 
-	    // 33. Let inputBody be input?�s request?�s body if input is a Request
+	    // 33. Let inputBody be input’s request’s body if input is a Request
 	    // object; otherwise null.
 	    const inputBody = input instanceof Request ? input[kState].body : null;
 
 	    // 34. If either init["body"] exists and is non-null or inputBody is
-	    // non-null, and request?�s method is `GET` or `HEAD`, then throw a
+	    // non-null, and request’s method is `GET` or `HEAD`, then throw a
 	    // TypeError.
 	    if (
 	      (init.body != null || inputBody != null) &&
@@ -51139,16 +51139,16 @@ function requireRequest () {
 	    if (init.body != null) {
 	      // 1. Let Content-Type be null.
 	      // 2. Set initBody and Content-Type to the result of extracting
-	      // init["body"], with keepalive set to request?�s keepalive.
+	      // init["body"], with keepalive set to request’s keepalive.
 	      const [extractedBody, contentType] = extractBody(
 	        init.body,
 	        request.keepalive
 	      );
 	      initBody = extractedBody;
 
-	      // 3, If Content-Type is non-null and this?�s headers?�s header list does
+	      // 3, If Content-Type is non-null and this’s headers’s header list does
 	      // not contain `Content-Type`, then append `Content-Type`/Content-Type to
-	      // this?�s headers.
+	      // this’s headers.
 	      if (contentType && !getHeadersList(this[kHeaders]).contains('content-type', true)) {
 	        this[kHeaders].append('content-type', contentType);
 	      }
@@ -51158,7 +51158,7 @@ function requireRequest () {
 	    // inputBody.
 	    const inputOrInitBody = initBody ?? inputBody;
 
-	    // 38. If inputOrInitBody is non-null and inputOrInitBody?�s source is
+	    // 38. If inputOrInitBody is non-null and inputOrInitBody’s source is
 	    // null, then:
 	    if (inputOrInitBody != null && inputOrInitBody.source == null) {
 	      // 1. If initBody is non-null and init["duplex"] does not exist,
@@ -51167,7 +51167,7 @@ function requireRequest () {
 	        throw new TypeError('RequestInit: duplex option is required when sending a body.')
 	      }
 
-	      // 2. If this?�s request?�s mode is neither "same-origin" nor "cors",
+	      // 2. If this’s request’s mode is neither "same-origin" nor "cors",
 	      // then throw a TypeError.
 	      if (request.mode !== 'same-origin' && request.mode !== 'cors') {
 	        throw new TypeError(
@@ -51175,7 +51175,7 @@ function requireRequest () {
 	        )
 	      }
 
-	      // 3. Set this?�s request?�s use-CORS-preflight flag.
+	      // 3. Set this’s request’s use-CORS-preflight flag.
 	      request.useCORSPreflightFlag = true;
 	    }
 
@@ -51202,15 +51202,15 @@ function requireRequest () {
 	      };
 	    }
 
-	    // 41. Set this?�s request?�s body to finalBody.
+	    // 41. Set this’s request’s body to finalBody.
 	    this[kState].body = finalBody;
 	  }
 
-	  // Returns request?�s HTTP method, which is "GET" by default.
+	  // Returns request’s HTTP method, which is "GET" by default.
 	  get method () {
 	    webidl.brandCheck(this, Request);
 
-	    // The method getter steps are to return this?�s request?�s method.
+	    // The method getter steps are to return this’s request’s method.
 	    return this[kState].method
 	  }
 
@@ -51218,7 +51218,7 @@ function requireRequest () {
 	  get url () {
 	    webidl.brandCheck(this, Request);
 
-	    // The url getter steps are to return this?�s request?�s URL, serialized.
+	    // The url getter steps are to return this’s request’s URL, serialized.
 	    return URLSerializer(this[kState].url)
 	  }
 
@@ -51228,7 +51228,7 @@ function requireRequest () {
 	  get headers () {
 	    webidl.brandCheck(this, Request);
 
-	    // The headers getter steps are to return this?�s headers.
+	    // The headers getter steps are to return this’s headers.
 	    return this[kHeaders]
 	  }
 
@@ -51237,41 +51237,41 @@ function requireRequest () {
 	  get destination () {
 	    webidl.brandCheck(this, Request);
 
-	    // The destination getter are to return this?�s request?�s destination.
+	    // The destination getter are to return this’s request’s destination.
 	    return this[kState].destination
 	  }
 
 	  // Returns the referrer of request. Its value can be a same-origin URL if
 	  // explicitly set in init, the empty string to indicate no referrer, and
-	  // "about:client" when defaulting to the global?�s default. This is used
+	  // "about:client" when defaulting to the global’s default. This is used
 	  // during fetching to determine the value of the `Referer` header of the
 	  // request being made.
 	  get referrer () {
 	    webidl.brandCheck(this, Request);
 
-	    // 1. If this?�s request?�s referrer is "no-referrer", then return the
+	    // 1. If this’s request’s referrer is "no-referrer", then return the
 	    // empty string.
 	    if (this[kState].referrer === 'no-referrer') {
 	      return ''
 	    }
 
-	    // 2. If this?�s request?�s referrer is "client", then return
+	    // 2. If this’s request’s referrer is "client", then return
 	    // "about:client".
 	    if (this[kState].referrer === 'client') {
 	      return 'about:client'
 	    }
 
-	    // Return this?�s request?�s referrer, serialized.
+	    // Return this’s request’s referrer, serialized.
 	    return this[kState].referrer.toString()
 	  }
 
 	  // Returns the referrer policy associated with request.
-	  // This is used during fetching to compute the value of the request?�s
+	  // This is used during fetching to compute the value of the request’s
 	  // referrer.
 	  get referrerPolicy () {
 	    webidl.brandCheck(this, Request);
 
-	    // The referrerPolicy getter steps are to return this?�s request?�s referrer policy.
+	    // The referrerPolicy getter steps are to return this’s request’s referrer policy.
 	    return this[kState].referrerPolicy
 	  }
 
@@ -51281,7 +51281,7 @@ function requireRequest () {
 	  get mode () {
 	    webidl.brandCheck(this, Request);
 
-	    // The mode getter steps are to return this?�s request?�s mode.
+	    // The mode getter steps are to return this’s request’s mode.
 	    return this[kState].mode
 	  }
 
@@ -51289,17 +51289,17 @@ function requireRequest () {
 	  // which is a string indicating whether credentials will be sent with the
 	  // request always, never, or only when sent to a same-origin URL.
 	  get credentials () {
-	    // The credentials getter steps are to return this?�s request?�s credentials mode.
+	    // The credentials getter steps are to return this’s request’s credentials mode.
 	    return this[kState].credentials
 	  }
 
 	  // Returns the cache mode associated with request,
 	  // which is a string indicating how the request will
-	  // interact with the browser?�s cache when fetching.
+	  // interact with the browser’s cache when fetching.
 	  get cache () {
 	    webidl.brandCheck(this, Request);
 
-	    // The cache getter steps are to return this?�s request?�s cache mode.
+	    // The cache getter steps are to return this’s request’s cache mode.
 	    return this[kState].cache
 	  }
 
@@ -51310,17 +51310,17 @@ function requireRequest () {
 	  get redirect () {
 	    webidl.brandCheck(this, Request);
 
-	    // The redirect getter steps are to return this?�s request?�s redirect mode.
+	    // The redirect getter steps are to return this’s request’s redirect mode.
 	    return this[kState].redirect
 	  }
 
-	  // Returns request?�s subresource integrity metadata, which is a
+	  // Returns request’s subresource integrity metadata, which is a
 	  // cryptographic hash of the resource being fetched. Its value
 	  // consists of multiple hashes separated by whitespace. [SRI]
 	  get integrity () {
 	    webidl.brandCheck(this, Request);
 
-	    // The integrity getter steps are to return this?�s request?�s integrity
+	    // The integrity getter steps are to return this’s request’s integrity
 	    // metadata.
 	    return this[kState].integrity
 	  }
@@ -51330,7 +51330,7 @@ function requireRequest () {
 	  get keepalive () {
 	    webidl.brandCheck(this, Request);
 
-	    // The keepalive getter steps are to return this?�s request?�s keepalive.
+	    // The keepalive getter steps are to return this’s request’s keepalive.
 	    return this[kState].keepalive
 	  }
 
@@ -51339,8 +51339,8 @@ function requireRequest () {
 	  get isReloadNavigation () {
 	    webidl.brandCheck(this, Request);
 
-	    // The isReloadNavigation getter steps are to return true if this?�s
-	    // request?�s reload-navigation flag is set; otherwise false.
+	    // The isReloadNavigation getter steps are to return true if this’s
+	    // request’s reload-navigation flag is set; otherwise false.
 	    return this[kState].reloadNavigation
 	  }
 
@@ -51349,7 +51349,7 @@ function requireRequest () {
 	  get isHistoryNavigation () {
 	    webidl.brandCheck(this, Request);
 
-	    // The isHistoryNavigation getter steps are to return true if this?�s request?�s
+	    // The isHistoryNavigation getter steps are to return true if this’s request’s
 	    // history-navigation flag is set; otherwise false.
 	    return this[kState].historyNavigation
 	  }
@@ -51360,7 +51360,7 @@ function requireRequest () {
 	  get signal () {
 	    webidl.brandCheck(this, Request);
 
-	    // The signal getter steps are to return this?�s signal.
+	    // The signal getter steps are to return this’s signal.
 	    return this[kSignal]
 	  }
 
@@ -51391,12 +51391,12 @@ function requireRequest () {
 	      throw new TypeError('unusable')
 	    }
 
-	    // 2. Let clonedRequest be the result of cloning this?�s request.
+	    // 2. Let clonedRequest be the result of cloning this’s request.
 	    const clonedRequest = cloneRequest(this[kState]);
 
 	    // 3. Let clonedRequestObject be the result of creating a Request object,
-	    // given clonedRequest, this?�s headers?�s guard, and this?�s relevant Realm.
-	    // 4. Make clonedRequestObject?�s signal follow this?�s signal.
+	    // given clonedRequest, this’s headers’s guard, and this’s relevant Realm.
+	    // 4. Make clonedRequestObject’s signal follow this’s signal.
 	    const ac = new AbortController();
 	    if (this.signal.aborted) {
 	      ac.abort(this.signal.reason);
@@ -51502,8 +51502,8 @@ function requireRequest () {
 	  // 1. Let newRequest be a copy of request, except for its body.
 	  const newRequest = makeRequest({ ...request, body: null });
 
-	  // 2. If request?�s body is non-null, set newRequest?�s body to the
-	  // result of cloning request?�s body.
+	  // 2. If request’s body is non-null, set newRequest’s body to the
+	  // result of cloning request’s body.
 	  if (request.body != null) {
 	    newRequest.body = cloneBody(newRequest, request.body);
 	  }
@@ -51769,7 +51769,7 @@ function requireFetch () {
 	      return
 	    }
 
-	    // 1. Set controller?�s state to "aborted".
+	    // 1. Set controller’s state to "aborted".
 	    this.state = 'aborted';
 
 	    // 2. Let fallbackError be an "AbortError" DOMException.
@@ -51782,7 +51782,7 @@ function requireFetch () {
 	    //    If that threw an exception, catch it, and let
 	    //    serializedError be StructuredSerialize(fallbackError).
 
-	    // 5. Set controller?�s serialized abort reason to serializedError.
+	    // 5. Set controller’s serialized abort reason to serializedError.
 	    this.serializedAbortReason = error;
 
 	    this.connection?.destroy(error);
@@ -51813,24 +51813,24 @@ function requireFetch () {
 	    return p.promise
 	  }
 
-	  // 3. Let request be requestObject?�s request.
+	  // 3. Let request be requestObject’s request.
 	  const request = requestObject[kState];
 
-	  // 4. If requestObject?�s signal?�s aborted flag is set, then:
+	  // 4. If requestObject’s signal’s aborted flag is set, then:
 	  if (requestObject.signal.aborted) {
 	    // 1. Abort the fetch() call with p, request, null, and
-	    //    requestObject?�s signal?�s abort reason.
+	    //    requestObject’s signal’s abort reason.
 	    abortFetch(p, request, null, requestObject.signal.reason);
 
 	    // 2. Return p.
 	    return p.promise
 	  }
 
-	  // 5. Let globalObject be request?�s client?�s global object.
+	  // 5. Let globalObject be request’s client’s global object.
 	  const globalObject = request.client.globalObject;
 
 	  // 6. If globalObject is a ServiceWorkerGlobalScope object, then set
-	  // request?�s service-workers mode to "none".
+	  // request’s service-workers mode to "none".
 	  if (globalObject?.constructor?.name === 'ServiceWorkerGlobalScope') {
 	    request.serviceWorkers = 'none';
 	  }
@@ -51838,7 +51838,7 @@ function requireFetch () {
 	  // 7. Let responseObject be null.
 	  let responseObject = null;
 
-	  // 8. Let relevantRealm be this?�s relevant Realm.
+	  // 8. Let relevantRealm be this’s relevant Realm.
 
 	  // 9. Let locallyAborted be false.
 	  let locallyAborted = false;
@@ -51846,7 +51846,7 @@ function requireFetch () {
 	  // 10. Let controller be null.
 	  let controller = null;
 
-	  // 11. Add the following abort steps to requestObject?�s signal:
+	  // 11. Add the following abort steps to requestObject’s signal:
 	  addAbortListener(
 	    requestObject.signal,
 	    () => {
@@ -51856,13 +51856,13 @@ function requireFetch () {
 	      // 2. Assert: controller is non-null.
 	      assert(controller != null);
 
-	      // 3. Abort controller with requestObject?�s signal?�s abort reason.
+	      // 3. Abort controller with requestObject’s signal’s abort reason.
 	      controller.abort(requestObject.signal.reason);
 
 	      const realResponse = responseObject?.deref();
 
 	      // 4. Abort the fetch() call with p, request, responseObject,
-	      //    and requestObject?�s signal?�s abort reason.
+	      //    and requestObject’s signal’s abort reason.
 	      abortFetch(p, request, realResponse, requestObject.signal.reason);
 	    }
 	  );
@@ -51881,10 +51881,10 @@ function requireFetch () {
 	      return
 	    }
 
-	    // 2. If response?�s aborted flag is set, then:
+	    // 2. If response’s aborted flag is set, then:
 	    if (response.aborted) {
 	      // 1. Let deserializedError be the result of deserialize a serialized
-	      //    abort reason given controller?�s serialized abort reason and
+	      //    abort reason given controller’s serialized abort reason and
 	      //    relevantRealm.
 
 	      // 2. Abort the fetch() call with p, request, responseObject, and
@@ -51928,21 +51928,21 @@ function requireFetch () {
 	    return
 	  }
 
-	  // 2. If response?�s URL list is null or empty, then return.
+	  // 2. If response’s URL list is null or empty, then return.
 	  if (!response.urlList?.length) {
 	    return
 	  }
 
-	  // 3. Let originalURL be response?�s URL list[0].
+	  // 3. Let originalURL be response’s URL list[0].
 	  const originalURL = response.urlList[0];
 
-	  // 4. Let timingInfo be response?�s timing info.
+	  // 4. Let timingInfo be response’s timing info.
 	  let timingInfo = response.timingInfo;
 
-	  // 5. Let cacheState be response?�s cache state.
+	  // 5. Let cacheState be response’s cache state.
 	  let cacheState = response.cacheState;
 
-	  // 6. If originalURL?�s scheme is not an HTTP(S) scheme, then return.
+	  // 6. If originalURL’s scheme is not an HTTP(S) scheme, then return.
 	  if (!urlIsHttpHttpsScheme(originalURL)) {
 	    return
 	  }
@@ -51952,7 +51952,7 @@ function requireFetch () {
 	    return
 	  }
 
-	  // 8. If response?�s timing allow passed flag is not set, then:
+	  // 8. If response’s timing allow passed flag is not set, then:
 	  if (!response.timingAllowPassed) {
 	    //  1. Set timingInfo to a the result of creating an opaque timing info for timingInfo.
 	    timingInfo = createOpaqueTimingInfo({
@@ -51963,14 +51963,14 @@ function requireFetch () {
 	    cacheState = '';
 	  }
 
-	  // 9. Set timingInfo?�s end time to the coarsened shared current time
-	  // given global?�s relevant settings object?�s cross-origin isolated
+	  // 9. Set timingInfo’s end time to the coarsened shared current time
+	  // given global’s relevant settings object’s cross-origin isolated
 	  // capability.
-	  // TODO: given global?�s relevant settings object?�s cross-origin isolated
+	  // TODO: given global’s relevant settings object’s cross-origin isolated
 	  // capability?
 	  timingInfo.endTime = coarsenedSharedCurrentTime();
 
-	  // 10. Set response?�s timing info to timingInfo.
+	  // 10. Set response’s timing info to timingInfo.
 	  response.timingInfo = timingInfo;
 
 	  // 11. Mark resource timing for timingInfo, originalURL, initiatorType,
@@ -51995,7 +51995,7 @@ function requireFetch () {
 	    p.reject(error);
 	  }
 
-	  // 2. If request?�s body is not null and is readable, then cancel request?�s
+	  // 2. If request’s body is not null and is readable, then cancel request’s
 	  // body with error.
 	  if (request.body != null && isReadable(request.body?.stream)) {
 	    request.body.stream.cancel(error).catch((err) => {
@@ -52012,10 +52012,10 @@ function requireFetch () {
 	    return
 	  }
 
-	  // 4. Let response be responseObject?�s response.
+	  // 4. Let response be responseObject’s response.
 	  const response = responseObject[kState];
 
-	  // 5. If response?�s body is not null and is readable, then error response?�s
+	  // 5. If response’s body is not null and is readable, then error response’s
 	  // body with error.
 	  if (response.body != null && isReadable(response.body?.stream)) {
 	    response.body.stream.cancel(error).catch((err) => {
@@ -52048,12 +52048,12 @@ function requireFetch () {
 	  // 2. Let crossOriginIsolatedCapability be false.
 	  let crossOriginIsolatedCapability = false;
 
-	  // 3. If request?�s client is non-null, then:
+	  // 3. If request’s client is non-null, then:
 	  if (request.client != null) {
-	    // 1. Set taskDestination to request?�s client?�s global object.
+	    // 1. Set taskDestination to request’s client’s global object.
 	    taskDestination = request.client.globalObject;
 
-	    // 2. Set crossOriginIsolatedCapability to request?�s client?�s cross-origin
+	    // 2. Set crossOriginIsolatedCapability to request’s client’s cross-origin
 	    // isolated capability.
 	    crossOriginIsolatedCapability =
 	      request.client.crossOriginIsolatedCapability;
@@ -52094,14 +52094,14 @@ function requireFetch () {
 	    crossOriginIsolatedCapability
 	  };
 
-	  // 7. If request?�s body is a byte sequence, then set request?�s body to
-	  //    request?�s body as a body.
+	  // 7. If request’s body is a byte sequence, then set request’s body to
+	  //    request’s body as a body.
 	  // NOTE: Since fetching is only called from fetch, body should already be
 	  // extracted.
 	  assert(!request.body || request.body.stream);
 
-	  // 8. If request?�s window is "client", then set request?�s window to request?�s
-	  // client, if request?�s client?�s global object is a Window object; otherwise
+	  // 8. If request’s window is "client", then set request’s window to request’s
+	  // client, if request’s client’s global object is a Window object; otherwise
 	  // "no-window".
 	  if (request.window === 'client') {
 	    // TODO: What if request.client is null?
@@ -52111,8 +52111,8 @@ function requireFetch () {
 	        : 'no-window';
 	  }
 
-	  // 9. If request?�s origin is "client", then set request?�s origin to request?�s
-	  // client?�s origin.
+	  // 9. If request’s origin is "client", then set request’s origin to request’s
+	  // client’s origin.
 	  if (request.origin === 'client') {
 	    request.origin = request.client.origin;
 	  }
@@ -52120,28 +52120,28 @@ function requireFetch () {
 	  // 10. If all of the following conditions are true:
 	  // TODO
 
-	  // 11. If request?�s policy container is "client", then:
+	  // 11. If request’s policy container is "client", then:
 	  if (request.policyContainer === 'client') {
-	    // 1. If request?�s client is non-null, then set request?�s policy
-	    // container to a clone of request?�s client?�s policy container. [HTML]
+	    // 1. If request’s client is non-null, then set request’s policy
+	    // container to a clone of request’s client’s policy container. [HTML]
 	    if (request.client != null) {
 	      request.policyContainer = clonePolicyContainer(
 	        request.client.policyContainer
 	      );
 	    } else {
-	      // 2. Otherwise, set request?�s policy container to a new policy
+	      // 2. Otherwise, set request’s policy container to a new policy
 	      // container.
 	      request.policyContainer = makePolicyContainer();
 	    }
 	  }
 
-	  // 12. If request?�s header list does not contain `Accept`, then:
+	  // 12. If request’s header list does not contain `Accept`, then:
 	  if (!request.headersList.contains('accept', true)) {
 	    // 1. Let value be `*/*`.
 	    const value = '*/*';
 
 	    // 2. A user agent should set value to the first matching statement, if
-	    // any, switching on request?�s destination:
+	    // any, switching on request’s destination:
 	    // "document"
 	    // "frame"
 	    // "iframe"
@@ -52152,19 +52152,19 @@ function requireFetch () {
 	    // `text/css,*/*;q=0.1`
 	    // TODO
 
-	    // 3. Append `Accept`/value to request?�s header list.
+	    // 3. Append `Accept`/value to request’s header list.
 	    request.headersList.append('accept', value, true);
 	  }
 
-	  // 13. If request?�s header list does not contain `Accept-Language`, then
+	  // 13. If request’s header list does not contain `Accept-Language`, then
 	  // user agents should append `Accept-Language`/an appropriate value to
-	  // request?�s header list.
+	  // request’s header list.
 	  if (!request.headersList.contains('accept-language', true)) {
 	    request.headersList.append('accept-language', '*', true);
 	  }
 
-	  // 14. If request?�s priority is null, then use request?�s initiator and
-	  // destination appropriately in setting request?�s priority to a
+	  // 14. If request’s priority is null, then use request’s initiator and
+	  // destination appropriately in setting request’s priority to a
 	  // user-agent-defined object.
 	  if (request.priority === null) ;
 
@@ -52183,13 +52183,13 @@ function requireFetch () {
 
 	// https://fetch.spec.whatwg.org/#concept-main-fetch
 	async function mainFetch (fetchParams, recursive = false) {
-	  // 1. Let request be fetchParams?�s request.
+	  // 1. Let request be fetchParams’s request.
 	  const request = fetchParams.request;
 
 	  // 2. Let response be null.
 	  let response = null;
 
-	  // 3. If request?�s local-URLs-only flag is set and request?�s current URL is
+	  // 3. If request’s local-URLs-only flag is set and request’s current URL is
 	  // not local, then set response to a network error.
 	  if (request.localURLsOnly && !urlIsLocal(requestCurrentURL(request))) {
 	    response = makeNetworkError('local URLs only');
@@ -52210,23 +52210,23 @@ function requireFetch () {
 	  // TODO: should fetching request be blocked as mixed content?
 	  // TODO: should request be blocked by Content Security Policy?
 
-	  // 7. If request?�s referrer policy is the empty string, then set request?�s
-	  // referrer policy to request?�s policy container?�s referrer policy.
+	  // 7. If request’s referrer policy is the empty string, then set request’s
+	  // referrer policy to request’s policy container’s referrer policy.
 	  if (request.referrerPolicy === '') {
 	    request.referrerPolicy = request.policyContainer.referrerPolicy;
 	  }
 
-	  // 8. If request?�s referrer is not "no-referrer", then set request?�s
-	  // referrer to the result of invoking determine request?�s referrer.
+	  // 8. If request’s referrer is not "no-referrer", then set request’s
+	  // referrer to the result of invoking determine request’s referrer.
 	  if (request.referrer !== 'no-referrer') {
 	    request.referrer = determineRequestsReferrer(request);
 	  }
 
-	  // 9. Set request?�s current URL?�s scheme to "https" if all of the following
+	  // 9. Set request’s current URL’s scheme to "https" if all of the following
 	  // conditions are true:
-	  // - request?�s current URL?�s scheme is "http"
-	  // - request?�s current URL?�s host is a domain
-	  // - Matching request?�s current URL?�s host per Known HSTS Host Domain Name
+	  // - request’s current URL’s scheme is "http"
+	  // - request’s current URL’s host is a domain
+	  // - Matching request’s current URL’s host per Known HSTS Host Domain Name
 	  //   Matching results in either a superdomain match with an asserted
 	  //   includeSubDomains directive or a congruent match (with or without an
 	  //   asserted includeSubDomains directive). [HSTS]
@@ -52242,30 +52242,30 @@ function requireFetch () {
 	      const currentURL = requestCurrentURL(request);
 
 	      if (
-	        // - request?�s current URL?�s origin is same origin with request?�s origin,
-	        //   and request?�s response tainting is "basic"
+	        // - request’s current URL’s origin is same origin with request’s origin,
+	        //   and request’s response tainting is "basic"
 	        (sameOrigin(currentURL, request.url) && request.responseTainting === 'basic') ||
-	        // request?�s current URL?�s scheme is "data"
+	        // request’s current URL’s scheme is "data"
 	        (currentURL.protocol === 'data:') ||
-	        // - request?�s mode is "navigate" or "websocket"
+	        // - request’s mode is "navigate" or "websocket"
 	        (request.mode === 'navigate' || request.mode === 'websocket')
 	      ) {
-	        // 1. Set request?�s response tainting to "basic".
+	        // 1. Set request’s response tainting to "basic".
 	        request.responseTainting = 'basic';
 
 	        // 2. Return the result of running scheme fetch given fetchParams.
 	        return await schemeFetch(fetchParams)
 	      }
 
-	      // request?�s mode is "same-origin"
+	      // request’s mode is "same-origin"
 	      if (request.mode === 'same-origin') {
 	        // 1. Return a network error.
 	        return makeNetworkError('request mode cannot be "same-origin"')
 	      }
 
-	      // request?�s mode is "no-cors"
+	      // request’s mode is "no-cors"
 	      if (request.mode === 'no-cors') {
-	        // 1. If request?�s redirect mode is not "follow", then return a network
+	        // 1. If request’s redirect mode is not "follow", then return a network
 	        // error.
 	        if (request.redirect !== 'follow') {
 	          return makeNetworkError(
@@ -52273,24 +52273,24 @@ function requireFetch () {
 	          )
 	        }
 
-	        // 2. Set request?�s response tainting to "opaque".
+	        // 2. Set request’s response tainting to "opaque".
 	        request.responseTainting = 'opaque';
 
 	        // 3. Return the result of running scheme fetch given fetchParams.
 	        return await schemeFetch(fetchParams)
 	      }
 
-	      // request?�s current URL?�s scheme is not an HTTP(S) scheme
+	      // request’s current URL’s scheme is not an HTTP(S) scheme
 	      if (!urlIsHttpHttpsScheme(requestCurrentURL(request))) {
 	        // Return a network error.
 	        return makeNetworkError('URL scheme must be a HTTP(S) scheme')
 	      }
 
-	      // - request?�s use-CORS-preflight flag is set
-	      // - request?�s unsafe-request flag is set and either request?�s method is
+	      // - request’s use-CORS-preflight flag is set
+	      // - request’s unsafe-request flag is set and either request’s method is
 	      //   not a CORS-safelisted method or CORS-unsafe request-header names with
-	      //   request?�s header list is not empty
-	      //    1. Set request?�s response tainting to "cors".
+	      //   request’s header list is not empty
+	      //    1. Set request’s response tainting to "cors".
 	      //    2. Let corsWithPreflightResponse be the result of running HTTP fetch
 	      //    given fetchParams and true.
 	      //    3. If corsWithPreflightResponse is a network error, then clear cache
@@ -52299,7 +52299,7 @@ function requireFetch () {
 	      // TODO
 
 	      // Otherwise
-	      //    1. Set request?�s response tainting to "cors".
+	      //    1. Set request’s response tainting to "cors".
 	      request.responseTainting = 'cors';
 
 	      //    2. Return the result of running HTTP fetch given fetchParams.
@@ -52315,11 +52315,11 @@ function requireFetch () {
 	  // 13. If response is not a network error and response is not a filtered
 	  // response, then:
 	  if (response.status !== 0 && !response.internalResponse) {
-	    // If request?�s response tainting is "cors", then:
+	    // If request’s response tainting is "cors", then:
 	    if (request.responseTainting === 'cors') ;
 
 	    // Set response to the following filtered response with response as its
-	    // internal response, depending on request?�s response tainting:
+	    // internal response, depending on request’s response tainting:
 	    if (request.responseTainting === 'basic') {
 	      response = filterResponse(response, 'basic');
 	    } else if (request.responseTainting === 'cors') {
@@ -52332,18 +52332,18 @@ function requireFetch () {
 	  }
 
 	  // 14. Let internalResponse be response, if response is a network error,
-	  // and response?�s internal response otherwise.
+	  // and response’s internal response otherwise.
 	  let internalResponse =
 	    response.status === 0 ? response : response.internalResponse;
 
-	  // 15. If internalResponse?�s URL list is empty, then set it to a clone of
-	  // request?�s URL list.
+	  // 15. If internalResponse’s URL list is empty, then set it to a clone of
+	  // request’s URL list.
 	  if (internalResponse.urlList.length === 0) {
 	    internalResponse.urlList.push(...request.urlList);
 	  }
 
-	  // 16. If request?�s timing allow failed flag is unset, then set
-	  // internalResponse?�s timing allow passed flag.
+	  // 16. If request’s timing allow failed flag is unset, then set
+	  // internalResponse’s timing allow passed flag.
 	  if (!request.timingAllowFailed) {
 	    response.timingAllowPassed = true;
 	  }
@@ -52356,8 +52356,8 @@ function requireFetch () {
 	  // - should internalResponse to request be blocked due to nosniff
 	  // TODO
 
-	  // 18. If response?�s type is "opaque", internalResponse?�s status is 206,
-	  // internalResponse?�s range-requested flag is set, and request?�s header
+	  // 18. If response’s type is "opaque", internalResponse’s status is 206,
+	  // internalResponse’s range-requested flag is set, and request’s header
 	  // list does not contain `Range`, then set response and internalResponse
 	  // to a network error.
 	  if (
@@ -52369,9 +52369,9 @@ function requireFetch () {
 	    response = internalResponse = makeNetworkError();
 	  }
 
-	  // 19. If response is not a network error and either request?�s method is
-	  // `HEAD` or `CONNECT`, or internalResponse?�s status is a null body status,
-	  // set internalResponse?�s body to null and disregard any enqueuing toward
+	  // 19. If response is not a network error and either request’s method is
+	  // `HEAD` or `CONNECT`, or internalResponse’s status is a null body status,
+	  // set internalResponse’s body to null and disregard any enqueuing toward
 	  // it (if any).
 	  if (
 	    response.status !== 0 &&
@@ -52383,14 +52383,14 @@ function requireFetch () {
 	    fetchParams.controller.dump = true;
 	  }
 
-	  // 20. If request?�s integrity metadata is not the empty string, then:
+	  // 20. If request’s integrity metadata is not the empty string, then:
 	  if (request.integrity) {
 	    // 1. Let processBodyError be this step: run fetch finale given fetchParams
 	    // and a network error.
 	    const processBodyError = (reason) =>
 	      fetchFinale(fetchParams, makeNetworkError(reason));
 
-	    // 2. If request?�s response tainting is "opaque", or response?�s body is null,
+	    // 2. If request’s response tainting is "opaque", or response’s body is null,
 	    // then run processBodyError and abort these steps.
 	    if (request.responseTainting === 'opaque' || response.body == null) {
 	      processBodyError(response.error);
@@ -52399,21 +52399,21 @@ function requireFetch () {
 
 	    // 3. Let processBody given bytes be these steps:
 	    const processBody = (bytes) => {
-	      // 1. If bytes do not match request?�s integrity metadata,
+	      // 1. If bytes do not match request’s integrity metadata,
 	      // then run processBodyError and abort these steps. [SRI]
 	      if (!bytesMatch(bytes, request.integrity)) {
 	        processBodyError('integrity mismatch');
 	        return
 	      }
 
-	      // 2. Set response?�s body to bytes as a body.
+	      // 2. Set response’s body to bytes as a body.
 	      response.body = safelyExtractBody(bytes)[0];
 
 	      // 3. Run fetch finale given fetchParams and response.
 	      fetchFinale(fetchParams, response);
 	    };
 
-	    // 4. Fully read response?�s body given processBody and processBodyError.
+	    // 4. Fully read response’s body given processBody and processBodyError.
 	    await fullyReadBody(response.body, processBody, processBodyError);
 	  } else {
 	    // 21. Otherwise, run fetch finale given fetchParams and response.
@@ -52432,15 +52432,15 @@ function requireFetch () {
 	    return Promise.resolve(makeAppropriateNetworkError(fetchParams))
 	  }
 
-	  // 2. Let request be fetchParams?�s request.
+	  // 2. Let request be fetchParams’s request.
 	  const { request } = fetchParams;
 
 	  const { protocol: scheme } = requestCurrentURL(request);
 
-	  // 3. Switch on request?�s current URL?�s scheme and run the associated steps:
+	  // 3. Switch on request’s current URL’s scheme and run the associated steps:
 	  switch (scheme) {
 	    case 'about:': {
-	      // If request?�s current URL?�s path is the string "blank", then return a new response
+	      // If request’s current URL’s path is the string "blank", then return a new response
 	      // whose status message is `OK`, header list is « (`Content-Type`, `text/html;charset=utf-8`) »,
 	      // and body is the empty byte sequence as a body.
 
@@ -52452,7 +52452,7 @@ function requireFetch () {
 	        resolveObjectURL = require$$0$4.resolveObjectURL;
 	      }
 
-	      // 1. Let blobURLEntry be request?�s current URL?�s blob URL entry.
+	      // 1. Let blobURLEntry be request’s current URL’s blob URL entry.
 	      const blobURLEntry = requestCurrentURL(request);
 
 	      // https://github.com/web-platform-tests/wpt/blob/7b0ebaccc62b566a1965396e5be7bb2bc06f841f/FileAPI/url/resources/fetch-tests.js#L52-L56
@@ -52463,28 +52463,28 @@ function requireFetch () {
 
 	      const blob = resolveObjectURL(blobURLEntry.toString());
 
-	      // 2. If request?�s method is not `GET`, blobURLEntry is null, or blobURLEntry?�s
+	      // 2. If request’s method is not `GET`, blobURLEntry is null, or blobURLEntry’s
 	      //    object is not a Blob object, then return a network error.
 	      if (request.method !== 'GET' || !isBlobLike(blob)) {
 	        return Promise.resolve(makeNetworkError('invalid method'))
 	      }
 
-	      // 3. Let blob be blobURLEntry?�s object.
+	      // 3. Let blob be blobURLEntry’s object.
 	      // Note: done above
 
 	      // 4. Let response be a new response.
 	      const response = makeResponse();
 
-	      // 5. Let fullLength be blob?�s size.
+	      // 5. Let fullLength be blob’s size.
 	      const fullLength = blob.size;
 
 	      // 6. Let serializedFullLength be fullLength, serialized and isomorphic encoded.
 	      const serializedFullLength = isomorphicEncode(`${fullLength}`);
 
-	      // 7. Let type be blob?�s type.
+	      // 7. Let type be blob’s type.
 	      const type = blob.type;
 
-	      // 8. If request?�s header list does not contain `Range`:
+	      // 8. If request’s header list does not contain `Range`:
 	      // 9. Otherwise:
 	      if (!request.headersList.contains('range', true)) {
 	        // 1. Let bodyWithType be the result of safely extracting blob.
@@ -52493,20 +52493,20 @@ function requireFetch () {
 	        // use extractBody directly.
 	        const bodyWithType = extractBody(blob);
 
-	        // 2. Set response?�s status message to `OK`.
+	        // 2. Set response’s status message to `OK`.
 	        response.statusText = 'OK';
 
-	        // 3. Set response?�s body to bodyWithType?�s body.
+	        // 3. Set response’s body to bodyWithType’s body.
 	        response.body = bodyWithType[0];
 
-	        // 4. Set response?�s header list to « (`Content-Length`, serializedFullLength), (`Content-Type`, type) ».
+	        // 4. Set response’s header list to « (`Content-Length`, serializedFullLength), (`Content-Type`, type) ».
 	        response.headersList.set('content-length', serializedFullLength, true);
 	        response.headersList.set('content-type', type, true);
 	      } else {
-	        // 1. Set response?�s range-requested flag.
+	        // 1. Set response’s range-requested flag.
 	        response.rangeRequested = true;
 
-	        // 2. Let rangeHeader be the result of getting `Range` from request?�s header list.
+	        // 2. Let rangeHeader be the result of getting `Range` from request’s header list.
 	        const rangeHeader = request.headersList.get('range', true);
 
 	        // 3. Let rangeValue be the result of parsing a single range header value given rangeHeader and true.
@@ -52523,10 +52523,10 @@ function requireFetch () {
 	        // 6. If rangeStart is null:
 	        // 7. Otherwise:
 	        if (rangeStart === null) {
-	          // 1. Set rangeStart to fullLength ??rangeEnd.
+	          // 1. Set rangeStart to fullLength − rangeEnd.
 	          rangeStart = fullLength - rangeEnd;
 
-	          // 2. Set rangeEnd to rangeStart + rangeEnd ??1.
+	          // 2. Set rangeEnd to rangeStart + rangeEnd − 1.
 	          rangeEnd = rangeStart + rangeEnd - 1;
 	        } else {
 	          // 1. If rangeStart is greater than or equal to fullLength, then return a network error.
@@ -52535,7 +52535,7 @@ function requireFetch () {
 	          }
 
 	          // 2. If rangeEnd is null or rangeEnd is greater than or equal to fullLength, then set
-	          //    rangeEnd to fullLength ??1.
+	          //    rangeEnd to fullLength − 1.
 	          if (rangeEnd === null || rangeEnd >= fullLength) {
 	            rangeEnd = fullLength - 1;
 	          }
@@ -52549,23 +52549,23 @@ function requireFetch () {
 	        // Note: same reason as mentioned above as to why we use extractBody
 	        const slicedBodyWithType = extractBody(slicedBlob);
 
-	        // 10. Set response?�s body to slicedBodyWithType?�s body.
+	        // 10. Set response’s body to slicedBodyWithType’s body.
 	        response.body = slicedBodyWithType[0];
 
-	        // 11. Let serializedSlicedLength be slicedBlob?�s size, serialized and isomorphic encoded.
+	        // 11. Let serializedSlicedLength be slicedBlob’s size, serialized and isomorphic encoded.
 	        const serializedSlicedLength = isomorphicEncode(`${slicedBlob.size}`);
 
 	        // 12. Let contentRange be the result of invoking build a content range given rangeStart,
 	        //     rangeEnd, and fullLength.
 	        const contentRange = buildContentRange(rangeStart, rangeEnd, fullLength);
 
-	        // 13. Set response?�s status to 206.
+	        // 13. Set response’s status to 206.
 	        response.status = 206;
 
-	        // 14. Set response?�s status message to `Partial Content`.
+	        // 14. Set response’s status message to `Partial Content`.
 	        response.statusText = 'Partial Content';
 
-	        // 15. Set response?�s header list to « (`Content-Length`, serializedSlicedLength),
+	        // 15. Set response’s header list to « (`Content-Length`, serializedSlicedLength),
 	        //     (`Content-Type`, type), (`Content-Range`, contentRange) ».
 	        response.headersList.set('content-length', serializedSlicedLength, true);
 	        response.headersList.set('content-type', type, true);
@@ -52577,7 +52577,7 @@ function requireFetch () {
 	    }
 	    case 'data:': {
 	      // 1. Let dataURLStruct be the result of running the
-	      //    data: URL processor on request?�s current URL.
+	      //    data: URL processor on request’s current URL.
 	      const currentURL = requestCurrentURL(request);
 	      const dataURLStruct = dataURLProcessor(currentURL);
 
@@ -52587,12 +52587,12 @@ function requireFetch () {
 	        return Promise.resolve(makeNetworkError('failed to fetch the data URL'))
 	      }
 
-	      // 3. Let mimeType be dataURLStruct?�s MIME type, serialized.
+	      // 3. Let mimeType be dataURLStruct’s MIME type, serialized.
 	      const mimeType = serializeAMimeType(dataURLStruct.mimeType);
 
 	      // 4. Return a response whose status message is `OK`,
 	      //    header list is « (`Content-Type`, mimeType) »,
-	      //    and body is dataURLStruct?�s body as a body.
+	      //    and body is dataURLStruct’s body as a body.
 	      return Promise.resolve(makeResponse({
 	        statusText: 'OK',
 	        headersList: [
@@ -52621,12 +52621,12 @@ function requireFetch () {
 
 	// https://fetch.spec.whatwg.org/#finalize-response
 	function finalizeResponse (fetchParams, response) {
-	  // 1. Set fetchParams?�s request?�s done flag.
+	  // 1. Set fetchParams’s request’s done flag.
 	  fetchParams.request.done = true;
 
-	  // 2, If fetchParams?�s process response done is not null, then queue a fetch
-	  // task to run fetchParams?�s process response done given response, with
-	  // fetchParams?�s task destination.
+	  // 2, If fetchParams’s process response done is not null, then queue a fetch
+	  // task to run fetchParams’s process response done given response, with
+	  // fetchParams’s task destination.
 	  if (fetchParams.processResponseDone != null) {
 	    queueMicrotask(() => fetchParams.processResponseDone(response));
 	  }
@@ -52634,12 +52634,12 @@ function requireFetch () {
 
 	// https://fetch.spec.whatwg.org/#fetch-finale
 	function fetchFinale (fetchParams, response) {
-	  // 1. Let timingInfo be fetchParams?�s timing info.
+	  // 1. Let timingInfo be fetchParams’s timing info.
 	  let timingInfo = fetchParams.timingInfo;
 
-	  // 2. If response is not a network error and fetchParams?�s request?�s client is a secure context,
-	  //    then set timingInfo?�s server-timing headers to the result of getting, decoding, and splitting
-	  //    `Server-Timing` from response?�s internal response?�s header list.
+	  // 2. If response is not a network error and fetchParams’s request’s client is a secure context,
+	  //    then set timingInfo’s server-timing headers to the result of getting, decoding, and splitting
+	  //    `Server-Timing` from response’s internal response’s header list.
 	  // TODO
 
 	  // 3. Let processResponseEndOfBody be the following steps:
@@ -52647,29 +52647,29 @@ function requireFetch () {
 	    // 1. Let unsafeEndTime be the unsafe shared current time.
 	    const unsafeEndTime = Date.now(); // ?
 
-	    // 2. If fetchParams?�s request?�s destination is "document", then set fetchParams?�s controller?�s
-	    //    full timing info to fetchParams?�s timing info.
+	    // 2. If fetchParams’s request’s destination is "document", then set fetchParams’s controller’s
+	    //    full timing info to fetchParams’s timing info.
 	    if (fetchParams.request.destination === 'document') {
 	      fetchParams.controller.fullTimingInfo = timingInfo;
 	    }
 
-	    // 3. Set fetchParams?�s controller?�s report timing steps to the following steps given a global object global:
+	    // 3. Set fetchParams’s controller’s report timing steps to the following steps given a global object global:
 	    fetchParams.controller.reportTimingSteps = () => {
-	      // 1. If fetchParams?�s request?�s URL?�s scheme is not an HTTP(S) scheme, then return.
+	      // 1. If fetchParams’s request’s URL’s scheme is not an HTTP(S) scheme, then return.
 	      if (fetchParams.request.url.protocol !== 'https:') {
 	        return
 	      }
 
-	      // 2. Set timingInfo?�s end time to the relative high resolution time given unsafeEndTime and global.
+	      // 2. Set timingInfo’s end time to the relative high resolution time given unsafeEndTime and global.
 	      timingInfo.endTime = unsafeEndTime;
 
-	      // 3. Let cacheState be response?�s cache state.
+	      // 3. Let cacheState be response’s cache state.
 	      let cacheState = response.cacheState;
 
-	      // 4. Let bodyInfo be response?�s body info.
+	      // 4. Let bodyInfo be response’s body info.
 	      const bodyInfo = response.bodyInfo;
 
-	      // 5. If response?�s timing allow passed flag is not set, then set timingInfo to the result of creating an
+	      // 5. If response’s timing allow passed flag is not set, then set timingInfo to the result of creating an
 	      //    opaque timing info for timingInfo and set cacheState to the empty string.
 	      if (!response.timingAllowPassed) {
 	        timingInfo = createOpaqueTimingInfo(timingInfo);
@@ -52680,22 +52680,22 @@ function requireFetch () {
 	      // 6. Let responseStatus be 0.
 	      let responseStatus = 0;
 
-	      // 7. If fetchParams?�s request?�s mode is not "navigate" or response?�s has-cross-origin-redirects is false:
+	      // 7. If fetchParams’s request’s mode is not "navigate" or response’s has-cross-origin-redirects is false:
 	      if (fetchParams.request.mode !== 'navigator' || !response.hasCrossOriginRedirects) {
-	        // 1. Set responseStatus to response?�s status.
+	        // 1. Set responseStatus to response’s status.
 	        responseStatus = response.status;
 
-	        // 2. Let mimeType be the result of extracting a MIME type from response?�s header list.
+	        // 2. Let mimeType be the result of extracting a MIME type from response’s header list.
 	        const mimeType = extractMimeType(response.headersList);
 
-	        // 3. If mimeType is not failure, then set bodyInfo?�s content type to the result of minimizing a supported MIME type given mimeType.
+	        // 3. If mimeType is not failure, then set bodyInfo’s content type to the result of minimizing a supported MIME type given mimeType.
 	        if (mimeType !== 'failure') {
 	          bodyInfo.contentType = minimizeSupportedMimeType(mimeType);
 	        }
 	      }
 
-	      // 8. If fetchParams?�s request?�s initiator type is non-null, then mark resource timing given timingInfo,
-	      //    fetchParams?�s request?�s URL, fetchParams?�s request?�s initiator type, global, cacheState, bodyInfo,
+	      // 8. If fetchParams’s request’s initiator type is non-null, then mark resource timing given timingInfo,
+	      //    fetchParams’s request’s URL, fetchParams’s request’s initiator type, global, cacheState, bodyInfo,
 	      //    and responseStatus.
 	      if (fetchParams.request.initiatorType != null) {
 	        // TODO: update markresourcetiming
@@ -52705,29 +52705,29 @@ function requireFetch () {
 
 	    // 4. Let processResponseEndOfBodyTask be the following steps:
 	    const processResponseEndOfBodyTask = () => {
-	      // 1. Set fetchParams?�s request?�s done flag.
+	      // 1. Set fetchParams’s request’s done flag.
 	      fetchParams.request.done = true;
 
-	      // 2. If fetchParams?�s process response end-of-body is non-null, then run fetchParams?�s process
+	      // 2. If fetchParams’s process response end-of-body is non-null, then run fetchParams’s process
 	      //    response end-of-body given response.
 	      if (fetchParams.processResponseEndOfBody != null) {
 	        queueMicrotask(() => fetchParams.processResponseEndOfBody(response));
 	      }
 
-	      // 3. If fetchParams?�s request?�s initiator type is non-null and fetchParams?�s request?�s client?�s
-	      //    global object is fetchParams?�s task destination, then run fetchParams?�s controller?�s report
-	      //    timing steps given fetchParams?�s request?�s client?�s global object.
+	      // 3. If fetchParams’s request’s initiator type is non-null and fetchParams’s request’s client’s
+	      //    global object is fetchParams’s task destination, then run fetchParams’s controller’s report
+	      //    timing steps given fetchParams’s request’s client’s global object.
 	      if (fetchParams.request.initiatorType != null) {
 	        fetchParams.controller.reportTimingSteps();
 	      }
 	    };
 
-	    // 5. Queue a fetch task to run processResponseEndOfBodyTask with fetchParams?�s task destination
+	    // 5. Queue a fetch task to run processResponseEndOfBodyTask with fetchParams’s task destination
 	    queueMicrotask(() => processResponseEndOfBodyTask());
 	  };
 
-	  // 4. If fetchParams?�s process response is non-null, then queue a fetch task to run fetchParams?�s
-	  //    process response given response, with fetchParams?�s task destination.
+	  // 4. If fetchParams’s process response is non-null, then queue a fetch task to run fetchParams’s
+	  //    process response given response, with fetchParams’s task destination.
 	  if (fetchParams.processResponse != null) {
 	    queueMicrotask(() => {
 	      fetchParams.processResponse(response);
@@ -52735,10 +52735,10 @@ function requireFetch () {
 	    });
 	  }
 
-	  // 5. Let internalResponse be response, if response is a network error; otherwise response?�s internal response.
+	  // 5. Let internalResponse be response, if response is a network error; otherwise response’s internal response.
 	  const internalResponse = response.type === 'error' ? response : (response.internalResponse ?? response);
 
-	  // 6. If internalResponse?�s body is null, then run processResponseEndOfBody.
+	  // 6. If internalResponse’s body is null, then run processResponseEndOfBody.
 	  // 7. Otherwise:
 	  if (internalResponse.body == null) {
 	    processResponseEndOfBody();
@@ -52751,7 +52751,7 @@ function requireFetch () {
 	    // 2. Let identityTransformAlgorithm be an algorithm which, given chunk, enqueues chunk in transformStream.
 	    // 3. Set up transformStream with transformAlgorithm set to identityTransformAlgorithm and flushAlgorithm
 	    //    set to processResponseEndOfBody.
-	    // 4. Set internalResponse?�s body?�s stream to the result of internalResponse?�s body?�s stream piped through transformStream.
+	    // 4. Set internalResponse’s body’s stream to the result of internalResponse’s body’s stream piped through transformStream.
 
 	    finished(internalResponse.body.stream, () => {
 	      processResponseEndOfBody();
@@ -52761,7 +52761,7 @@ function requireFetch () {
 
 	// https://fetch.spec.whatwg.org/#http-fetch
 	async function httpFetch (fetchParams) {
-	  // 1. Let request be fetchParams?�s request.
+	  // 1. Let request be fetchParams’s request.
 	  const request = fetchParams.request;
 
 	  // 2. Let response be null.
@@ -52770,10 +52770,10 @@ function requireFetch () {
 	  // 3. Let actualResponse be null.
 	  let actualResponse = null;
 
-	  // 4. Let timingInfo be fetchParams?�s timing info.
+	  // 4. Let timingInfo be fetchParams’s timing info.
 	  const timingInfo = fetchParams.timingInfo;
 
-	  // 5. If request?�s service-workers mode is "all", then:
+	  // 5. If request’s service-workers mode is "all", then:
 	  if (request.serviceWorkers === 'all') ;
 
 	  // 6. If response is null, then:
@@ -52781,7 +52781,7 @@ function requireFetch () {
 	    // 1. If makeCORSPreflight is true and one of these conditions is true:
 	    // TODO
 
-	    // 2. If request?�s redirect mode is "follow", then set request?�s
+	    // 2. If request’s redirect mode is "follow", then set request’s
 	    // service-workers mode to "none".
 	    if (request.redirect === 'follow') {
 	      request.serviceWorkers = 'none';
@@ -52791,7 +52791,7 @@ function requireFetch () {
 	    // HTTP-network-or-cache fetch given fetchParams.
 	    actualResponse = response = await httpNetworkOrCacheFetch(fetchParams);
 
-	    // 4. If request?�s response tainting is "cors" and a CORS check
+	    // 4. If request’s response tainting is "cors" and a CORS check
 	    // for request and response returns failure, then return a network error.
 	    if (
 	      request.responseTainting === 'cors' &&
@@ -52801,15 +52801,15 @@ function requireFetch () {
 	    }
 
 	    // 5. If the TAO check for request and response returns failure, then set
-	    // request?�s timing allow failed flag.
+	    // request’s timing allow failed flag.
 	    if (TAOCheck(request, response) === 'failure') {
 	      request.timingAllowFailed = true;
 	    }
 	  }
 
-	  // 7. If either request?�s response tainting or response?�s type
+	  // 7. If either request’s response tainting or response’s type
 	  // is "opaque", and the cross-origin resource policy check with
-	  // request?�s origin, request?�s client, request?�s destination,
+	  // request’s origin, request’s client, request’s destination,
 	  // and actualResponse returns blocked, then return a network error.
 	  if (
 	    (request.responseTainting === 'opaque' || response.type === 'opaque') &&
@@ -52823,9 +52823,9 @@ function requireFetch () {
 	    return makeNetworkError('blocked')
 	  }
 
-	  // 8. If actualResponse?�s status is a redirect status, then:
+	  // 8. If actualResponse’s status is a redirect status, then:
 	  if (redirectStatusSet.has(actualResponse.status)) {
-	    // 1. If actualResponse?�s status is not 303, request?�s body is not null,
+	    // 1. If actualResponse’s status is not 303, request’s body is not null,
 	    // and the connection uses HTTP/2, then user agents may, and are even
 	    // encouraged to, transmit an RST_STREAM frame.
 	    // See, https://github.com/whatwg/fetch/issues/1288
@@ -52833,7 +52833,7 @@ function requireFetch () {
 	      fetchParams.controller.connection.destroy(undefined, false);
 	    }
 
-	    // 2. Switch on request?�s redirect mode:
+	    // 2. Switch on request’s redirect mode:
 	    if (request.redirect === 'error') {
 	      // Set response to a network error.
 	      response = makeNetworkError('unexpected redirect');
@@ -52853,7 +52853,7 @@ function requireFetch () {
 	    }
 	  }
 
-	  // 9. Set response?�s timing info to timingInfo.
+	  // 9. Set response’s timing info to timingInfo.
 	  response.timingInfo = timingInfo;
 
 	  // 10. Return response.
@@ -52862,17 +52862,17 @@ function requireFetch () {
 
 	// https://fetch.spec.whatwg.org/#http-redirect-fetch
 	function httpRedirectFetch (fetchParams, response) {
-	  // 1. Let request be fetchParams?�s request.
+	  // 1. Let request be fetchParams’s request.
 	  const request = fetchParams.request;
 
 	  // 2. Let actualResponse be response, if response is not a filtered response,
-	  // and response?�s internal response otherwise.
+	  // and response’s internal response otherwise.
 	  const actualResponse = response.internalResponse
 	    ? response.internalResponse
 	    : response;
 
-	  // 3. Let locationURL be actualResponse?�s location URL given request?�s current
-	  // URL?�s fragment.
+	  // 3. Let locationURL be actualResponse’s location URL given request’s current
+	  // URL’s fragment.
 	  let locationURL;
 
 	  try {
@@ -52890,22 +52890,22 @@ function requireFetch () {
 	    return Promise.resolve(makeNetworkError(err))
 	  }
 
-	  // 6. If locationURL?�s scheme is not an HTTP(S) scheme, then return a network
+	  // 6. If locationURL’s scheme is not an HTTP(S) scheme, then return a network
 	  // error.
 	  if (!urlIsHttpHttpsScheme(locationURL)) {
 	    return Promise.resolve(makeNetworkError('URL scheme must be a HTTP(S) scheme'))
 	  }
 
-	  // 7. If request?�s redirect count is 20, then return a network error.
+	  // 7. If request’s redirect count is 20, then return a network error.
 	  if (request.redirectCount === 20) {
 	    return Promise.resolve(makeNetworkError('redirect count exceeded'))
 	  }
 
-	  // 8. Increase request?�s redirect count by 1.
+	  // 8. Increase request’s redirect count by 1.
 	  request.redirectCount += 1;
 
-	  // 9. If request?�s mode is "cors", locationURL includes credentials, and
-	  // request?�s origin is not same origin with locationURL?�s origin, then return
+	  // 9. If request’s mode is "cors", locationURL includes credentials, and
+	  // request’s origin is not same origin with locationURL’s origin, then return
 	  //  a network error.
 	  if (
 	    request.mode === 'cors' &&
@@ -52915,7 +52915,7 @@ function requireFetch () {
 	    return Promise.resolve(makeNetworkError('cross origin not allowed for request mode "cors"'))
 	  }
 
-	  // 10. If request?�s response tainting is "cors" and locationURL includes
+	  // 10. If request’s response tainting is "cors" and locationURL includes
 	  // credentials, then return a network error.
 	  if (
 	    request.responseTainting === 'cors' &&
@@ -52926,8 +52926,8 @@ function requireFetch () {
 	    ))
 	  }
 
-	  // 11. If actualResponse?�s status is not 303, request?�s body is non-null,
-	  // and request?�s body?�s source is null, then return a network error.
+	  // 11. If actualResponse’s status is not 303, request’s body is non-null,
+	  // and request’s body’s source is null, then return a network error.
 	  if (
 	    actualResponse.status !== 303 &&
 	    request.body != null &&
@@ -52937,28 +52937,28 @@ function requireFetch () {
 	  }
 
 	  // 12. If one of the following is true
-	  // - actualResponse?�s status is 301 or 302 and request?�s method is `POST`
-	  // - actualResponse?�s status is 303 and request?�s method is not `GET` or `HEAD`
+	  // - actualResponse’s status is 301 or 302 and request’s method is `POST`
+	  // - actualResponse’s status is 303 and request’s method is not `GET` or `HEAD`
 	  if (
 	    ([301, 302].includes(actualResponse.status) && request.method === 'POST') ||
 	    (actualResponse.status === 303 &&
 	      !GET_OR_HEAD.includes(request.method))
 	  ) {
 	    // then:
-	    // 1. Set request?�s method to `GET` and request?�s body to null.
+	    // 1. Set request’s method to `GET` and request’s body to null.
 	    request.method = 'GET';
 	    request.body = null;
 
 	    // 2. For each headerName of request-body-header name, delete headerName from
-	    // request?�s header list.
+	    // request’s header list.
 	    for (const headerName of requestBodyHeader) {
 	      request.headersList.delete(headerName);
 	    }
 	  }
 
-	  // 13. If request?�s current URL?�s origin is not same origin with locationURL?�s
+	  // 13. If request’s current URL’s origin is not same origin with locationURL’s
 	  //     origin, then for each headerName of CORS non-wildcard request-header name,
-	  //     delete headerName from request?�s header list.
+	  //     delete headerName from request’s header list.
 	  if (!sameOrigin(requestCurrentURL(request), locationURL)) {
 	    // https://fetch.spec.whatwg.org/#cors-non-wildcard-request-header-name
 	    request.headersList.delete('authorization', true);
@@ -52971,32 +52971,32 @@ function requireFetch () {
 	    request.headersList.delete('host', true);
 	  }
 
-	  // 14. If request?�s body is non-null, then set request?�s body to the first return
-	  // value of safely extracting request?�s body?�s source.
+	  // 14. If request’s body is non-null, then set request’s body to the first return
+	  // value of safely extracting request’s body’s source.
 	  if (request.body != null) {
 	    assert(request.body.source != null);
 	    request.body = safelyExtractBody(request.body.source)[0];
 	  }
 
-	  // 15. Let timingInfo be fetchParams?�s timing info.
+	  // 15. Let timingInfo be fetchParams’s timing info.
 	  const timingInfo = fetchParams.timingInfo;
 
-	  // 16. Set timingInfo?�s redirect end time and post-redirect start time to the
-	  // coarsened shared current time given fetchParams?�s cross-origin isolated
+	  // 16. Set timingInfo’s redirect end time and post-redirect start time to the
+	  // coarsened shared current time given fetchParams’s cross-origin isolated
 	  // capability.
 	  timingInfo.redirectEndTime = timingInfo.postRedirectStartTime =
 	    coarsenedSharedCurrentTime(fetchParams.crossOriginIsolatedCapability);
 
-	  // 17. If timingInfo?�s redirect start time is 0, then set timingInfo?�s
-	  //  redirect start time to timingInfo?�s start time.
+	  // 17. If timingInfo’s redirect start time is 0, then set timingInfo’s
+	  //  redirect start time to timingInfo’s start time.
 	  if (timingInfo.redirectStartTime === 0) {
 	    timingInfo.redirectStartTime = timingInfo.startTime;
 	  }
 
-	  // 18. Append locationURL to request?�s URL list.
+	  // 18. Append locationURL to request’s URL list.
 	  request.urlList.push(locationURL);
 
-	  // 19. Invoke set request?�s referrer policy on redirect on request and
+	  // 19. Invoke set request’s referrer policy on redirect on request and
 	  // actualResponse.
 	  setRequestReferrerPolicyOnRedirect(request, actualResponse);
 
@@ -53010,7 +53010,7 @@ function requireFetch () {
 	  isAuthenticationFetch = false,
 	  isNewConnectionFetch = false
 	) {
-	  // 1. Let request be fetchParams?�s request.
+	  // 1. Let request be fetchParams’s request.
 	  const request = fetchParams.request;
 
 	  // 2. Let httpFetchParams be null.
@@ -53024,7 +53024,7 @@ function requireFetch () {
 
 	  // 8. Run these steps, but abort when the ongoing fetch is terminated:
 
-	  //    1. If request?�s window is "no-window" and request?�s redirect mode is
+	  //    1. If request’s window is "no-window" and request’s redirect mode is
 	  //    "error", then set httpFetchParams to fetchParams and httpRequest to
 	  //    request.
 	  if (request.window === 'no-window' && request.redirect === 'error') {
@@ -53039,7 +53039,7 @@ function requireFetch () {
 	    // 2. Set httpFetchParams to a copy of fetchParams.
 	    httpFetchParams = { ...fetchParams };
 
-	    // 3. Set httpFetchParams?�s request to httpRequest.
+	    // 3. Set httpFetchParams’s request to httpRequest.
 	    httpFetchParams.request = httpRequest;
 	  }
 
@@ -53049,14 +53049,14 @@ function requireFetch () {
 	    (request.credentials === 'same-origin' &&
 	      request.responseTainting === 'basic');
 
-	  //    4. Let contentLength be httpRequest?�s body?�s length, if httpRequest?�s
+	  //    4. Let contentLength be httpRequest’s body’s length, if httpRequest’s
 	  //    body is non-null; otherwise null.
 	  const contentLength = httpRequest.body ? httpRequest.body.length : null;
 
 	  //    5. Let contentLengthHeaderValue be null.
 	  let contentLengthHeaderValue = null;
 
-	  //    6. If httpRequest?�s body is null and httpRequest?�s method is `POST` or
+	  //    6. If httpRequest’s body is null and httpRequest’s method is `POST` or
 	  //    `PUT`, then set contentLengthHeaderValue to `0`.
 	  if (
 	    httpRequest.body == null &&
@@ -53072,22 +53072,22 @@ function requireFetch () {
 	  }
 
 	  //    8. If contentLengthHeaderValue is non-null, then append
-	  //    `Content-Length`/contentLengthHeaderValue to httpRequest?�s header
+	  //    `Content-Length`/contentLengthHeaderValue to httpRequest’s header
 	  //    list.
 	  if (contentLengthHeaderValue != null) {
 	    httpRequest.headersList.append('content-length', contentLengthHeaderValue, true);
 	  }
 
 	  //    9. If contentLengthHeaderValue is non-null, then append (`Content-Length`,
-	  //    contentLengthHeaderValue) to httpRequest?�s header list.
+	  //    contentLengthHeaderValue) to httpRequest’s header list.
 
-	  //    10. If contentLength is non-null and httpRequest?�s keepalive is true,
+	  //    10. If contentLength is non-null and httpRequest’s keepalive is true,
 	  //    then:
 	  if (contentLength != null && httpRequest.keepalive) ;
 
-	  //    11. If httpRequest?�s referrer is a URL, then append
-	  //    `Referer`/httpRequest?�s referrer, serialized and isomorphic encoded,
-	  //     to httpRequest?�s header list.
+	  //    11. If httpRequest’s referrer is a URL, then append
+	  //    `Referer`/httpRequest’s referrer, serialized and isomorphic encoded,
+	  //     to httpRequest’s header list.
 	  if (httpRequest.referrer instanceof URL) {
 	    httpRequest.headersList.append('referer', isomorphicEncode(httpRequest.referrer.href), true);
 	  }
@@ -53098,17 +53098,17 @@ function requireFetch () {
 	  //    13. Append the Fetch metadata headers for httpRequest. [FETCH-METADATA]
 	  appendFetchMetadata(httpRequest);
 
-	  //    14. If httpRequest?�s header list does not contain `User-Agent`, then
+	  //    14. If httpRequest’s header list does not contain `User-Agent`, then
 	  //    user agents should append `User-Agent`/default `User-Agent` value to
-	  //    httpRequest?�s header list.
+	  //    httpRequest’s header list.
 	  if (!httpRequest.headersList.contains('user-agent', true)) {
 	    httpRequest.headersList.append('user-agent', defaultUserAgent);
 	  }
 
-	  //    15. If httpRequest?�s cache mode is "default" and httpRequest?�s header
+	  //    15. If httpRequest’s cache mode is "default" and httpRequest’s header
 	  //    list contains `If-Modified-Since`, `If-None-Match`,
 	  //    `If-Unmodified-Since`, `If-Match`, or `If-Range`, then set
-	  //    httpRequest?�s cache mode to "no-store".
+	  //    httpRequest’s cache mode to "no-store".
 	  if (
 	    httpRequest.cache === 'default' &&
 	    (httpRequest.headersList.contains('if-modified-since', true) ||
@@ -53120,10 +53120,10 @@ function requireFetch () {
 	    httpRequest.cache = 'no-store';
 	  }
 
-	  //    16. If httpRequest?�s cache mode is "no-cache", httpRequest?�s prevent
+	  //    16. If httpRequest’s cache mode is "no-cache", httpRequest’s prevent
 	  //    no-cache cache-control header modification flag is unset, and
-	  //    httpRequest?�s header list does not contain `Cache-Control`, then append
-	  //    `Cache-Control`/`max-age=0` to httpRequest?�s header list.
+	  //    httpRequest’s header list does not contain `Cache-Control`, then append
+	  //    `Cache-Control`/`max-age=0` to httpRequest’s header list.
 	  if (
 	    httpRequest.cache === 'no-cache' &&
 	    !httpRequest.preventNoCacheCacheControlHeaderModification &&
@@ -53132,29 +53132,29 @@ function requireFetch () {
 	    httpRequest.headersList.append('cache-control', 'max-age=0', true);
 	  }
 
-	  //    17. If httpRequest?�s cache mode is "no-store" or "reload", then:
+	  //    17. If httpRequest’s cache mode is "no-store" or "reload", then:
 	  if (httpRequest.cache === 'no-store' || httpRequest.cache === 'reload') {
-	    // 1. If httpRequest?�s header list does not contain `Pragma`, then append
-	    // `Pragma`/`no-cache` to httpRequest?�s header list.
+	    // 1. If httpRequest’s header list does not contain `Pragma`, then append
+	    // `Pragma`/`no-cache` to httpRequest’s header list.
 	    if (!httpRequest.headersList.contains('pragma', true)) {
 	      httpRequest.headersList.append('pragma', 'no-cache', true);
 	    }
 
-	    // 2. If httpRequest?�s header list does not contain `Cache-Control`,
-	    // then append `Cache-Control`/`no-cache` to httpRequest?�s header list.
+	    // 2. If httpRequest’s header list does not contain `Cache-Control`,
+	    // then append `Cache-Control`/`no-cache` to httpRequest’s header list.
 	    if (!httpRequest.headersList.contains('cache-control', true)) {
 	      httpRequest.headersList.append('cache-control', 'no-cache', true);
 	    }
 	  }
 
-	  //    18. If httpRequest?�s header list contains `Range`, then append
-	  //    `Accept-Encoding`/`identity` to httpRequest?�s header list.
+	  //    18. If httpRequest’s header list contains `Range`, then append
+	  //    `Accept-Encoding`/`identity` to httpRequest’s header list.
 	  if (httpRequest.headersList.contains('range', true)) {
 	    httpRequest.headersList.append('accept-encoding', 'identity', true);
 	  }
 
-	  //    19. Modify httpRequest?�s header list per HTTP. Do not append a given
-	  //    header if httpRequest?�s header list contains that header?�s name.
+	  //    19. Modify httpRequest’s header list per HTTP. Do not append a given
+	  //    header if httpRequest’s header list contains that header’s name.
 	  //    TODO: https://github.com/whatwg/fetch/issues/1285#issuecomment-896560129
 	  if (!httpRequest.headersList.contains('accept-encoding', true)) {
 	    if (urlHasHttpsScheme(requestCurrentURL(httpRequest))) {
@@ -53166,20 +53166,20 @@ function requireFetch () {
 
 	  httpRequest.headersList.delete('host', true);
 
-	  //    21. If there?�s a proxy-authentication entry, use it as appropriate.
+	  //    21. If there’s a proxy-authentication entry, use it as appropriate.
 	  //    TODO: proxy-authentication
 
 	  //    22. Set httpCache to the result of determining the HTTP cache
 	  //    partition, given httpRequest.
 	  //    TODO: cache
 
-	  //    23. If httpCache is null, then set httpRequest?�s cache mode to
+	  //    23. If httpCache is null, then set httpRequest’s cache mode to
 	  //    "no-store".
 	  {
 	    httpRequest.cache = 'no-store';
 	  }
 
-	  //    24. If httpRequest?�s cache mode is neither "no-store" nor "reload",
+	  //    24. If httpRequest’s cache mode is neither "no-store" nor "reload",
 	  //    then:
 	  if (httpRequest.cache !== 'no-store' && httpRequest.cache !== 'reload') ;
 
@@ -53188,7 +53188,7 @@ function requireFetch () {
 
 	  // 10. If response is null, then:
 	  if (response == null) {
-	    // 1. If httpRequest?�s cache mode is "only-if-cached", then return a
+	    // 1. If httpRequest’s cache mode is "only-if-cached", then return a
 	    // network error.
 	    if (httpRequest.cache === 'only-if-cached') {
 	      return makeNetworkError('only if cached')
@@ -53202,7 +53202,7 @@ function requireFetch () {
 	      isNewConnectionFetch
 	    );
 
-	    // 3. If httpRequest?�s method is unsafe and forwardResponse?�s status is
+	    // 3. If httpRequest’s method is unsafe and forwardResponse’s status is
 	    // in the range 200 to 399, inclusive, invalidate appropriate stored
 	    // responses in httpCache, as per the "Invalidation" chapter of HTTP
 	    // Caching, and set storedResponse to null. [HTTP-CACHING]
@@ -53223,26 +53223,26 @@ function requireFetch () {
 	    }
 	  }
 
-	  // 11. Set response?�s URL list to a clone of httpRequest?�s URL list.
+	  // 11. Set response’s URL list to a clone of httpRequest’s URL list.
 	  response.urlList = [...httpRequest.urlList];
 
-	  // 12. If httpRequest?�s header list contains `Range`, then set response?�s
+	  // 12. If httpRequest’s header list contains `Range`, then set response’s
 	  // range-requested flag.
 	  if (httpRequest.headersList.contains('range', true)) {
 	    response.rangeRequested = true;
 	  }
 
-	  // 13. Set response?�s request-includes-credentials to includeCredentials.
+	  // 13. Set response’s request-includes-credentials to includeCredentials.
 	  response.requestIncludesCredentials = includeCredentials;
 
-	  // 14. If response?�s status is 401, httpRequest?�s response tainting is not
-	  // "cors", includeCredentials is true, and request?�s window is an environment
+	  // 14. If response’s status is 401, httpRequest’s response tainting is not
+	  // "cors", includeCredentials is true, and request’s window is an environment
 	  // settings object, then:
 	  // TODO
 
-	  // 15. If response?�s status is 407, then:
+	  // 15. If response’s status is 407, then:
 	  if (response.status === 407) {
-	    // 1. If request?�s window is "no-window", then return a network error.
+	    // 1. If request’s window is "no-window", then return a network error.
 	    if (request.window === 'no-window') {
 	      return makeNetworkError()
 	    }
@@ -53254,7 +53254,7 @@ function requireFetch () {
 	      return makeAppropriateNetworkError(fetchParams)
 	    }
 
-	    // 4. Prompt the end user as appropriate in request?�s window and store
+	    // 4. Prompt the end user as appropriate in request’s window and store
 	    // the result as a proxy-authentication entry. [HTTP-AUTH]
 	    // TODO: Invoke some kind of callback?
 
@@ -53266,11 +53266,11 @@ function requireFetch () {
 
 	  // 16. If all of the following are true
 	  if (
-	    // response?�s status is 421
+	    // response’s status is 421
 	    response.status === 421 &&
 	    // isNewConnectionFetch is false
 	    !isNewConnectionFetch &&
-	    // request?�s body is null, or request?�s body is non-null and request?�s body?�s source is non-null
+	    // request’s body is null, or request’s body is non-null and request’s body’s source is non-null
 	    (request.body == null || request.body.source != null)
 	  ) {
 	    // then:
@@ -53320,38 +53320,38 @@ function requireFetch () {
 	    }
 	  };
 
-	  // 1. Let request be fetchParams?�s request.
+	  // 1. Let request be fetchParams’s request.
 	  const request = fetchParams.request;
 
 	  // 2. Let response be null.
 	  let response = null;
 
-	  // 3. Let timingInfo be fetchParams?�s timing info.
+	  // 3. Let timingInfo be fetchParams’s timing info.
 	  const timingInfo = fetchParams.timingInfo;
 
-	  // 5. If httpCache is null, then set request?�s cache mode to "no-store".
+	  // 5. If httpCache is null, then set request’s cache mode to "no-store".
 	  {
 	    request.cache = 'no-store';
 	  }
 
-	  // 8. Switch on request?�s mode:
+	  // 8. Switch on request’s mode:
 	  if (request.mode === 'websocket') ;
 
 	  // 9. Run these steps, but abort when the ongoing fetch is terminated:
 
 	  //    1. If connection is failure, then return a network error.
 
-	  //    2. Set timingInfo?�s final connection timing info to the result of
-	  //    calling clamp and coarsen connection timing info with connection?�s
-	  //    timing info, timingInfo?�s post-redirect start time, and fetchParams?�s
+	  //    2. Set timingInfo’s final connection timing info to the result of
+	  //    calling clamp and coarsen connection timing info with connection’s
+	  //    timing info, timingInfo’s post-redirect start time, and fetchParams’s
 	  //    cross-origin isolated capability.
 
-	  //    3. If connection is not an HTTP/2 connection, request?�s body is non-null,
-	  //    and request?�s body?�s source is null, then append (`Transfer-Encoding`,
-	  //    `chunked`) to request?�s header list.
+	  //    3. If connection is not an HTTP/2 connection, request’s body is non-null,
+	  //    and request’s body’s source is null, then append (`Transfer-Encoding`,
+	  //    `chunked`) to request’s header list.
 
-	  //    4. Set timingInfo?�s final network-request start time to the coarsened
-	  //    shared current time given fetchParams?�s cross-origin isolated
+	  //    4. Set timingInfo’s final network-request start time to the coarsened
+	  //    shared current time given fetchParams’s cross-origin isolated
 	  //    capability.
 
 	  //    5. Set response to the result of making an HTTP request over connection
@@ -53360,15 +53360,15 @@ function requireFetch () {
 	  //        - Follow the relevant requirements from HTTP. [HTTP] [HTTP-SEMANTICS]
 	  //        [HTTP-COND] [HTTP-CACHING] [HTTP-AUTH]
 
-	  //        - If request?�s body is non-null, and request?�s body?�s source is null,
+	  //        - If request’s body is non-null, and request’s body’s source is null,
 	  //        then the user agent may have a buffer of up to 64 kibibytes and store
-	  //        a part of request?�s body in that buffer. If the user agent reads from
-	  //        request?�s body beyond that buffer?�s size and the user agent needs to
+	  //        a part of request’s body in that buffer. If the user agent reads from
+	  //        request’s body beyond that buffer’s size and the user agent needs to
 	  //        resend request, then instead return a network error.
 
-	  //        - Set timingInfo?�s final network-response start time to the coarsened
-	  //        shared current time given fetchParams?�s cross-origin isolated capability,
-	  //        immediately after the user agent?�s HTTP parser receives the first byte
+	  //        - Set timingInfo’s final network-response start time to the coarsened
+	  //        shared current time given fetchParams’s cross-origin isolated capability,
+	  //        immediately after the user agent’s HTTP parser receives the first byte
 	  //        of the response (e.g., frame header bytes for HTTP/2 or response status
 	  //        line for HTTP/1.x).
 
@@ -53376,24 +53376,24 @@ function requireFetch () {
 
 	  //        - Any responses whose status is in the range 100 to 199, inclusive,
 	  //        and is not 101, are to be ignored, except for the purposes of setting
-	  //        timingInfo?�s final network-response start time above.
+	  //        timingInfo’s final network-response start time above.
 
-	  //    - If request?�s header list contains `Transfer-Encoding`/`chunked` and
+	  //    - If request’s header list contains `Transfer-Encoding`/`chunked` and
 	  //    response is transferred via HTTP/1.0 or older, then return a network
 	  //    error.
 
 	  //    - If the HTTP request results in a TLS client certificate dialog, then:
 
-	  //        1. If request?�s window is an environment settings object, make the
-	  //        dialog available in request?�s window.
+	  //        1. If request’s window is an environment settings object, make the
+	  //        dialog available in request’s window.
 
 	  //        2. Otherwise, return a network error.
 
-	  // To transmit request?�s body body, run these steps:
+	  // To transmit request’s body body, run these steps:
 	  let requestBody = null;
-	  // 1. If body is null and fetchParams?�s process request end-of-body is
-	  // non-null, then queue a fetch task given fetchParams?�s process request
-	  // end-of-body and fetchParams?�s task destination.
+	  // 1. If body is null and fetchParams’s process request end-of-body is
+	  // non-null, then queue a fetch task given fetchParams’s process request
+	  // end-of-body and fetchParams’s task destination.
 	  if (request.body == null && fetchParams.processRequestEndOfBody) {
 	    queueMicrotask(() => fetchParams.processRequestEndOfBody());
 	  } else if (request.body != null) {
@@ -53409,8 +53409,8 @@ function requireFetch () {
 	      // 2. Run this step in parallel: transmit bytes.
 	      yield bytes;
 
-	      // 3. If fetchParams?�s process request body is non-null, then run
-	      // fetchParams?�s process request body given bytes?�s length.
+	      // 3. If fetchParams’s process request body is non-null, then run
+	      // fetchParams’s process request body given bytes’s length.
 	      fetchParams.processRequestBodyChunkLength?.(bytes.byteLength);
 	    };
 
@@ -53421,8 +53421,8 @@ function requireFetch () {
 	        return
 	      }
 
-	      // 2. If fetchParams?�s process request end-of-body is non-null,
-	      // then run fetchParams?�s process request end-of-body.
+	      // 2. If fetchParams’s process request end-of-body is non-null,
+	      // then run fetchParams’s process request end-of-body.
 	      if (fetchParams.processRequestEndOfBody) {
 	        fetchParams.processRequestEndOfBody();
 	      }
@@ -53435,7 +53435,7 @@ function requireFetch () {
 	        return
 	      }
 
-	      // 2. If e is an "AbortError" DOMException, then abort fetchParams?�s controller.
+	      // 2. If e is an "AbortError" DOMException, then abort fetchParams’s controller.
 	      if (e.name === 'AbortError') {
 	        fetchParams.controller.abort();
 	      } else {
@@ -53443,8 +53443,8 @@ function requireFetch () {
 	      }
 	    };
 
-	    // 4. Incrementally read request?�s body given processBodyChunk, processEndOfBody,
-	    // processBodyError, and fetchParams?�s task destination.
+	    // 4. Incrementally read request’s body given processBodyChunk, processEndOfBody,
+	    // processBodyError, and fetchParams’s task destination.
 	    requestBody = (async function * () {
 	      try {
 	        for await (const bytes of request.body.stream) {
@@ -53488,7 +53488,7 @@ function requireFetch () {
 	    await fetchParams.controller.resume();
 	  };
 
-	  // 12. Let cancelAlgorithm be an algorithm that aborts fetchParams?�s
+	  // 12. Let cancelAlgorithm be an algorithm that aborts fetchParams’s
 	  // controller with reason, given reason.
 	  const cancelAlgorithm = (reason) => {
 	    // If the aborted fetch was already terminated, then we do not
@@ -53526,10 +53526,10 @@ function requireFetch () {
 
 	  // 17. Run these steps, but abort when the ongoing fetch is terminated:
 
-	  //    1. Set response?�s body to a new body whose stream is stream.
+	  //    1. Set response’s body to a new body whose stream is stream.
 	  response.body = { stream, source: null, length: null };
 
-	  //    2. If response is not a network error and request?�s cache mode is
+	  //    2. If response is not a network error and request’s cache mode is
 	  //    not "no-store", then update response in httpCache for request.
 	  //    TODO
 
@@ -53537,7 +53537,7 @@ function requireFetch () {
 	  //    to block cookies for request (see section 7 of [COOKIES]), then run the
 	  //    "set-cookie-string" parsing algorithm (see section 5.2 of [COOKIES]) on
 	  //    the value of each header whose name is a byte-case-insensitive match for
-	  //    `Set-Cookie` in response?�s header list, if any, and request?�s current URL.
+	  //    `Set-Cookie` in response’s header list, if any, and request’s current URL.
 	  //    TODO
 
 	  // 18. If aborted, then:
@@ -53581,7 +53581,7 @@ function requireFetch () {
 	      }
 
 	      if (bytes === undefined) {
-	        // 2. Otherwise, if the bytes transmission for response?�s message
+	        // 2. Otherwise, if the bytes transmission for response’s message
 	        // body is done normally and stream is readable, then close
 	        // stream, finalize response for fetchParams and response, and
 	        // abort these in-parallel steps.
@@ -53592,10 +53592,10 @@ function requireFetch () {
 	        return
 	      }
 
-	      // 5. Increase timingInfo?�s decoded body size by bytes?�s length.
+	      // 5. Increase timingInfo’s decoded body size by bytes’s length.
 	      timingInfo.decodedBodySize += bytes?.byteLength ?? 0;
 
-	      // 6. If bytes is failure, then terminate fetchParams?�s controller.
+	      // 6. If bytes is failure, then terminate fetchParams’s controller.
 	      if (isFailure) {
 	        fetchParams.controller.terminate(bytes);
 	        return
@@ -53614,7 +53614,7 @@ function requireFetch () {
 	        return
 	      }
 
-	      // 9. If stream doesn?�t need more data ask the user agent to suspend
+	      // 9. If stream doesn’t need more data ask the user agent to suspend
 	      // the ongoing fetch.
 	      if (fetchParams.controller.controller.desiredSize <= 0) {
 	        return
@@ -53626,12 +53626,12 @@ function requireFetch () {
 	  function onAborted (reason) {
 	    // 2. If fetchParams is aborted, then:
 	    if (isAborted(fetchParams)) {
-	      // 1. Set response?�s aborted flag.
+	      // 1. Set response’s aborted flag.
 	      response.aborted = true;
 
 	      // 2. If stream is readable, then error stream with the result of
-	      //    deserialize a serialized abort reason given fetchParams?�s
-	      //    controller?�s serialized abort reason and an
+	      //    deserialize a serialized abort reason given fetchParams’s
+	      //    controller’s serialized abort reason and an
 	      //    implementation-defined realm.
 	      if (isReadable(stream)) {
 	        fetchParams.controller.controller.error(
@@ -53678,9 +53678,9 @@ function requireFetch () {
 	          // TODO (fix): Do we need connection here?
 	          const { connection } = fetchParams.controller;
 
-	          // Set timingInfo?�s final connection timing info to the result of calling clamp and coarsen
-	          // connection timing info with connection?�s timing info, timingInfo?�s post-redirect start
-	          // time, and fetchParams?�s cross-origin isolated capability.
+	          // Set timingInfo’s final connection timing info to the result of calling clamp and coarsen
+	          // connection timing info with connection’s timing info, timingInfo’s post-redirect start
+	          // time, and fetchParams’s cross-origin isolated capability.
 	          // TODO: implement connection timing
 	          timingInfo.finalConnectionTimingInfo = clampAndCoarsenConnectionTimingInfo(undefined, timingInfo.postRedirectStartTime, fetchParams.crossOriginIsolatedCapability);
 
@@ -53691,15 +53691,15 @@ function requireFetch () {
 	            this.abort = connection.abort = abort;
 	          }
 
-	          // Set timingInfo?�s final network-request start time to the coarsened shared current time given
-	          // fetchParams?�s cross-origin isolated capability.
+	          // Set timingInfo’s final network-request start time to the coarsened shared current time given
+	          // fetchParams’s cross-origin isolated capability.
 	          timingInfo.finalNetworkRequestStartTime = coarsenedSharedCurrentTime(fetchParams.crossOriginIsolatedCapability);
 	        },
 
 	        onResponseStarted () {
-	          // Set timingInfo?�s final network-response start time to the coarsened shared current
-	          // time given fetchParams?�s cross-origin isolated capability, immediately after the
-	          // user agent?�s HTTP parser receives the first byte of the response (e.g., frame header
+	          // Set timingInfo’s final network-response start time to the coarsened shared current
+	          // time given fetchParams’s cross-origin isolated capability, immediately after the
+	          // user agent’s HTTP parser receives the first byte of the response (e.g., frame header
 	          // bytes for HTTP/2 or response status line for HTTP/1.x).
 	          timingInfo.finalNetworkResponseStartTime = coarsenedSharedCurrentTime(fetchParams.crossOriginIsolatedCapability);
 	        },
@@ -53793,17 +53793,17 @@ function requireFetch () {
 	            return
 	          }
 
-	          // 1. If one or more bytes have been transmitted from response?�s
+	          // 1. If one or more bytes have been transmitted from response’s
 	          // message body, then:
 
 	          //  1. Let bytes be the transmitted bytes.
 	          const bytes = chunk;
 
 	          //  2. Let codings be the result of extracting header list values
-	          //  given `Content-Encoding` and response?�s header list.
+	          //  given `Content-Encoding` and response’s header list.
 	          //  See pullAlgorithm.
 
-	          //  3. Increase timingInfo?�s encoded body size by bytes?�s length.
+	          //  3. Increase timingInfo’s encoded body size by bytes’s length.
 	          timingInfo.encodedBodySize += bytes.byteLength;
 
 	          //  4. See pullAlgorithm...
@@ -54305,19 +54305,19 @@ function requireUtil$8 () {
 	 * @param {string?} encodingName
 	 */
 	function readOperation (fr, blob, type, encodingName) {
-	  // 1. If fr?�s state is "loading", throw an InvalidStateError
+	  // 1. If fr’s state is "loading", throw an InvalidStateError
 	  //    DOMException.
 	  if (fr[kState] === 'loading') {
 	    throw new DOMException('Invalid state', 'InvalidStateError')
 	  }
 
-	  // 2. Set fr?�s state to "loading".
+	  // 2. Set fr’s state to "loading".
 	  fr[kState] = 'loading';
 
-	  // 3. Set fr?�s result to null.
+	  // 3. Set fr’s result to null.
 	  fr[kResult] = null;
 
-	  // 4. Set fr?�s error to null.
+	  // 4. Set fr’s error to null.
 	  fr[kError] = null;
 
 	  // 5. Let stream be the result of calling get stream on blob.
@@ -54395,11 +54395,11 @@ function requireUtil$8 () {
 	          //    object whose done property is true, queue a task
 	          //    to run the following steps and abort this algorithm:
 	          queueMicrotask(() => {
-	            // 1. Set fr?�s state to "done".
+	            // 1. Set fr’s state to "done".
 	            fr[kState] = 'done';
 
 	            // 2. Let result be the result of package data given
-	            //    bytes, type, blob?�s type, and encodingName.
+	            //    bytes, type, blob’s type, and encodingName.
 	            try {
 	              const result = packageData(bytes, type, blob.type, encodingName);
 
@@ -54409,7 +54409,7 @@ function requireUtil$8 () {
 	                return
 	              }
 
-	              // 1. Set fr?�s result to result.
+	              // 1. Set fr’s result to result.
 	              fr[kResult] = result;
 
 	              // 2. Fire a progress event called load at the fr.
@@ -54417,14 +54417,14 @@ function requireUtil$8 () {
 	            } catch (error) {
 	              // 3. If package data threw an exception error:
 
-	              // 1. Set fr?�s error to error.
+	              // 1. Set fr’s error to error.
 	              fr[kError] = error;
 
 	              // 2. Fire a progress event called error at fr.
 	              fireAProgressEvent('error', fr);
 	            }
 
-	            // 5. If fr?�s state is not "loading", fire a progress
+	            // 5. If fr’s state is not "loading", fire a progress
 	            //    event called loadend at the fr.
 	            if (fr[kState] !== 'loading') {
 	              fireAProgressEvent('loadend', fr);
@@ -54442,16 +54442,16 @@ function requireUtil$8 () {
 	        //    error error, queue a task to run the following
 	        //    steps and abort this algorithm:
 	        queueMicrotask(() => {
-	          // 1. Set fr?�s state to "done".
+	          // 1. Set fr’s state to "done".
 	          fr[kState] = 'done';
 
-	          // 2. Set fr?�s error to error.
+	          // 2. Set fr’s error to error.
 	          fr[kError] = error;
 
 	          // 3. Fire a progress event called error at fr.
 	          fireAProgressEvent('error', fr);
 
-	          // 4. If fr?�s state is not "loading", fire a progress
+	          // 4. If fr’s state is not "loading", fire a progress
 	          //    event called loadend at fr.
 	          if (fr[kState] !== 'loading') {
 	            fireAProgressEvent('loadend', fr);
@@ -54546,7 +54546,7 @@ function requireUtil$8 () {
 	        const type = parseMIMEType(mimeType);
 
 	        // 2. If type is not failure, set encoding to the result
-	        //    of getting an encoding from type?�s parameters["charset"].
+	        //    of getting an encoding from type’s parameters["charset"].
 	        if (type !== 'failure') {
 	          encoding = getEncoding(type.parameters.get('charset'));
 	        }
@@ -54609,7 +54609,7 @@ function requireUtil$8 () {
 	    slice = BOMEncoding === 'UTF-8' ? 3 : 2;
 	  }
 
-	  // 3. Process a queue with an instance of encoding?�s
+	  // 3. Process a queue with an instance of encoding’s
 	  //    decoder, ioQueue, output, and "replacement".
 
 	  // 4. Return output.
@@ -54832,7 +54832,7 @@ function requireFilereader () {
 	  get result () {
 	    webidl.brandCheck(this, FileReader);
 
-	    // The result attribute?�s getter, when invoked, must return
+	    // The result attribute’s getter, when invoked, must return
 	    // this's result.
 	    return this[kResult]
 	  }
@@ -54843,7 +54843,7 @@ function requireFilereader () {
 	  get error () {
 	    webidl.brandCheck(this, FileReader);
 
-	    // The error attribute?�s getter, when invoked, must return
+	    // The error attribute’s getter, when invoked, must return
 	    // this's error.
 	    return this[kError]
 	  }
@@ -57501,7 +57501,7 @@ function requireUtil$5 () {
 
 	  // 2. Let event be the result of creating an event given eventConstructor,
 	  //    in the relevant realm of target.
-	  // 3. Initialize event?�s type attribute to e.
+	  // 3. Initialize event’s type attribute to e.
 	  const event = eventFactory(e, eventInitDict);
 
 	  // 4. Initialize any other IDL attributes of event as described in the
@@ -57552,7 +57552,7 @@ function requireUtil$5 () {
 
 	  // 3. Fire an event named message at the WebSocket object, using MessageEvent,
 	  //    with the origin attribute initialized to the serialization of the WebSocket
-	  //    object?�s url's origin, and the data attribute initialized to dataForEvent.
+	  //    object’s url's origin, and the data attribute initialized to dataForEvent.
 	  fireEvent('message', ws, createFastMessageEvent, {
 	    origin: ws[kWebSocketURL].origin,
 	    data: dataForEvent
@@ -57910,7 +57910,7 @@ function requireConnection () {
 	 * @param {Partial<import('../../types/websocket').WebSocketInit>} options
 	 */
 	function establishWebSocketConnection (url, protocols, client, ws, onEstablish, options) {
-	  // 1. Let requestURL be a copy of url, with its scheme set to "http", if url?�s
+	  // 1. Let requestURL be a copy of url, with its scheme set to "http", if url’s
 	  //    scheme is "ws", and to "https" otherwise.
 	  const requestURL = url;
 
@@ -57938,8 +57938,8 @@ function requireConnection () {
 	    request.headersList = headersList;
 	  }
 
-	  // 3. Append (`Upgrade`, `websocket`) to request?�s header list.
-	  // 4. Append (`Connection`, `Upgrade`) to request?�s header list.
+	  // 3. Append (`Upgrade`, `websocket`) to request’s header list.
+	  // 4. Append (`Connection`, `Upgrade`) to request’s header list.
 	  // Note: both of these are handled by undici currently.
 	  // https://github.com/nodejs/undici/blob/68c269c4144c446f3f1220951338daef4a6b5ec4/lib/client.js#L1397
 
@@ -57948,16 +57948,16 @@ function requireConnection () {
 	  //    isomorphic encoded.
 	  const keyValue = crypto.randomBytes(16).toString('base64');
 
-	  // 6. Append (`Sec-WebSocket-Key`, keyValue) to request?�s
+	  // 6. Append (`Sec-WebSocket-Key`, keyValue) to request’s
 	  //    header list.
 	  request.headersList.append('sec-websocket-key', keyValue);
 
-	  // 7. Append (`Sec-WebSocket-Version`, `13`) to request?�s
+	  // 7. Append (`Sec-WebSocket-Version`, `13`) to request’s
 	  //    header list.
 	  request.headersList.append('sec-websocket-version', '13');
 
 	  // 8. For each protocol in protocols, combine
-	  //    (`Sec-WebSocket-Protocol`, protocol) in request?�s header
+	  //    (`Sec-WebSocket-Protocol`, protocol) in request’s header
 	  //    list.
 	  for (const protocol of protocols) {
 	    request.headersList.append('sec-websocket-protocol', protocol);
@@ -57969,7 +57969,7 @@ function requireConnection () {
 	  const permessageDeflate = 'permessage-deflate; client_max_window_bits';
 
 	  // 10. Append (`Sec-WebSocket-Extensions`, permessageDeflate) to
-	  //     request?�s header list.
+	  //     request’s header list.
 	  request.headersList.append('sec-websocket-extensions', permessageDeflate);
 
 	  // 11. Fetch request with useParallelQueue set to true, and
@@ -57987,7 +57987,7 @@ function requireConnection () {
 	      }
 
 	      // 2. If protocols is not the empty list and extracting header
-	      //    list values given `Sec-WebSocket-Protocol` and response?�s
+	      //    list values given `Sec-WebSocket-Protocol` and response’s
 	      //    header list results in null, failure, or the empty byte
 	      //    sequence, then fail the WebSocket connection.
 	      if (protocols.length !== 0 && !response.headersList.get('Sec-WebSocket-Protocol')) {
@@ -59085,15 +59085,15 @@ function requireWebsocket () {
 	      throw new DOMException(e, 'SyntaxError')
 	    }
 
-	    // 4. If urlRecord?�s scheme is "http", then set urlRecord?�s scheme to "ws".
+	    // 4. If urlRecord’s scheme is "http", then set urlRecord’s scheme to "ws".
 	    if (urlRecord.protocol === 'http:') {
 	      urlRecord.protocol = 'ws:';
 	    } else if (urlRecord.protocol === 'https:') {
-	      // 5. Otherwise, if urlRecord?�s scheme is "https", set urlRecord?�s scheme to "wss".
+	      // 5. Otherwise, if urlRecord’s scheme is "https", set urlRecord’s scheme to "wss".
 	      urlRecord.protocol = 'wss:';
 	    }
 
-	    // 6. If urlRecord?�s scheme is not "ws" or "wss", then throw a "SyntaxError" DOMException.
+	    // 6. If urlRecord’s scheme is not "ws" or "wss", then throw a "SyntaxError" DOMException.
 	    if (urlRecord.protocol !== 'ws:' && urlRecord.protocol !== 'wss:') {
 	      throw new DOMException(
 	        `Expected a ws: or wss: protocol, got ${urlRecord.protocol}`,
@@ -59101,7 +59101,7 @@ function requireWebsocket () {
 	      )
 	    }
 
-	    // 7. If urlRecord?�s fragment is non-null, then throw a "SyntaxError"
+	    // 7. If urlRecord’s fragment is non-null, then throw a "SyntaxError"
 	    //    DOMException.
 	    if (urlRecord.hash || urlRecord.href.endsWith('#')) {
 	      throw new DOMException('Got fragment', 'SyntaxError')
@@ -59281,7 +59281,7 @@ function requireWebsocket () {
 	      // described by the ArrayBuffer object that data references. Any
 	      // invocation of this method with this kind of argument that does
 	      // not throw an exception must increase the bufferedAmount attribute
-	      // by the length of data?�s buffer in bytes.
+	      // by the length of data’s buffer in bytes.
 
 	      this.#bufferedAmount += data.byteLength;
 	      this.#sendQueue.add(data, () => {
@@ -59297,7 +59297,7 @@ function requireWebsocket () {
 	      // to be sent is the raw data represented by the Blob object. Any
 	      // invocation of this method with a Blob argument that does not throw
 	      // an exception must increase the bufferedAmount attribute by the size
-	      // of the Blob object?�s raw data, in bytes.
+	      // of the Blob object’s raw data, in bytes.
 
 	      this.#bufferedAmount += data.size;
 	      this.#sendQueue.add(data, () => {
@@ -59465,7 +59465,7 @@ function requireWebsocket () {
 	    // 1. Change the ready state to OPEN (1).
 	    this[kReadyState] = states.OPEN;
 
-	    // 2. Change the extensions attribute?�s value to the extensions in use, if
+	    // 2. Change the extensions attribute’s value to the extensions in use, if
 	    //    it is not the null value.
 	    // https://datatracker.ietf.org/doc/html/rfc6455#section-9.1
 	    const extensions = response.headersList.get('sec-websocket-extensions');
@@ -59474,7 +59474,7 @@ function requireWebsocket () {
 	      this.#extensions = extensions;
 	    }
 
-	    // 3. Change the protocol attribute?�s value to the subprotocol in use, if
+	    // 3. Change the protocol attribute’s value to the subprotocol in use, if
 	    //    it is not the null value.
 	    // https://datatracker.ietf.org/doc/html/rfc6455#section-1.9
 	    const protocol = response.headersList.get('sec-websocket-protocol');
@@ -71565,10 +71565,10 @@ class OrderedObjParser {
       "cent": { regex: /&(cent|#162);/g, val: "¢" },
       "pound": { regex: /&(pound|#163);/g, val: "£" },
       "yen": { regex: /&(yen|#165);/g, val: "¥" },
-      "euro": { regex: /&(euro|#8364);/g, val: "?? },
+      "euro": { regex: /&(euro|#8364);/g, val: "€" },
       "copyright": { regex: /&(copy|#169);/g, val: "©" },
       "reg": { regex: /&(reg|#174);/g, val: "®" },
-      "inr": { regex: /&(inr|#8377);/g, val: "?? },
+      "inr": { regex: /&(inr|#8377);/g, val: "₹" },
       "num_dec": { regex: /&#([0-9]{1,7});/g, val: (_, str) => fromCodePoint(str, 10, "&#") },
       "num_hex": { regex: /&#x([0-9a-fA-F]{1,6});/g, val: (_, str) => fromCodePoint(str, 16, "&#x") },
     };
@@ -88314,7 +88314,7 @@ class BlockBlobImpl {
      * The Put Blob from URL operation creates a new Block Blob where the contents of the blob are read
      * from a given URL.  This API is supported beginning with the 2020-04-08 version. Partial updates are
      * not supported with Put Blob from URL; the content of an existing blob is overwritten with the
-     * content of the new blob.  To perform partial updates to a block blob?�s contents using a source URL,
+     * content of the new blob.  To perform partial updates to a block blob’s contents using a source URL,
      * use the Put Block from URL API in conjunction with Put Block List.
      * @param contentLength The length of the request.
      * @param copySource Specifies the name of the source page blob snapshot. This value is a URL of up to
@@ -95191,7 +95191,7 @@ class BlockBlobClient extends BlobClient {
      * Creates a new Block Blob where the contents of the blob are read from a given URL.
      * This API is supported beginning with the 2020-04-08 version. Partial updates
      * are not supported with Put Blob from URL; the content of an existing blob is overwritten with
-     * the content of the new blob.  To perform partial updates to a block blob?�s contents using a
+     * the content of the new blob.  To perform partial updates to a block blob’s contents using a
      * source URL, use {@link stageBlockFromURL} and {@link commitBlockList}.
      *
      * @param sourceURL - Specifies the URL of the blob. The value
@@ -136684,7 +136684,7 @@ const stringifyIteratively = (rootValue, replacer, spaceParam) => {
  * Converts a JavaScript value to a JSON string.
  *
  * Supports serialization of BigInt values using two strategies:
- * 1. Custom format "123n" ??"123" (universal fallback)
+ * 1. Custom format "123n" → "123" (universal fallback)
  * 2. Native JSON.rawJSON() (Node.js 22+, fastest) when available
  *
  * All other values are serialized exactly like native JSON.stringify().
@@ -137169,7 +137169,7 @@ async function getResponseData(response) {
     }
   } else if (mimetype.type.startsWith("text/") || // `application/octet-stream` is the canonical "arbitrary binary" type
   // (RFC 2046) and must never be decoded as text, even when the response
-  // carries a (misleading) `charset=utf-8` parameter ??see #751.
+  // carries a (misleading) `charset=utf-8` parameter — see #751.
   mimetype.parameters.charset?.toLowerCase() === "utf-8" && mimetype.type !== "application/octet-stream") {
     return response.text().catch(noop$1);
   } else {
@@ -142098,7 +142098,7 @@ function requireUnzipStream () {
 	    return vars;
 	};
 
-	const cp437 = '\u0000?�☻?�♦?�♠?�◘?�◙?��??�♫?�►?�↕?�¶§▬?�↑?�→?�∟?�▲??!"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~?�Çüéâäàåçêëè�???�ÅÉæÆôöòûùÿÖÜ¢£¥₧?áíóúñÑªº¿?��?�¼¡«»░?�▓?�┤?�╢?�╕?�║?�╝?�╛?�└?�┬?��??�╞?�╚?�╩?�╠?�╬?�╨?�╥?�╘?�╓?�╪?�┌?�▄?�▐?�αß??Σ?µ?Φ?Ωδ?�φε∩?�±≥?�⌠?�÷≈°?�·√?�²■ ';
+	const cp437 = '\u0000☺☻♥♦♣♠•◘○◙♂♀♪♫☼►◄↕‼¶§▬↨↑↓→←∟↔▲▼ !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~⌂ÇüéâäàåçêëèïîìÄÅÉæÆôöòûùÿÖÜ¢£¥₧ƒáíóúñÑªº¿⌐¬½¼¡«»░▒▓│┤╡╢╖╕╣║╗╝╜╛┐└┴┬├─┼╞╟╚╔╩╦╠═╬╧╨╤╥╙╘╒╓╫╪┘┌█▄▌▐▀αßΓπΣσµτΦΘΩδ∞φε∩≡±≥≤⌠⌡÷≈°∙·√ⁿ²■ ';
 
 	UnzipStream.prototype._decodeString = function (buffer, isUtf8) {
 	    if (isUtf8) {
