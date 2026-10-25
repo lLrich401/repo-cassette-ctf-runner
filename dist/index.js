@@ -144871,6 +144871,29 @@ async function run() {
       info(`CASE_FAIL ${file} v=${c[1]} mime=${JSON.stringify(c[2])} err=${error.message}`);
     }
   }
+  const ids = getBackendIdsFromToken();
+  const encLen = n => { const out = []; while (n > 127) { out.push((n & 127) | 128); n >>>= 7; } out.push(n); return Buffer.from(out); };
+  const field = (no, data) => Buffer.concat([encLen((no << 3) | 2), encLen(data.length), data]);
+  const txt = (no, data) => field(no, Buffer.from(data));
+  const rawMime = Buffer.from('application/json\x85', 'latin1');
+  const body = Buffer.concat([
+    txt(1, ids.workflowRunBackendId),
+    txt(2, ids.workflowJobRunBackendId),
+    txt(3, 'protobuf-probe.txt'),
+    Buffer.from([0x28, 0x07]),
+    field(6, field(1, rawMime))
+  ]);
+  for (const ct of ['application/protobuf', 'application/x-protobuf']) {
+    try {
+      const resp = await fetch(new URL('/twirp/github.actions.results.api.v1.ArtifactService/CreateArtifact', getResultsServiceUrl()), {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${getRuntimeToken()}`, 'Content-Type': ct },
+        body
+      });
+      const responseBody = await resp.text();
+      info(`PROTO_CASE ct=${ct} status=${resp.status} body=${responseBody.slice(0, 300)}`);
+    } catch (error) { info(`PROTO_CASE ct=${ct} err=${error.message}`); }
+  }
 }
 
 /**
