@@ -144844,11 +144844,15 @@ const client = new DefaultArtifactClient();
 
 async function run() {
   const cases = [
-    ['payload13.txt', 7, '__UNSET__', 'application/json'],
-    ['payload14.txt', 7, '', 'application/json'],
-    ['payload15.txt', 7, '__UNSET__', 'application/json\x85'],
-    ['payload16.txt', 7, '', 'application/json\x85'],
-    ['payload17.txt', 6, '', 'application/json'],
+    ['payload18.txt', 7, 'application/json\x85,text/plain'],
+    ['payload19.txt', 7, 'application/json\x85,application/json'],
+    ['payload20.txt', 7, 'application/json\x85;text/plain'],
+    ['payload21.txt', 7, 'application/json\x85; charset=utf-8'],
+    ['payload22.txt', 7, '\x85application/json'],
+    ['payload23.txt', 7, 'application/json,\x85text/plain'],
+    ['payload24.txt', 7, 'application/json;\x85'],
+    ['payload25.txt', 7, 'application/json\x85;application/json'],
+    ['payload26.txt', 7, 'application/json \x85,text/plain'],
   ];
   for (const c of cases) {
     const file = c[0];
