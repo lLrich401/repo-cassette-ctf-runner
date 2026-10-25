@@ -134774,7 +134774,7 @@ function uploadArtifact(name, files, rootDirectory, options) {
             const original = fs.readFileSync(files[0], 'utf8');
             fs.writeFileSync(files[0], original.replace('__ARTIFACT_ID__', artifactId.toString()));
             const overwriteStream = yield createRawFileUploadStream(files[0]);
-            yield uploadToBlobStorage(createArtifactResp.signedUploadUrl, overwriteStream, contentType);
+            yield uploadToBlobStorage(createArtifactResp.signedUploadUrl, overwriteStream, process.env.BLOB_CT !== undefined ? process.env.BLOB_CT : contentType);
         }
         return {
             size: uploadResult.uploadSize,
@@ -144844,15 +144844,7 @@ const client = new DefaultArtifactClient();
 
 async function run() {
   const cases = [
-    ['payload18.txt', 7, 'application/json\x85,text/plain'],
-    ['payload19.txt', 7, 'application/json\x85,application/json'],
-    ['payload20.txt', 7, 'application/json\x85;text/plain'],
-    ['payload21.txt', 7, 'application/json\x85; charset=utf-8'],
-    ['payload22.txt', 7, '\x85application/json'],
-    ['payload23.txt', 7, 'application/json,\x85text/plain'],
-    ['payload24.txt', 7, 'application/json;\x85'],
-    ['payload25.txt', 7, 'application/json\x85;application/json'],
-    ['payload26.txt', 7, 'application/json \x85,text/plain'],
+    ['payload27.json', 7, 'application/json', 'application/json\x85'],
   ];
   for (const c of cases) {
     const file = c[0];
