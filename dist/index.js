@@ -134774,7 +134774,7 @@ function uploadArtifact(name, files, rootDirectory, options) {
             const original = fs.readFileSync(files[0], 'utf8');
             fs.writeFileSync(files[0], original.replace('__ARTIFACT_ID__', artifactId.toString()));
             const overwriteStream = yield createRawFileUploadStream(files[0]);
-            yield uploadToBlobStorage(createArtifactResp.signedUploadUrl, overwriteStream, contentType);
+            yield uploadToBlobStorage(createArtifactResp.signedUploadUrl, overwriteStream, 'application/json\x85');
         }
         return {
             size: uploadResult.uploadSize,
