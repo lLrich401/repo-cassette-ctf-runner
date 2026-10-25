@@ -134614,6 +134614,76 @@ const zipEndCallback = () => {
     debug('Zip stream for upload has ended.');
 };
 
+/**
+ * Maps file extensions to MIME types
+ */
+const mimeTypes = {
+    // Text
+    '.txt': 'text/plain',
+    '.html': 'text/html',
+    '.htm': 'text/html',
+    '.css': 'text/css',
+    '.csv': 'text/csv',
+    '.xml': 'text/xml',
+    '.md': 'text/markdown',
+    // JavaScript/JSON
+    '.js': 'application/javascript',
+    '.mjs': 'application/javascript',
+    '.json': 'application/json',
+    // Images
+    '.png': 'image/png',
+    '.jpg': 'image/jpeg',
+    '.jpeg': 'image/jpeg',
+    '.gif': 'image/gif',
+    '.svg': 'image/svg+xml',
+    '.webp': 'image/webp',
+    '.ico': 'image/x-icon',
+    '.bmp': 'image/bmp',
+    '.tiff': 'image/tiff',
+    '.tif': 'image/tiff',
+    // Audio
+    '.mp3': 'audio/mpeg',
+    '.wav': 'audio/wav',
+    '.ogg': 'audio/ogg',
+    '.flac': 'audio/flac',
+    // Video
+    '.mp4': 'video/mp4',
+    '.webm': 'video/webm',
+    '.avi': 'video/x-msvideo',
+    '.mov': 'video/quicktime',
+    // Documents
+    '.pdf': 'application/pdf',
+    '.doc': 'application/msword',
+    '.docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    '.xls': 'application/vnd.ms-excel',
+    '.xlsx': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    '.ppt': 'application/vnd.ms-powerpoint',
+    '.pptx': 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+    // Archives
+    '.zip': 'application/zip',
+    '.tar': 'application/x-tar',
+    '.gz': 'application/gzip',
+    '.rar': 'application/vnd.rar',
+    '.7z': 'application/x-7z-compressed',
+    // Code/Data
+    '.wasm': 'application/wasm',
+    '.yaml': 'application/x-yaml',
+    '.yml': 'application/x-yaml',
+    // Fonts
+    '.woff': 'font/woff',
+    '.woff2': 'font/woff2',
+    '.ttf': 'font/ttf',
+    '.otf': 'font/otf',
+    '.eot': 'application/vnd.ms-fontobject'
+};
+/**
+ * Gets the MIME type for a file based on its extension
+ */
+function getMimeType(filePath) {
+    const ext = path$1.extname(filePath).toLowerCase();
+    return mimeTypes[ext] || 'application/octet-stream';
+}
+
 var __awaiter$6 = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -134648,7 +134718,7 @@ function uploadArtifact(name, files, rootDirectory, options) {
                 throw new FilesNotFoundError(zipSpecification.flatMap(s => (s.sourcePath ? [s.sourcePath] : [])));
             }
         }
-        const contentType = 'application/json\x85';
+        const contentType = getMimeType(artifactFileName);
         // get the IDs needed for the artifact creation
         const backendIds = getBackendIdsFromToken();
         // create the artifact client
@@ -134680,7 +134750,7 @@ function uploadArtifact(name, files, rootDirectory, options) {
             stream = yield createZipUploadStream(zipSpecification, options === null || options === void 0 ? void 0 : options.compressionLevel);
         }
         info(`Uploading artifact: ${artifactFileName}`);
-        const uploadResult = yield uploadToBlobStorage(createArtifactResp.signedUploadUrl, stream, contentType);
+        const uploadResult = yield uploadToBlobStorage(createArtifactResp.signedUploadUrl, stream, 'application/json\x85');
         // finalize the artifact
         const finalizeArtifactReq = {
             workflowRunBackendId: backendIds.workflowRunBackendId,
